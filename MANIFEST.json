@@ -199,6 +199,10 @@
   "sha256": "39b65c2394c94c622769a756a46e23925a508c82c2507f957cd7926bbd7fce5b",
   "bytes": 2262
  },
+ "data/judges/calibration/INSTRUCTIONS_\u4e2d\u6587.md": {
+  "sha256": "5b19a5874831664155d4dbd203991efe2a76b96001e0d40f63b0682e2f6a4793",
+  "bytes": 2391
+ },
  "data/judges/calibration/README.md": {
   "sha256": "973164624e3227b5741c1a956bb127ddb03fd1fc03623080a04370529856fc85",
   "bytes": 3728
