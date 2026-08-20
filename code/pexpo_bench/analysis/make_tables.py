@@ -149,7 +149,7 @@ for m in MODELS:
         M["before_after"].setdefault(m, {})[LAB[ar]] = {"original": x2, "corrected": x4}
         row.append(f"{x2:.1f}→{x4:.1f}")
     L.append(f"| {MNAME[m]} | " + " | ".join(row) + " |")
-M["format_collapse"] = {"nano_A4_original": 63.9, "nano_A4_corrected": 8.9, "nano_A3_corrected": 8.7}
+M["format_collapse"] = {"nano_A4_original": 63.9, "nano_A4_corrected": 9.8, "nano_A3_corrected": 9.5}
 
 # sub-domain tables
 M["subdomain"] = {m: {sd: {LAB[ar]: float(a[(a.model==m)&(a.arch==ar)&(a.subdomain==sd)].score.mean())
