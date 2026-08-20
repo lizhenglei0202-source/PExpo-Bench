@@ -1,0 +1,581 @@
+{
+  "package": "judge_calibration_20260812",
+  "created": "2026-08-12",
+  "seed": 42,
+  "source_parquet": "~/Library/CloudStorage/OneDrive-Personal/macmini/lzl/runs/v3_scored/all_scored_v2.parquet",
+  "bank": "~/Library/CloudStorage/OneDrive-Personal/macmini/lzl/pexpo_bench/samples/pexpo_bench_v3_full.patched_20260811.yaml",
+  "arch": "A3_agent",
+  "models": [
+    "gpt-5.4",
+    "gpt-5.4-mini",
+    "gpt-5.4-nano",
+    "deepseek-v4"
+  ],
+  "n_active_open_ended_qids": 482,
+  "n_sampled_qids": 100,
+  "n_rows": 400,
+  "allocation": {
+    "S1_exposure_factors|hard": {
+      "pool": 25,
+      "sampled": 5
+    },
+    "S1_exposure_factors|medium": {
+      "pool": 40,
+      "sampled": 9
+    },
+    "S1_exposure_factors|simple": {
+      "pool": 24,
+      "sampled": 5
+    },
+    "S2_microenv_conc|hard": {
+      "pool": 34,
+      "sampled": 7
+    },
+    "S2_microenv_conc|medium": {
+      "pool": 48,
+      "sampled": 10
+    },
+    "S2_microenv_conc|simple": {
+      "pool": 24,
+      "sampled": 5
+    },
+    "S3_trajectory_activity|hard": {
+      "pool": 29,
+      "sampled": 6
+    },
+    "S3_trajectory_activity|medium": {
+      "pool": 44,
+      "sampled": 9
+    },
+    "S3_trajectory_activity|simple": {
+      "pool": 24,
+      "sampled": 5
+    },
+    "S4_dosimetry|hard": {
+      "pool": 30,
+      "sampled": 6
+    },
+    "S4_dosimetry|medium": {
+      "pool": 40,
+      "sampled": 8
+    },
+    "S4_dosimetry|simple": {
+      "pool": 24,
+      "sampled": 5
+    },
+    "S5_health|hard": {
+      "pool": 29,
+      "sampled": 6
+    },
+    "S5_health|medium": {
+      "pool": 43,
+      "sampled": 9
+    },
+    "S5_health|simple": {
+      "pool": 24,
+      "sampled": 5
+    }
+  },
+  "sampled_items": [
+    {
+      "qid": "S1-0015",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S1-0117",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S1-0149",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S1-0157",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S1-0196",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S1-0129",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0142",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0202",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0205",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0210",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0211",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0212",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0214",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0218",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S1-0230",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S1-0232",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S1-0233",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S1-0239",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S1-0245",
+      "subdomain": "S1_exposure_factors",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S2-0029",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0037",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0193",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0230",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0249",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0252",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0266",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S2-0032",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0196",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0198",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0221",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0246",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0255",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0279",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0288",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0316",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0325",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S2-0289",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S2-0292",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S2-0295",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S2-0298",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S2-0306",
+      "subdomain": "S2_microenv_conc",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S3-0056",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S3-0060",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S3-0152",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S3-0162",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S3-0176",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S3-0213",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S3-0160",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0161",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0186",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0260",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0263",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0264",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0266",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0270",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0273",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S3-0245",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S3-0249",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S3-0250",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S3-0251",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S3-0256",
+      "subdomain": "S3_trajectory_activity",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S4-0068",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S4-0071",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S4-0074",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S4-0078",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S4-0080",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S4-0135",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S4-0144",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0229",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0231",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0232",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0234",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0237",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0238",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0249",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S4-0252",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S4-0254",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S4-0256",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S4-0257",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S4-0268",
+      "subdomain": "S4_dosimetry",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S5-0088",
+      "subdomain": "S5_health",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S5-0098",
+      "subdomain": "S5_health",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S5-0099",
+      "subdomain": "S5_health",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S5-0204",
+      "subdomain": "S5_health",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S5-0224",
+      "subdomain": "S5_health",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S5-0241",
+      "subdomain": "S5_health",
+      "difficulty": "hard"
+    },
+    {
+      "qid": "S5-0174",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0197",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0210",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0213",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0257",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0305",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0311",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0313",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0316",
+      "subdomain": "S5_health",
+      "difficulty": "medium"
+    },
+    {
+      "qid": "S5-0264",
+      "subdomain": "S5_health",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S5-0272",
+      "subdomain": "S5_health",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S5-0275",
+      "subdomain": "S5_health",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S5-0280",
+      "subdomain": "S5_health",
+      "difficulty": "simple"
+    },
+    {
+      "qid": "S5-0283",
+      "subdomain": "S5_health",
+      "difficulty": "simple"
+    }
+  ]
+}

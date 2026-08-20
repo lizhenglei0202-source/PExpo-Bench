@@ -1,0 +1,330 @@
+{
+  "date": "2026-08-11",
+  "fixes": {
+    "S3-0184": {
+      "new": 261.8,
+      "reason": "rationale mis-multiplied 12*0.4*16 as 384 (true 76.8); stored sum 554 matches neither"
+    },
+    "S3-0197": {
+      "new": 270.0,
+      "reason": "rationale mis-multiplied 40*1.8*2 as 396 (true 144)"
+    },
+    "S3-0287": {
+      "new": 27.29,
+      "reason": "terms sum to 655 but stored answer used 705/24"
+    },
+    "S3-0292": {
+      "new": 24.58,
+      "reason": "590/24 = 24.583, not 23.25"
+    },
+    "S5-0240": {
+      "new": 1290.0,
+      "reason": "AF difference 0.1306-0.0769=0.0537; 24,000*0.0537=1290, not 1920"
+    },
+    "S5-0286": {
+      "new": 500.0,
+      "reason": "restores the _answer_corrected_v3 marker value (500) that a May 28 edit reverted to 50; models answered 500 in all 28 cells"
+    },
+    "S5-0292": {
+      "new": 285.5,
+      "reason": "rationale's own AF 0.0951 gives 3,000*0.0951=285.5, not 659"
+    },
+    "S5-0326": {
+      "new": 846.0,
+      "reason": "rationale's own AF 0.1174 gives 7,200*0.1174=846, not 1872"
+    },
+    "S5-0331": {
+      "new": 1583.0,
+      "reason": "stored 16,800 implies AF=1.2>1 (physically impossible); 14,000*0.1131=1583"
+    },
+    "S5-0334": {
+      "new": 528.8,
+      "reason": "rationale's own AF 0.1173 gives 4,500*0.1173=528.8, not 2240.96"
+    }
+  },
+  "unit_repairs": {
+    "S3-0156": {
+      "new": "µg/m³",
+      "reason": "unit field contained the entire worked solution string"
+    },
+    "S1-0014": {
+      "new": "fraction",
+      "reason": "unit field was '(91%)' for a dimensionless fraction (answer 0.91)"
+    }
+  },
+  "retired_defect": {
+    "S3-0234": "under-specified: activity-level inhalation rates not given in question; gold assumes 4.8/0.54 m3/h while the item's own cited EFH table gives 4.2/0.498 (TWA 1.42 vs gold 1.62)",
+    "S1-0248": "ambiguous: 'a 3-year-old' straddles the EFH 2-<3 and 3-<6 surface-area bins; gold 0.66 matches neither published bin value; tolerance 1%",
+    "S4-0138": "under-specified: averaging time not stated; stored gold 5.43e-08 irreproducible; the rationale's own formula yields 1.03e-3",
+    "S4-0134": "under-specified: ED/AT not stated; rationale's inhalation HQ (0.33) irreproducible from its own formula; archived model answers scatter 0.40-0.92 with no defensible modal value",
+    "S5-0253": "ill-posed: 'excess risk' as (RR-1)*exposure is not a defined IER quantity; rationale arithmetic inconsistent ((1.14-1)*20 stated as 0.28); answer carries a concentration unit for a risk quantity",
+    "S1-0249": "gold unverifiable (700 g/day not confirmed against EFH; archived answers cluster 1000-1290 g/day) and tolerance corrupted (10, i.e. any answer within +/-7000 scored 1.0)"
+  },
+  "retired_tf_balance": [
+    "S1-0125",
+    "S1-0130",
+    "S1-0143",
+    "S1-0147",
+    "S1-0150",
+    "S1-0158",
+    "S1-0172",
+    "S1-0178",
+    "S1-0182",
+    "S1-0191",
+    "S1-0275",
+    "S2-0205",
+    "S2-0220",
+    "S2-0225",
+    "S2-0232",
+    "S2-0247",
+    "S2-0251",
+    "S2-0253",
+    "S2-0263",
+    "S2-0267",
+    "S2-0272",
+    "S2-0274",
+    "S2-0277",
+    "S2-0355",
+    "S3-0045",
+    "S3-0167",
+    "S3-0170",
+    "S3-0173",
+    "S3-0177",
+    "S3-0180",
+    "S3-0192",
+    "S3-0199",
+    "S3-0203",
+    "S3-0206",
+    "S3-0212",
+    "S3-0215",
+    "S3-0221",
+    "S3-0225",
+    "S3-0228",
+    "S3-0236",
+    "S3-0312",
+    "S3-0315",
+    "S3-0318",
+    "S4-0133",
+    "S4-0146",
+    "S4-0152",
+    "S4-0159",
+    "S4-0163",
+    "S4-0172",
+    "S4-0191",
+    "S4-0203",
+    "S4-0208",
+    "S4-0212",
+    "S4-0215",
+    "S4-0286",
+    "S5-0170",
+    "S5-0173",
+    "S5-0186",
+    "S5-0198",
+    "S5-0201",
+    "S5-0202",
+    "S5-0219",
+    "S5-0225",
+    "S5-0233",
+    "S5-0242",
+    "S5-0246",
+    "S5-0252",
+    "S5-0255"
+  ],
+  "content_flags": {
+    "S1-0256": "question embeds a physically impossible SA factor (0.25 m2/kg; realistic ~0.034), so gold 8.0 m2 follows from the question but is nonsense; internally consistent, gold left unchanged for score stability; reword in a future revision"
+  },
+  "effective_n": 1026,
+  "fixes_round2": {
+    "S1-0008": {
+      "new": 29.2,
+      "unit": "m³/day",
+      "reason": "Independent recompute: 4 h × 2.5 m³/h = 10.0 and 4 h × 4.8 m³/h = 19.2, total 29.2 m³. Stored 30.8 is 5.48% off (tolerance 0.05), and the rationale itself writes the wrong sum '10 + 19.2 = 30.8'. No alternate reading saves it: crediting the 16 unstated hours would require 0.1 m³/h, which is not an EFH rate and is contradicted by the rationale's explicit two-term sum. The YAML already records the correction in _answer_corrected_v3_round2 (old 30.8 → new 29.2, reason '4×2.5 + 4×4.8 = 29.2') but the answer field was never updated; applying the recorded patch is all that is needed. Question is well-posed (both rates given, dimensional check [time]×[flow]→[volume], 29.2 inside range [0,50])."
+    },
+    "S1-0104": {
+      "new": 18.08,
+      "unit": "m³/day",
+      "reason": "The stored 15.3 contradicts its own rationale and is unreachable by any consistent route. Using the bench's own authoritative KB (knowledge_base/authoritative_values.yaml, activity_rates_m3_per_hr labeled 'Table 6-2', adult_male sleep 0.45 / sedentary 0.54 / light 1.5 / moderate 2.5 m³/h) — the exact rates the rationale lists — the 24 h day gives 8×0.45 + 12×0.54 + 2×1.5 + 2×2.5 = 3.6 + 6.48 + 3.0 + 5.0 = 18.08 m³/day (15.4% above the gold). Reaching 15.3 would require a sedentary rate of 0.308 m³/h, which appears in no table. Real EFH Table 6-2 (m³/min) would give ~9.7 m³/day, which falls outside the item's own physical_constraints range [10,20], whereas 18.08 falls inside it, confirming 18.08 as the intended in-frame answer. Caveat for maintainers: tools/tools.py exposure_factor_lookup lacks the ('inhalation_rate','M','adult','sedentary') key, so 0.54 cannot be retrieved via the gold tool — the rates should be stated in the question or the tool table extended, otherwise the item stays unsolvable even with the corrected gold."
+    },
+    "S2-0341": {
+      "new": 35,
+      "unit": "ppb",
+      "reason": "With no indoor sources or removal (k=0), steady state gives C_in = P·AER·Cout/(AER+0) = P·Cout = 0.7×50 = 35 ppb. Stored 28 = 0.7×0.8×50 multiplies by AER, which is dimensionally invalid (ppb/h) and contradicts the item's own gold reference (I/O = P·AER/(AER+k) → P when k=0) and sibling items S2-0340/0347/0365 whose gold answers all equal P·Cout."
+    },
+    "S2-0342": {
+      "new": 32,
+      "unit": "ppb",
+      "reason": "With no ozone removal indoors, C_in = P·AER·Cout/(AER+0) = P·Cout = 0.4×80 = 32 ppb. Stored 48 = 80×0.4×1.5 applies the spurious AER factor (dimensionally ppb/h); it contradicts the reference formula I/O = P·AER/(AER+k), which reduces to P at k=0, and the P·Cout convention used by sibling items. 32 vs 48 is far outside the 0.05 tolerance under any reading."
+    },
+    "S2-0345": {
+      "new": 60,
+      "unit": "μg/m³",
+      "reason": "Steady-state mass balance gives C_in = P·AER·C_out/(AER+k); the question explicitly states 'no indoor sources or deposition exist', forcing k=0, so AER cancels and C_in = P·C_out = 0.6×100 = 60 μg/m³. Stored 42 = 0.6×100×0.7 multiplies by AER, which is dimensionally invalid (μg/m³·h⁻¹ is not a concentration) and is contradicted by the item's own dimensional_check chain. Rescue attempts fail: justifying 42 requires a deposition rate k=0.3 h⁻¹ that the question explicitly rules out; the k=0 transient at t=1 h gives 30.2, not 42. Stored value is 30% off, far outside the 0.05 tolerance. Bank siblings S2-0339 (67.5=75×0.9), S2-0366 (64=0.8×80), S2-0367, S2-0368 all use C_in = P·C_out with AER as a distractor. Also update rationale, gold_tools code preview, and physical_constraints (dimensional_check, 'monotone in AER')."
+    },
+    "S2-0370": {
+      "new": 20,
+      "unit": "ppb",
+      "reason": "Question states 'no indoor sources or sinks', so k=0 and C_in = P·AER·C_out/(AER+k) = P·C_out = 0.4×50 = 20 ppb. Stored 30.0 = 0.4×50×1.5 uses the dimensionally invalid C_in = P·C_out·AER (ppb·h⁻¹). Decisive refutation failure: 30 ppb exceeds the hard physical ceiling P·C_out = 20 ppb, so NO non-negative deposition rate can reproduce it — back-solving gives k = −0.5 h⁻¹, an impossible negative sink. The k=0 transient at t=1 h gives 15.5, not 30. Error is 50%, versus 0.05 tolerance. Bank convention (S2-0367: 0.4×70=28; S2-0368: 0.6×45=27) confirms P·C_out. Also update rationale, gold_tools code preview, and physical_constraints."
+    },
+    "S2-0371": {
+      "new": 12,
+      "unit": "ppb",
+      "reason": "Same dimensionally invalid formula; correct steady-state no-sink result is C_in = P·C_out = 0.2×60 = 12 ppb. Stored 6.0 would require an indoor removal rate k=0.5 h⁻¹ appearing nowhere in the question (it coincides with AER only because of the erroneous multiplication); 'sealed windows' constrains AER/P, not surface deposition, so it cannot supply that sink. The k=0 transient at t=1 h gives 4.72, not 6.0. Error is 50% versus 0.05 tolerance. Considered 'retire' since the stem omits explicit 'steady state'/'no sinks' wording and real indoor ozone has substantial surface removal, but with no k given, 12 ppb is the only computable answer and matches the bank's own convention in S2-0339/0366/0367/0368, so the item is repairable rather than ill-posed. Also update rationale, gold_tools code preview, and physical_constraints."
+    },
+    "S2-0372": {
+      "new": 60,
+      "unit": "μg/m³",
+      "reason": "Stored gold uses C_in = P·C_out·AER (0.8×75×0.6=36), which is dimensionally invalid — the item's own gold reference (REF_WHO_AQG_2021) gives C_in = P·AER·C_out/(AER+k). With no indoor sources and no deposition rate k supplied, the only computable steady state is k=0: C_in = P·C_out = 0.8×75 = 60 μg/m³ (AER cancels). Stored 36 would require an unstated k=0.4 h⁻¹; no reading of the question supports it."
+    },
+    "S2-0373": {
+      "new": 36,
+      "unit": "ppb",
+      "reason": "Question explicitly states 'no indoor sources or sinks', so k=0 and steady state is C_in = P·C_out = 0.9×40 = 36 ppb per the item's own WHO reference formula C_in = P·AER·C_out/(AER+k). Stored 25.2 comes from the dimensionally invalid C_in = P·C_out·AER (leaves a stray h⁻¹). Unambiguous; fix."
+    },
+    "S3-0277": {
+      "new": 25.83,
+      "unit": "μg/m³",
+      "reason": "TWA = (5×30 + 12×10 + 7×50)/24 = (150+120+350)/24 = 620/24 = 25.8333 μg/m³. The stored rationale itself writes '620/24 = 22.92', an arithmetic error (22.92×24 = 550, not 620). Question is well-posed and the recomputation is unambiguous; 25.83 matches the exact value within the 0.01 tolerance."
+    },
+    "S3-0188": {
+      "new": 18.96,
+      "unit": "μg/m³",
+      "reason": "Hours sum to exactly 24; Σ(t·C) = 5×10+3×35+10×15+6×25 = 455; 455/24 = 18.958 ≈ 18.96. Stored 17.08 implies Σ = 410, unreachable under any reading of the question (unweighted mean is 21.25). The rationale itself computes 455/24 then misstates the quotient — a pure arithmetic slip. Question is well-posed, so fix rather than retire."
+    },
+    "S3-0200": {
+      "new": 15.67,
+      "unit": "μg/m³",
+      "reason": "Question explicitly averages over the stated 12 hours (4+2+6 = 12); Σ(t·C) = 40+100+48 = 188; 188/12 = 15.667 ≈ 15.67. Stored 17.33 implies Σ = 208, which no reading produces (188/24 = 7.83; unweighted mean = 22.67). Rationale writes 188/12 ≈ 17.33, a division error. Well-posed → fix."
+    },
+    "S3-0276": {
+      "new": 22.25,
+      "unit": "μg/m³",
+      "reason": "Hours sum to exactly 24; Σ(t·C) = 108+176+130+120 = 534; 534/24 = 22.25 exactly (within the 0.01 tolerance). Stored 24.25 implies Σ = 582, unreachable under any reading (unweighted mean = 30.0). Rationale's own products confirm 534. Well-posed → fix."
+    },
+    "S3-0280": {
+      "new": 28.5,
+      "unit": "μg/m³",
+      "reason": "Independent recomputation: Σ(t·C) = 7×12 + 10×25 + 3×70 + 4×35 = 84+250+210+140 = 684 μg·h/m³; Σt = 24 h exactly, so TWA = 684/24 = 28.5 μg/m³. The stored 29.08 equals 698/24, i.e. an addition slip where 684 was summed as 698 — the error is visible inside the item's own rationale, which writes '(84 + 250 + 210 + 140) / 24 = 684 / 24 = 29.08'. All four segment concentrations and durations are given and the durations total exactly 24 h, so there is no alternative reading (no partial-day normalization, no missing segment) under which 29.08 is defensible. Deviation is 2.03% relative / 0.58 absolute, failing the 0.01 tolerance on either interpretation. Well-posed question, unambiguous recomputation → fix to 28.5 μg/m³."
+    },
+    "S3-0282": {
+      "new": 31.67,
+      "unit": "μg/m³",
+      "reason": "Σ(t·C)=4·15+8·20+4·55+8·40=760 and Σt=24 h exactly, so TWA=760/24=31.6667. Stored 32.92 implies a numerator of 790.08, which no reading of the item yields; the rationale itself prints the correct sum 760 then a wrong quotient, confirming a division slip. No inhalation/ventilation rates are given, so activity-weighted alternatives are not available; error of 1.25 is far outside tolerance 0.01. Question is well-posed with a unique answer, so fix rather than retire (rationale string should be updated too)."
+    },
+    "S3-0283": {
+      "new": 21.67,
+      "unit": "μg/m³",
+      "reason": "12·12+4·50+8·22=520 with Σt=24 h exactly, so TWA=520/24=21.6667. Stored 21.33 corresponds to 512/24, an arithmetic slip; the rationale states '520 / 24 = 21.33', internally inconsistent. No alternate weighting scheme is specified or implied, and the 0.337 deviation exceeds tolerance 0.01. Well-posed, so fix."
+    },
+    "S3-0284": {
+      "new": 20.54,
+      "unit": "μg/m³",
+      "reason": "8·12+9·18+4·40+3·25=493 with Σt=24 h exactly, so TWA=493/24=20.5417. Stored 20.25 equals 486/24; no subset or variant of the four stated microenvironments produces 486. Rationale lists the correct sum 493 then the wrong quotient. Deviation 0.292 exceeds tolerance 0.01, and the item is unambiguous, so fix."
+    },
+    "S3-0286": {
+      "new": 23.5,
+      "unit": "μg/m³",
+      "reason": "TWA = (10×12 + 8×18 + 6×50)/24 = 564/24 = 23.5 exactly. Stored gold 21.5 is an arithmetic error in the rationale itself, which writes (120+144+300)/24 = 21.5 despite the sum being 564. No alternate reading (unweighted mean = 26.67, etc.) yields 21.5; question is well-posed with hours summing to 24."
+    },
+    "S3-0291": {
+      "new": 26.25,
+      "unit": "μg/m³",
+      "reason": "TWA = (8×10 + 10×25 + 6×50)/24 = 630/24 = 26.25 exactly. The rationale correctly derives 630/24 but states the quotient as 25.83 (which would be 620/24, inconsistent with the stated inputs). No defensible reading recovers 25.83; question is well-posed."
+    },
+    "S3-0294": {
+      "new": 24.54,
+      "unit": "μg/m³",
+      "reason": "TWA = (7×12 + 8×20 + 3×55 + 6×30)/24 = 589/24 = 24.5417. The rationale correctly sums to 589 but misdivides to 22.58 (which would be ~542/24). Corrected gold 24.54 sits within the item's 0.05 tolerance of the exact value; question is well-posed with hours summing to 24."
+    },
+    "S3-0295": {
+      "new": 17.83,
+      "unit": "μg/m³",
+      "reason": "Hours sum to 24; item's own rationale gives integrated exposure 428 μg·h/m³, and 428/24 = 17.8333, not 19.83. Pure final-division arithmetic error; no reasonable reading of the question yields 19.83. Corrected gold 17.83 is within the item's 0.05 tolerance of the exact value."
+    },
+    "S3-0296": {
+      "new": 22.92,
+      "unit": "μg/m³",
+      "reason": "Hours sum to 24; rationale's integrated sum 550 is correct (100+90+120+240), but 550/24 = 22.9167, not 20.33. No alternate reading reproduces 20.33. Corrected gold 22.92 is within the item's 0.05 tolerance of the exact value."
+    },
+    "S3-0301": {
+      "new": 22.58,
+      "unit": "μg/m³",
+      "reason": "Hours sum to 24; rationale's integrated sum 542 is correct (105+225+140+72), but 542/24 = 22.5833, not 24.58. Question is well-posed and unambiguous. Corrected gold 22.58 is within the item's 0.01 tolerance of the exact value (diff 0.0033)."
+    },
+    "S3-0302": {
+      "new": 21.75,
+      "unit": "μg/m³",
+      "reason": "Well-posed: hours sum to 24. Sum of t·C = 90+144+180+108 = 522 (matches the item's own rationale intermediates); 522/24 = 21.75. Stored 21.42 (=514.08/24) is not reproducible under any reasonable reading and differs by 1.5%, exceeding the 1% tolerance."
+    },
+    "S3-0304": {
+      "new": 19.0417,
+      "unit": "μg/m³",
+      "reason": "Well-posed: hours sum to 24. Sum of t·C = 60+176+165+56 = 457 (matches rationale intermediates); 457/24 = 19.0417. Stored 20.25 (=486/24) matches no combination of the given values and is 6.3% off."
+    },
+    "S3-0305": {
+      "new": 22.125,
+      "unit": "μg/m³",
+      "reason": "Well-posed: hours sum to 24. Rationale itself writes '531/24 = 20.625', a bare arithmetic error: 531/24 = 22.125. Stored gold (=495/24) is not defensible under any reading and is 6.8% off."
+    },
+    "S4-0131": {
+      "new": 2.857e-06,
+      "unit": "mg/kg/day",
+      "reason": "Independent recompute: (2e-5 mg/m3 * 20 m3/day * 0.5 * 365 * 70)/(70 kg * 25550 day) = 2.8571e-06 mg/kg/day. Stored answer 2.86e-06 paired with unit '×10⁻⁶ mg/kg/day' evaluates to 2.86e-12 mg/kg/day, which violates the item's own _orig_range [1e-7, 1e-5], so the pairing is indefensible under any reading. _normalize_meta shows the cause: original_answer '3.43×10⁻⁶ mg/kg/day' was parsed into mantissa+parsed_unit '×10⁻⁶ mg/kg/day', then the mantissa slot was later overwritten with a full-magnitude value while the scaled unit remained. Question is well-posed and the computation unambiguous. Fix: answer 2.857e-06, unit 'mg/kg/day'. Two collateral repairs needed: the rationale still states 3.43×10⁻⁶ (stale and arithmetically wrong -- 1.2005x the correct value, matching no plausible parameter variant; the no-ET variant would be 5.71e-06), and physical_constraints.range [-13.72, 20.58] is still in mantissa units and should revert to _orig_range [1e-7, 1e-5]. Note '×10⁻⁶ mg/kg/day' appears exactly once among 370 calculation items, confirming it as a normalization artifact rather than corpus convention."
+    },
+    "S4-0136": {
+      "new": 2.571e-07,
+      "unit": "unitless",
+      "reason": "Independent recompute: 1.8e-3 per µg/m3 * 0.001 µg/m3 * (10/70) * (365/365) * (24/24) = 2.5714e-07, dimensionless. Stored unit '×10⁻³' is the IUR's exponent left behind by normalization (_normalize_meta.original_answer '1.28×10⁻³', itself wrong by ~5000x; parsed_unit '×10⁻³'). Applied to the stored answer it gives 2.57e-10 and directly contradicts the item's own dimensional_check '[1/µg/m³] × [µg/m³] × ... → [1]', so it cannot be read as a legitimate scale factor. Question is well-posed (all of C, ET, EF, ED, IUR given) and the computation unambiguous. Fix: answer 2.571e-07, unit 'unitless' (dominant dimensionless label in this corpus: 16 uses vs 1 for 'dimensionless'). Collateral: the rationale still asserts 1.28×10⁻³ and should be rewritten; physical_constraints.range [-5.12, 7.68] should revert to _orig_range [0, 1]."
+    },
+    "S4-0129": {
+      "new": 0.03,
+      "unit": "unitless",
+      "reason": "Independent recompute: CSF 1.5 per mg/kg/day * LADD 0.02 mg/kg/day = 0.03, dimensionless. Numeric gold is correct and unchanged; only the unit is wrong. The item refutes itself twice over: physical_constraints.dimensional_check reads '[mg/kg/day] × [per mg/kg/day] → [unitless risk]' and range is [0, 1], both incompatible with a mg/kg/day label. The gold_references quote likewise defines CSF output as an upper-bound probability. No reading of 'oral cancer risk' carries dose units -- the per-mg/kg/day slope factor cancels the dose exactly. Question is well-posed, so fix rather than retire: keep gold 0.03, set unit 'unitless'."
+    },
+    "S5-0193": {
+      "new": 117.5,
+      "unit": "deaths/year",
+      "reason": "Independent recomputation: dC = 30-5 = 25 ug/m3; RR = exp(0.005*25) = 1.133148; AF = (RR-1)/RR = 0.117503 (identically 1-exp(-b*dC)); deaths = 500,000 x 0.002 x 0.117503 = 117.5031/year. Stored 125 is 6.38% high, exceeding the 0.05 tolerance. Attempts to refute failed: the alternative excess = baseline x (RR-1) gives 133.149 (6.1% off in the other direction), so no standard AF convention yields 125. The stored 125 equals the linear approximation baseline x b*dC = 1000 x 0.125 exactly, i.e. the exponential form the question explicitly mandates was discarded at the last step. The stored rationale itself refutes the gold: it derives AF ~ 0.117 and then reports ~125, which does not follow from its own intermediate value (0.117 x 1000 = 117). This is an arithmetic slip, not an alternative reading. Corrected gold 117.5 stays inside the declared range [100,150]; the stored 125 would remain in range too, so the range check cannot arbitrate. Recommend also correcting the rationale's final figure to 117.5."
+    },
+    "S5-0196": {
+      "new": 6593.6,
+      "unit": "cases/year",
+      "reason": "Independent recomputation: dC = 40-20 = 20 ppb; RR = exp(0.02*20) = exp(0.4) = 1.491825; AF = (RR-1)/RR = 0.329680; cases = 2,000,000 x 0.01 x 0.329680 = 6593.599/year. Stored 8000 is 21.3% above this, far outside the 0.05 tolerance. Refutation attempts fail on every alternative: excess = baseline x (RR-1) gives 9836.49 (stored is 18.7% below that), and no rounding of AF reaches 0.40. The stored 8000 is exactly the linear approximation 20,000 x (0.02*20) = 20,000 x 0.4, which abandons the RR = exp(b*dC) form the question explicitly prescribes; at b*dC = 0.4 that approximation is not defensible (21% error). As with S5-0193, the stored rationale is self-contradictory: it states AF ~ 0.331 and then reports ~8000, whereas 0.331 x 20,000 = 6620. The question is well-posed (population, baseline rate, threshold, beta and RR form all specified) and the AF convention is fixed by the rationale, so the unambiguous fix is 6593.6 cases/year rather than retirement. Value remains within the declared range [0, 1e6]. Recommend correcting the rationale's final figure as well."
+    },
+    "S5-0212": {
+      "new": 1262.8,
+      "unit": "deaths/year",
+      "reason": "Stored 1350 is the linear shortcut pop*rate*beta*dC, contradicting the item's own rationale (RR=exp(0.135)=1.1445, AF=(RR-1)/RR=0.1263 -> 2e6*0.005*0.1263=1262.8; even the rationale's rounded AF 0.127 gives 1270, not 1350). A solver using the stated AF method fails tolerance (rel err 0.065). Question plus rationale make the intended method unambiguous and 1262.8 is within the item's range [1000,2000], so fix."
+    },
+    "S5-0215": {
+      "new": 146.3,
+      "unit": "deaths/year",
+      "reason": "Question explicitly pins RR=exp(0.005) per ug/m3 and the attributable fraction approach: RR=exp(0.05)=1.0513, AF=0.04877, deaths=1e6*0.003*0.04877=146.3. Stored 158 matches no standard variant (linear 150, RR-1 153.8, AF 146.3) and contradicts the rationale's own arithmetic (0.003*0.048*1e6=144). Correct answer is even outside the stored range [150,165], which should be widened alongside this fix. Well-posed, unambiguous recomputation."
+    },
+    "S5-0223": {
+      "new": 638.4,
+      "unit": "cases/year",
+      "reason": "Stored 675 equals the linear shortcut AF=beta*dC=0.1125, but the rationale states AF=(RR-1)/RR (=0.1064 with RR=exp(0.1125)=1.1191), giving 5e5*0.012*0.1064=638.4; the rationale's own rounded AF 0.106 gives 636, not 675. A solver following the stated method fails marginally (rel err 0.054 > tol 0.05). Same internal inconsistency as the sibling items; 638.4 is within the stated range [600,700], so fix."
+    },
+    "S5-0237": {
+      "new": 3173,
+      "unit": "deaths/year",
+      "reason": "DeltaC = 25 is unambiguous and the rationale explicitly commits to the log-linear PAF method: RR = exp(0.005 x 25) = 1.13315, AF = (RR-1)/RR = 0.117503. Deaths = 3,000,000 x 0.009 x 0.117503 = 3172.6. The rationale's own stated numbers give 27,000 x 0.117 = 3159, not 3375 - the stored gold silently substitutes the linear beta x DeltaC = 0.125 shortcut, an internally inconsistent slip. Rel. err vs the method the item itself specifies is 6.4% > 0.05 tolerance. No alternative reading rescues 3375: applying (RR-1) to a counterfactual baseline gives 3595, which is further away. The item's gold reference REF_GBD_PM25 also demonstrates exactly the AF = (RR-1)/RR method. Corrected value 3173 still satisfies the stored physical_constraints range [3000, 3500], so no range edit is needed."
+    },
+    "S5-0244": {
+      "new": 256,
+      "unit": "DALYs/year",
+      "reason": "Baseline DALYs = 1,500,000 x 400/100,000 = 6,000. DeltaAF = (1 - exp(-0.003 x 25)) - (1 - exp(-0.003 x 10)) = 0.072257 - 0.029554 = 0.042702, giving 256.2 DALYs avoided. Every reasonable variant converges to the same neighborhood: RR = exp(0.003 x 15) applied to the observed baseline gives 264.0 (3.0% from 256.2, inside tolerance), and the linear shortcut gives 270.0. The rationale's own arithmetic yields 6,000 x 0.042 = 252 yet reports 2700, so the stored gold is a factor-of-~10 error rather than a method disagreement (rel. err 954%). No reading of the question supports 2700. IMPORTANT downstream edit: physical_constraints.range is currently [2500, 3000], which excludes the corrected gold and must be widened (e.g. [150, 400]) or the item will fail its own range check."
+    },
+    "S5-0298": {
+      "new": 1.419,
+      "unit": "dimensionless",
+      "reason": "Question explicitly gives RR=exp(beta*dC) with beta=0.014, dC=25: exp(0.35)=1.4191 (internally consistent beta=ln(1.15)/10 gives 1.4182, within 0.1%). Stored 1.485 has relative error 4.6% > tolerance 0.01 and corresponds to no parameter in the question; unit 'ug/m3' is also wrong for a dimensionless RR. Well-posed, unambiguous recomputation."
+    }
+  },
+  "retired_round2": {
+    "S1-0246": "3.0 L/day is not defensible under any reading: the item's own gold_reference quote states 'the average adult intake rate is about 1.15 L/day'; the bench KB and the item's own gold tool call (drinking_water, age 21, sex M, long_term) both return 1,053 mL/day; 3.0 L/day corresponds to a ~95th-percentile value, not a mean, so the 0.01 tolerance is violated by a wide margin. However the item is not repairable to a single number: EFH Table 3-1 has no sex-specific adult drinking-water mean (the tool silently falls back to 'both'), and 'average as recommended by EPA EFH' admits several mutually incompatible conventions that the bank itself uses inconsistently — 1.053 L/day (KB, sibling S1-0185), ~1.15-1.227 L/day (cited EFH passage / >65 group), 2.0-2.5 L/day (EPA default / RSL), and 2.2 L/day asserted as true in sibling S1-0164. Any single fix would also violate the item's own physical_constraints range [2.5,4.0]. Under-specified as a 1%-tolerance numeric item; retire (or rewrite to name the exact table, age band, and per-capita vs consumers-only basis).",
+    "S2-0226": "Under-specified: the model C=(P·AER·Cout+S/V)/(AER+k) requires room volume V, but the question gives S=15 μg/h with no V, so the answer is indeterminate (V=50 m³ gives ~23.6 μg/m³). Even the charitable volumetric reading (V=1 m³) gives (0.7·1·40+15)/1.2=35.83, not the stored 36.36 — the rationale's own arithmetic is wrong (reproducing 36.36 requires V≈0.96 m³). No reasonable reading yields the stored gold exactly, and the missing V makes the question ill-posed, so retire rather than fix.",
+    "S3-0219": "The two segments with stated inhalation rates give walking 30×1.2×2 = 72 μg and car 50×0.8×3 = 120 μg. The 5 h home segment is given a concentration (8 μg/m³) but no inhalation rate, and the gold of 192 μg is obtainable only by setting IR_home = 0 — an assumption the rationale states outright ('8 × 0 × 5 = 0 μg (no inhalation rate given for home segment)') and which is physically false for a 5-hour period, while the supplied home concentration would then be inert data. Substituting any defensible resting/sedentary rate from the benchmark's own canonical factor table (knowledge_base/authoritative_values.yaml adult F sleep 0.32 / sedentary 0.39; adult M sleep 0.45 / sedentary 0.54) yields 204.8, 207.6, 210.0 or 213.6 μg — 6.7% to 11.3% above the gold and outside the 0.05 tolerance. Because the commuter's sex and home activity level are both unstated, no single corrected value is recoverable from the question text, so the item cannot be fixed, only retired. Authoring instability corroborates: gold_tools carries python preview sum([0, 72, 360]) = 432 matching stale _normalize_meta.original_answer '432 μg', and its 360 term does not even equal 50×0.8×3 = 120.",
+    "S1-0172": "provenance-compromised: the question wording was edited on May 28 after 19 of 28 cells had already been served the old wording; scored results are not reproducible from the current bank text"
+  }
+}

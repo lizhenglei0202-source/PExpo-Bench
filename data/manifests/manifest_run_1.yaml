@@ -1,0 +1,82 @@
+run_idx: 1
+started_at: 2026-08-17T16:30:44+0200
+host: Mus-Mac-mini.local
+git_commit_pexpo_bench: null
+python_version: 3.12.13
+bank_path: pexpo_bench/samples/pexpo_bench_v3_active_20260813.yaml
+bank_sha256_16: 5bcf249657d7ef6c
+kb_chunks_path: ~/Desktop/lzl/pexpo_bench/knowledge_base/index/chunks.parquet
+kb_chunks_sha256_16: 'MISSING: ~/Desktop/lzl/pexpo_bench/knowledge_base/index/chunks.parquet'
+prompt_hashes:
+  A0_SYSTEM: e7acff3f44aa7067
+  A1_SYSTEM: a2750716d197ad09
+  A2_SYSTEM: ce6b9077d6925878
+  A2P_SYSTEM: f6fd138a194b173a
+  A3_SYSTEM: cb41bca139b8dacf
+  A4_SYSTEM: 36a245d827672c34
+  A4P_SYSTEM: 14d302194379d851
+tool_registry:
+  n_tools: 18
+  tool_names_sorted:
+  - af_calc
+  - airquality_lookup
+  - cotinine_pk_calc
+  - dose_calculator
+  - exposure_factor_lookup
+  - gbd_mortality
+  - ier_pm25_rr
+  - indoor_air_mass_balance
+  - iris_lookup
+  - mppd_deposition
+  - noncancer_hq_calc
+  - python_sandbox
+  - retrieve
+  - revise_plan
+  - submit_plan
+  - trajectory_match
+  - unit_converter
+  - who_aqg_lookup
+  schema_hash: a02a052b07a1872f
+models:
+- deepseek-v4
+model_snapshots:
+  deepseek-v4:
+    model_string: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    price_in_usd_per_1M: 0.14
+    price_out_usd_per_1M: 0.28
+architectures:
+- A0_naive
+- A1_context_eng
+- A2p_rag_constrained
+- A3_agent
+- A4p_hybrid_constrained
+temperature: 0.3
+seed: 42
+concurrency: 10
+judge_dispatch:
+  gpt-5.4: deepseek-v4
+  gpt-5.4-native: deepseek-v4
+  gpt-5.4-mini: deepseek-v4
+  gpt-5.4-nano: deepseek-v4
+  deepseek-v4: gpt-4o-mini
+  gpt-4o: deepseek-v4
+  gpt-4o-mini: deepseek-v4
+  deepseek: gpt-4o-mini
+judge_models_used:
+  gpt-4o-mini:
+    model_string: gpt-4o-mini
+    base_url: https://api.openai.com/v1
+    price_in_usd_per_1M: 0.15
+    price_out_usd_per_1M: 0.6
+  deepseek-v4:
+    model_string: deepseek-v4-flash
+    base_url: https://api.deepseek.com
+    price_in_usd_per_1M: 0.14
+    price_out_usd_per_1M: 0.28
+notes:
+- ' release schema: doc_id and gold_tools are descriptive metadata; no metric uses
+  them.'
+- Retrieval uses content-hash dedup + low-info filter (drops ~26.9% chunks).
+- 'Cross-family judging: GPT-{5.4,5.4-nano} → DeepSeek V4 Flash; DeepSeek V4 → GPT-4o-mini.'
+- 'n=3 reruns: results stored as run_1.jsonl, run_2.jsonl, run_3.jsonl per cell.'

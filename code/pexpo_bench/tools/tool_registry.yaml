@@ -1,0 +1,68 @@
+# PExpo-Bench 工具注册表 v0.1
+# 用于 A3 Agentic Harness 和 A4 Hybrid 架构
+# 所有工具签名在此冻结；评估 Tool-Use F1 时以 name 为准
+
+tools:
+  - name: unit_converter
+    description: "Convert a numerical value between physical units (time, mass, volume, concentration)."
+    args:
+      value: {type: number, required: true}
+      from:  {type: string, required: true, examples: [min, h, L, mL, μg/m³, mg/m³]}
+      to:    {type: string, required: true}
+    returns: {value: number, unit: string}
+
+  - name: dose_calculator
+    description: "Compute inhalation or ingestion dose. Dose = C × IR × ET (optionally / BW)."
+    args:
+      C:  {type: number, required: true, desc: "concentration (μg/m³ or mg/L)"}
+      IR: {type: number, required: true, desc: "inhalation/ingestion rate"}
+      ET: {type: number, required: true, desc: "exposure time (h or day)"}
+      BW: {type: number, required: false, desc: "body weight (kg), if body-weight-normalized"}
+    returns: {dose: number, unit: string}
+
+  - name: mppd_deposition
+    description: "Return regional deposition fraction (head/tracheobronchial/alveolar) for a given particle size and breathing condition. Simplified ICRP 66 lookup."
+    args:
+      particle_size_um: {type: number, required: true}
+      region: {type: enum, values: [head, TB, alveolar, total], required: true}
+      breathing: {type: enum, values: [resting, light, heavy], default: resting}
+    returns: {fraction: number}
+
+  - name: airquality_lookup
+    description: "Query cached AirNow/PurpleAir data by location and time."
+    args:
+      lat: {type: number, required: true}
+      lon: {type: number, required: true}
+      time: {type: iso8601, required: true}
+      pollutant: {type: enum, values: [PM2.5, PM10, NO2, O3, CO, SO2], required: true}
+    returns: {value: number, unit: string, station_id: string}
+
+  - name: trajectory_match
+    description: "Match GPS trajectory to microenvironment categories using land-use DB."
+    args:
+      gps_csv: {type: path, required: true}
+      microenv_db: {type: string, default: "default"}
+    returns: {segments: "list of {start, end, microenv, duration_h}"}
+
+  - name: exposure_factor_lookup
+    description: "Query EPA Exposure Factors Handbook default values."
+    args:
+      age: {type: number, required: false}
+      sex: {type: enum, values: [M, F, both], default: both}
+      factor: {type: enum, values: [inhalation_rate, body_weight, skin_area, drinking_water, food_intake], required: true}
+      duration: {type: enum, values: [short_term, long_term], default: long_term}
+    returns: {value: number, unit: string, source: "EFH section"}
+
+  - name: python_sandbox
+    description: "Execute restricted Python (math/numpy only) for custom calculations."
+    args:
+      code: {type: string, required: true}
+    returns: {result: any, stdout: string}
+    security: "no file/network access; 5s timeout; numpy/math/statistics only"
+
+  - name: retrieve  # 仅 A4 Hybrid 暴露
+    description: "Retrieve top-k passages from the RAG knowledge base."
+    args:
+      query: {type: string, required: true}
+      k: {type: int, default: 5}
+    returns: {passages: "list of {doc_id, section, text, score}"}

@@ -1,0 +1,1 @@
+Original-campaign data (defective execution environment; see manuscript Sections 2.7 and 3.3). Scored with the same corrected gold standard as the corrected rerun. Raw trajectories available from the authors due to size.

@@ -1,0 +1,18 @@
+{
+  "input_tokens_per_judge": 191916,
+  "output_tokens_nano": 2000,
+  "output_tokens_deepseek": 220000,
+  "assumed_prices_per_MTok": {
+    "gpt-5.4-nano": [
+      0.05,
+      0.4
+    ],
+    "deepseek-v4": [
+      0.28,
+      1.1
+    ]
+  },
+  "cost_nano_usd": 0.01,
+  "cost_deepseek_usd": 0.296,
+  "total_usd": 0.306
+}

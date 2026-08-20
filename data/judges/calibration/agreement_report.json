@@ -1,0 +1,35 @@
+{
+  "n_judged_rows": 400,
+  "per_judge_mean": {
+    "deepseek-v4": 4.3675,
+    "gpt-5.4-nano": 4.75
+  },
+  "per_judge_mean_by_model": {
+    "deepseek-v4": {
+      "deepseek-v4": 4.35,
+      "gpt-5.4": 4.58,
+      "gpt-5.4-mini": 4.25,
+      "gpt-5.4-nano": 4.29
+    },
+    "gpt-5.4-nano": {
+      "deepseek-v4": 4.75,
+      "gpt-5.4": 4.81,
+      "gpt-5.4-mini": 4.76,
+      "gpt-5.4-nano": 4.68
+    }
+  },
+  "judge_judge": {
+    "pair": "deepseek-v4 vs gpt-5.4-nano",
+    "n": 400,
+    "pearson_r": 0.7302,
+    "spearman_rho": 0.6038,
+    "exact_agree": 0.795,
+    "within_1": 0.9,
+    "kappa_unweighted": 0.2714,
+    "kappa_linear": 0.4644,
+    "kappa_quadratic": 0.5805,
+    "mean_diff": -0.3825
+  },
+  "n_human_rated": 0,
+  "human_note": "human columns not (sufficiently) filled - judge-human agreement skipped"
+}
