@@ -31,7 +31,7 @@ code → (qid, model) lives in `blinding_key.json` — **withhold this file (and
 | File | Role |
 |---|---|
 | `sample_manifest.json` | sampled qids, strata, allocation, seed |
-| `human_rating_sheet.csv` | 400 blinded rows; raters fill `rater1_score_0_5`, `rater2_score_0_5` |
+| `human_rating_sheet.csv` | 400 blinded rows; COMPLETED 2026-08-21 (both rater columns filled) |
 | `INSTRUCTIONS.md` | rater instructions with the exact 0-5 rubric from `run_open_judge.py` |
 | `blinding_key.json` | code → model/qid map — WITHHELD from raters |
 | `judge_inputs.jsonl` | machine-readable rows for the double-judge run (contains model identity) |
@@ -44,8 +44,12 @@ code → (qid, model) lives in `blinding_key.json` — **withhold this file (and
 The machine-vs-machine half is **complete**: 800 judgments across 400 answers, both
 judges. Result: Pearson r = 0.73, within-one-point agreement 90%, quadratic κ = 0.58,
 and the GPT-5.4-nano judge is +0.38 points more lenient on the 0–5 scale (reported in
-SI Section C). The **human** half is outstanding: `human_rating_sheet.csv` still has
-both rater columns empty (0/400).
+SI Section C). The **human** half is now complete as well (2026-08-21): both raters scored all 400
+rows. Rater-to-rater agreement r = 0.92 (quadratic κ = 0.92, within-one 99.5%); against
+the mean human score the DeepSeek-V4 judge is −0.15 and the GPT-5.4-nano judge +0.24,
+so the human standard sits between the two judges. Full statistics in
+`agreement_report.json`; the completed sheet is preserved as
+`human_rating_sheet_completed_20260821.csv`.
 
 ## Workflow
 
