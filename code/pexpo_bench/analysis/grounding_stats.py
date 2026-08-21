@@ -1,4 +1,3 @@
-import os
 """Grounding (HR) statistics for the corrected rerun, computed on the stratified
 299-item reference-quoted subsample (seed 42, identical items for all models/archs).
 
@@ -7,6 +6,7 @@ Dedups per_row_hr.jsonl (best row per model×arch×qid, claims>0 preferred), the
   - grounding_subsample block appended to V4_NUMBERS_20260818.json
   - the ranges needed for the two manuscript placeholders -> stdout
 """
+import os
 import json, pathlib
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))

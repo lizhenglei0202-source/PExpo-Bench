@@ -1,11 +1,12 @@
 """Export the underlying data for every figure into one multi-sheet Excel.
 Output: article/final/PExpo-Bench_figure_data_v4.xlsx
 """
+import os
 import json, pathlib
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon
 
-ROOT = pathlib.Path('${PEXPO_ROOT}')
+ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 df = pd.read_parquet(ROOT / 'runs/v4_scored/all_scored_v4_main.parquet')
 OUT = ROOT / 'article/final/PExpo-Bench_figure_data_v4.xlsx'
 

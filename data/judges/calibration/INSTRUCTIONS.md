@@ -1,4 +1,4 @@
-# Rater Instructions — Judge Calibration Study (PEXPO-Bench )
+# Rater Instructions — Judge Calibration Study (PExpo-Bench)
 
 You are rating answers to open-ended environmental health science questions.
 Each row of `human_rating_sheet.csv` contains a question, a reference (gold)

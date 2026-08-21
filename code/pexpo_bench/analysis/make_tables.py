@@ -1,10 +1,10 @@
-import os
 """All statistics for the (reframed) manuscript, from the canonical dataset.
 Sources: runs/v4_scored/all_scored_v4_main.parquet (Phase A), all_scored_v4.parquet
 (factorial B + seeds C), runs/v3_scored/all_scored_v2.parquet (the frozen line, used
 ONLY for the before/after exhibit). Grounding (S11/Fig4bc) is appended by the HR step.
 Outputs: article/final/V4_NUMBERS_20260818.md + .json
 """
+import os
 import json, math, pathlib
 import numpy as np
 import pandas as pd

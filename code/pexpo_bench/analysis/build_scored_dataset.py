@@ -1,4 +1,3 @@
-import os
 """Build the CANONICAL paper dataset: runs/v4_scored/all_scored_v4_main.parquet.
 
 Phase A cells only (4 models x 5 paper arms, curated bank n=1,027), full -compatible
@@ -6,6 +5,7 @@ schema (incl. latency_s, error_msg), open-ended scores from the corrected judge 
 (runs/v4_rerun/_open_judge). This file is THE single source for all figures/tables.
  files (runs/v3_scored/*) are frozen history — never overwritten.
 """
+import os
 import json, pathlib, sys
 import pandas as pd
 import yaml

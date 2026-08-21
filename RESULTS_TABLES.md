@@ -10,7 +10,7 @@
 | DeepSeek-V4 | 88.7 | 90.4 | 91.4 | 91.7 | 90.9 |
 | **Mean** | 75.3 | 76.5 | 74.4 | 89.2 | 89.4 |
 
-## Table S2 (within-model Wilcoxon; Holm across 20)
+## Table S1 (within-model Wilcoxon; Holm across 20)
 
 | Contrast | GPT-5.4 | GPT-5.4-mini | GPT-5.4-nano | DeepSeek-V4 |
 |---|---|---|---|---|
@@ -20,7 +20,7 @@
 | A3 vs A4 | 0.58 (-0.3 pp) | 0.50 (+0.7 pp) | 0.22 (+1.3 pp) | 0.14 (-0.8 pp) |
 | A0 vs A4 | 1.3 × 10^-32 (+16.0 pp) | 4.4 × 10^-28 (+15.7 pp) | 7.9 × 10^-36 (+22.4 pp) | 0.010 (+2.1 pp) |
 
-## Table S3 (between-model at fixed arch; Holm across 30)
+## Table S2 (between-model at fixed arch; Holm across 30)
 
 | Pair | A0 | A1 | A2 | A3 | A4 |
 |---|---|---|---|---|---|
@@ -58,7 +58,7 @@
 | GPT-5.4-nano | +2.84 | +3.67 | +3.85 | +3.39 | +3.64 ± 0.23 |
 | DeepSeek-V4 | -2.02 | +0.46 | +1.65 | -0.73 | +0.46 ± 1.19 |
 
-## Before/after exhibit (original campaign, defective env -> corrected rerun)
+## Before/after exhibit ( defective env ->  corrected env)
 
 | Model | A0 | A1 | A2 | A3 | A4 |
 |---|---|---|---|---|---|
@@ -107,7 +107,7 @@
 | S4 Dosimetry | 0.835 | 0.868 | 0.906 | 0.848 | 0.823 |
 | S5 Health effects | 0.872 | 0.896 | 0.908 | 0.888 | 0.891 |
 
-## Cost per 100 questions (corrected-rerun tokens × 2026-08 registry prices, USD)
+## Cost per 100 questions ( tokens × 2026-08 registry prices, USD)
 
 - GPT-5.4: A0 0.387, A1 0.500, A2 1.379, A3 2.696, A4 2.935
 - GPT-5.4-mini: A0 0.039, A1 0.055, A2 0.143, A3 0.297, A4 0.332

@@ -13,6 +13,7 @@ SI figures:
 Architectures: A0 naive, A1 static-context, A2 RAG (rules baked in),
                A3 tool agent, A4 hybrid (rules baked in).
 """
+import os
 import json, pathlib, math, re
 import numpy as np
 import pandas as pd
@@ -33,7 +34,7 @@ from paper_palette import (
     ROSE_CMAP,
 )
 
-ROOT = pathlib.Path('${PEXPO_ROOT}')
+ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 PARQ = ROOT / 'runs/v4_scored/all_scored_v4_main.parquet'
 HR_FILE = ROOT / 'runs/v4_rerun/_hr/per_row_hr.jsonl'
 RUNS_DIR = ROOT / 'runs/v4_rerun'

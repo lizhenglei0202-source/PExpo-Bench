@@ -35,15 +35,23 @@ code → (qid, model) lives in `blinding_key.json` — **withhold this file (and
 | `INSTRUCTIONS.md` | rater instructions with the exact 0-5 rubric from `run_open_judge.py` |
 | `blinding_key.json` | code → model/qid map — WITHHELD from raters |
 | `judge_inputs.jsonl` | machine-readable rows for the double-judge run (contains model identity) |
-| `run_double_judge.py` | ready-to-run, NOT yet executed — scores all 400 rows with BOTH judges |
+| `run_double_judge.py` | scores all 400 rows with BOTH judges — EXECUTED 2026-08-13; output in `per_row_double_judge.jsonl` |
 | `analyze_agreement.py` | agreement statistics (no API calls) |
 | `_cost_estimate.json` | machine-readable copy of the cost estimate below |
+
+## Status (2026-08-13)
+
+The machine-vs-machine half is **complete**: 800 judgments across 400 answers, both
+judges. Result: Pearson r = 0.73, within-one-point agreement 90%, quadratic κ = 0.58,
+and the GPT-5.4-nano judge is +0.38 points more lenient on the 0–5 scale (reported in
+SI Section C). The **human** half is outstanding: `human_rating_sheet.csv` still has
+both rater columns empty (0/400).
 
 ## Workflow
 
 1. Give raters `human_rating_sheet.csv` + `INSTRUCTIONS.md` only. Two raters
    score independently.
-2. Run the double judge (makes API calls):
+2. Run the double judge (makes API calls; ALREADY DONE — results shipped):
    `python run_double_judge.py` → `per_row_double_judge.jsonl`
    (800 judgments: 400 rows x 2 judges — gpt-5.4-nano and deepseek-v4 —
    identical prompt/rubric/settings to the production judge: temperature 0.0,
@@ -54,7 +62,7 @@ code → (qid, model) lives in `blinding_key.json` — **withhold this file (and
    exact/within-1 agreement, unweighted/linear/quadratic Cohen's kappa,
    rater1-rater2 agreement, and each judge vs the mean human score.
 
-## Estimated API cost of the double-judge run (NOT yet spent)
+## API cost of the double-judge run (spent 2026-08-13)
 
 Computed from actual character counts of the 400 assembled prompts
 (question + gold + answer + ~700-char template), at ~4 chars/token:

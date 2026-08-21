@@ -1,7 +1,14 @@
 # Reproduction guide
 
-## 1. Rescore from released trajectories (no API calls)
+## 0. Prepare paths (once)
+The analysis scripts address data by the layout used when the experiments were run;
+this one-liner maps the published `data/` tree onto those paths with symlinks and
+derives the programmatic-stream bank file from the full bank.
+
+    bash setup_paths.sh
     export PEXPO_ROOT=$(pwd)
+
+## 1. Rescore from released trajectories (no API calls)
     python code/pexpo_bench/analysis/build_scored_dataset.py
 
 ## 2. Regenerate tables and figures

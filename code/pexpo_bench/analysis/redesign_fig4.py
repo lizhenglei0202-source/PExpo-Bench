@@ -1,4 +1,3 @@
-import os
 #!/usr/bin/env python3
 """Regenerate manuscript Figure 4 without the scored-Parquet dependency.
 
@@ -10,6 +9,7 @@ its numerator includes both SUPPORTED and CONTRADICTED claims.
 
 from __future__ import annotations
 
+import os
 import json
 import math
 import pathlib

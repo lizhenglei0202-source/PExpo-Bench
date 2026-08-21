@@ -1,8 +1,7 @@
-import os
 """Curated rescore (2026-08-11): re-scores ALL archived run trajectories against the patched
 golds, with unit-aware numeric comparison, excluding retired items. Zero model/API calls.
 
-Replicates analysis/build_v3_scored.py scoring exactly, then adds:
+Replicates the original scoring routine exactly, then adds:
   - golds from pexpo_bench_v3_release.patched_20260811.yaml (+ unpatched TS extension)
   - unit-aware calculation compare: if the answer's recorded unit and the gold unit parse
     to the same base signature with a known factor, the converted value is also tried and
@@ -14,6 +13,7 @@ Outputs (baseline files are untouched):
   runs/v3_scored/per_cell_summary_v2.parquet (excluding retired)
   article/final/RESCORE_DIFF_20260811.md ( -> per-cell and headline diff)
 """
+import os
 import json, math, pathlib, re, unicodedata, yaml
 import pandas as pd
 
@@ -32,7 +32,7 @@ MODELS = ["gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "deepseek-v4"]
 LAB = dict(zip(PAPER, ["A0", "A1", "A2", "A3", "A4"]))
 
 
-# ---------- identical scoring primitives (from build_v3_scored.py) ----------
+# ---------- identical scoring primitives (unchanged from the original scorer) ----------
 def norm_tf(x):
     if isinstance(x, bool):
         return x
@@ -171,112 +171,113 @@ def score_row(r, gq, model, arch):
     return 0.0, False
 
 
-# ---------- load gold ----------
-g1 = {q["qid"]: q for q in yaml.safe_load(GOLD1.read_text())}
-g2 = {q["qid"]: q for q in yaml.safe_load(GOLD2.read_text())}
-gold = {**g1, **g2}
-retired = {q for q, it in gold.items() if it.get(f"_retired_{TAG}")}
-print(f"gold items: {len(gold)}; retired: {len(retired)}")
+if __name__ == "__main__":
+    # ---------- load gold ----------
+    g1 = {q["qid"]: q for q in yaml.safe_load(GOLD1.read_text())}
+    g2 = {q["qid"]: q for q in yaml.safe_load(GOLD2.read_text())}
+    gold = {**g1, **g2}
+    retired = {q for q, it in gold.items() if it.get(f"_retired_{TAG}")}
+    print(f"gold items: {len(gold)}; retired: {len(retired)}")
 
-# ---------- consolidate ----------
-rows = []
-for model in MODELS:
-    for arch in ARCHS:
-        for root in [P1, T1]:
-            f = root / model / arch / "run_1.jsonl"
-            if not f.exists():
-                continue
-            for line in f.read_text().splitlines():
-                if not line.strip():
+    # ---------- consolidate ----------
+    rows = []
+    for model in MODELS:
+        for arch in ARCHS:
+            for root in [P1, T1]:
+                f = root / model / arch / "run_1.jsonl"
+                if not f.exists():
                     continue
-                r = json.loads(line)
-                gq = gold.get(r.get("qid"))
-                if not gq:
-                    continue
-                sc, via_unit = score_row(r, gq, model, arch)
-                rows.append({
-                    "model": model, "arch": arch, "qid": r["qid"],
-                    "subdomain": gq.get("subdomain"), "question_type": gq.get("question_type"),
-                    "difficulty": gq.get("difficulty", "medium"),
-                    "score": sc, "unit_converted": via_unit,
-                    "retired": r["qid"] in retired,
-                    "in_tokens": r.get("input_tokens", 0) or 0,
-                    "out_tokens": r.get("output_tokens", 0) or 0,
-                    "latency_s": r.get("total_latency_s", 0) or 0,
-                    "n_tools": len(r.get("tool_calls") or []),
-                    "parse_error": bool(r.get("parse_error")),
-                    "error_msg": r.get("error_msg") or "",
-                })
-df = pd.DataFrame(rows)
-df.to_parquet(OUT / "all_scored_v2.parquet")
-act = df[~df.retired].copy()
-print(f"rows: {len(df)} (active {len(act)}); cells: {df.groupby(['model','arch']).ngroups}")
+                for line in f.read_text().splitlines():
+                    if not line.strip():
+                        continue
+                    r = json.loads(line)
+                    gq = gold.get(r.get("qid"))
+                    if not gq:
+                        continue
+                    sc, via_unit = score_row(r, gq, model, arch)
+                    rows.append({
+                        "model": model, "arch": arch, "qid": r["qid"],
+                        "subdomain": gq.get("subdomain"), "question_type": gq.get("question_type"),
+                        "difficulty": gq.get("difficulty", "medium"),
+                        "score": sc, "unit_converted": via_unit,
+                        "retired": r["qid"] in retired,
+                        "in_tokens": r.get("input_tokens", 0) or 0,
+                        "out_tokens": r.get("output_tokens", 0) or 0,
+                        "latency_s": r.get("total_latency_s", 0) or 0,
+                        "n_tools": len(r.get("tool_calls") or []),
+                        "parse_error": bool(r.get("parse_error")),
+                        "error_msg": r.get("error_msg") or "",
+                    })
+    df = pd.DataFrame(rows)
+    df.to_parquet(OUT / "all_scored_v2.parquet")
+    act = df[~df.retired].copy()
+    print(f"rows: {len(df)} (active {len(act)}); cells: {df.groupby(['model','arch']).ngroups}")
 
-# per-cell summary (active only), same cost model as for comparability
-COST = {"gpt-5.4": {"in": 5e-3, "out": 15e-3}, "gpt-5.4-nano": {"in": 1.5e-4, "out": 6e-4},
-        "deepseek-v4": {"in": 2.7e-4, "out": 1.1e-3}}
-act["cost_usd"] = act.apply(lambda r: (r.in_tokens / 1000) * COST.get(r.model, {"in": 1e-3})["in"]
-                            + (r.out_tokens / 1000) * COST.get(r.model, {"out": 3e-3})["out"], axis=1)
-cell = act.groupby(["model", "arch"]).agg(n=("score", "size"), acc=("score", "mean"),
-                                          in_tok=("in_tokens", "mean"), out_tok=("out_tokens", "mean"),
-                                          cost_per_q=("cost_usd", "mean"),
-                                          cost_per_100q=("cost_usd", lambda x: x.sum() * 100 / len(x)))
-cell.to_parquet(OUT / "per_cell_summary_v2.parquet")
+    # per-cell summary (active only), same cost model as for comparability
+    COST = {"gpt-5.4": {"in": 5e-3, "out": 15e-3}, "gpt-5.4-nano": {"in": 1.5e-4, "out": 6e-4},
+            "deepseek-v4": {"in": 2.7e-4, "out": 1.1e-3}}
+    act["cost_usd"] = act.apply(lambda r: (r.in_tokens / 1000) * COST.get(r.model, {"in": 1e-3})["in"]
+                                + (r.out_tokens / 1000) * COST.get(r.model, {"out": 3e-3})["out"], axis=1)
+    cell = act.groupby(["model", "arch"]).agg(n=("score", "size"), acc=("score", "mean"),
+                                              in_tok=("in_tokens", "mean"), out_tok=("out_tokens", "mean"),
+                                              cost_per_q=("cost_usd", "mean"),
+                                              cost_per_100q=("cost_usd", lambda x: x.sum() * 100 / len(x)))
+    cell.to_parquet(OUT / "per_cell_summary_v2.parquet")
 
-# ---------- diff vs baseline ----------
-baseline = pd.read_parquet(OUT / "all_scored.parquet")
-m = baseline.merge(df[["model", "arch", "qid", "score", "unit_converted", "retired"]],
-             on=["model", "arch", "qid"], suffixes=("_v1", "_v2"))
-chg = m[m.score_v1 != m.score_v2]
-gain_qids = chg.groupby("qid").size().sort_values(ascending=False)
-unit_gain = m[m.unit_converted & (m.score_v2 > m.score_v1)].qid.nunique()
+    # ---------- diff vs baseline ----------
+    baseline = pd.read_parquet(OUT / "all_scored.parquet")
+    m = baseline.merge(df[["model", "arch", "qid", "score", "unit_converted", "retired"]],
+                 on=["model", "arch", "qid"], suffixes=("_v1", "_v2"))
+    chg = m[m.score_v1 != m.score_v2]
+    gain_qids = chg.groupby("qid").size().sort_values(ascending=False)
+    unit_gain = m[m.unit_converted & (m.score_v2 > m.score_v1)].qid.nunique()
 
-L = ["# Curated-rescore diff — 2026-08-11", "",
-     "Baseline = `all_scored.parquet` (original golds, unit-blind scorer, all 1,104 items).",
-     "Curated = `all_scored_v2.parquet` (patched golds, unit-aware scorer; primary numbers exclude "
-     f"the {len(retired)} retired items → n = {len(gold) - len(retired)}).",
-     "No model or judge was re-run; every score derives from archived trajectories.", "",
-     f"- Rows with changed scores: {len(chg)} (across {chg.qid.nunique()} qids)",
-     f"- qids gaining via unit conversion: {unit_gain}",
-     f"- Score decreases: {len(chg[chg.score_v2 < chg.score_v1])} rows "
-     "(possible only via gold fixes; expected ~0 since fixed items scored 0 under the original golds)", "",
-     "## Changed items (rows changed across 28 cells)", ""]
-for q, n in gain_qids.head(20).items():
-    mean1 = m[m.qid == q].score_v1.mean()
-    mean2 = m[m.qid == q].score_v2.mean()
-    L.append(f"- {q}: {n} cells changed (item mean {mean1:.2f} → {mean2:.2f})")
+    L = ["# Curated-rescore diff — 2026-08-11", "",
+         "Baseline = `all_scored.parquet` (original golds, unit-blind scorer, all 1,104 items).",
+         "Curated = `all_scored_v2.parquet` (patched golds, unit-aware scorer; primary numbers exclude "
+         f"the {len(retired)} retired items → n = {len(gold) - len(retired)}).",
+         "No model or judge was re-run; every score derives from archived trajectories.", "",
+         f"- Rows with changed scores: {len(chg)} (across {chg.qid.nunique()} qids)",
+         f"- qids gaining via unit conversion: {unit_gain}",
+         f"- Score decreases: {len(chg[chg.score_v2 < chg.score_v1])} rows "
+         "(possible only via gold fixes; expected ~0 since fixed items scored 0 under the original golds)", "",
+         "## Changed items (rows changed across 28 cells)", ""]
+    for q, n in gain_qids.head(20).items():
+        mean1 = m[m.qid == q].score_v1.mean()
+        mean2 = m[m.qid == q].score_v2.mean()
+        L.append(f"- {q}: {n} cells changed (item mean {mean1:.2f} → {mean2:.2f})")
 
-L += ["", "## Paper-arm accuracy (%), baseline (n=1,104) → curated (n=1,030)", "",
-      "| Model | " + " | ".join(LAB[a] for a in PAPER) + " |", "|---|" + "---|" * len(PAPER)]
-for mod in MODELS:
-    parts = []
+    L += ["", "## Paper-arm accuracy (%), baseline (n=1,104) → curated (n=1,030)", "",
+          "| Model | " + " | ".join(LAB[a] for a in PAPER) + " |", "|---|" + "---|" * len(PAPER)]
+    for mod in MODELS:
+        parts = []
+        for a in PAPER:
+            a1 = baseline[(baseline.model == mod) & (baseline.arch == a)].score.mean() * 100
+            a2 = act[(act.model == mod) & (act.arch == a)].score.mean() * 100
+            parts.append(f"{a1:.1f} → {a2:.1f}")
+        L.append(f"| {mod} | " + " | ".join(parts) + " |")
+
+    L += ["", "## Cross-model means (paper arms)", "", "| Arm | baseline | curated | Δ |", "|---|---|---|---|"]
     for a in PAPER:
-        a1 = baseline[(baseline.model == mod) & (baseline.arch == a)].score.mean() * 100
-        a2 = act[(act.model == mod) & (act.arch == a)].score.mean() * 100
-        parts.append(f"{a1:.1f} → {a2:.1f}")
-    L.append(f"| {mod} | " + " | ".join(parts) + " |")
+        a1 = baseline[baseline.arch == a].groupby("model").score.mean().mean() * 100
+        a2 = act[act.arch == a].groupby("model").score.mean().mean() * 100
+        L.append(f"| {LAB[a]} | {a1:.1f} | {a2:.1f} | {a2 - a1:+.1f} |")
 
-L += ["", "## Cross-model means (paper arms)", "", "| Arm | baseline | curated | Δ |", "|---|---|---|---|"]
-for a in PAPER:
-    a1 = baseline[baseline.arch == a].groupby("model").score.mean().mean() * 100
-    a2 = act[act.arch == a].groupby("model").score.mean().mean() * 100
-    L.append(f"| {LAB[a]} | {a1:.1f} | {a2:.1f} | {a2 - a1:+.1f} |")
+    L += ["", "## By question type, cross-model means (baseline → curated)", ""]
+    for qt in ["calculation", "true_false", "open_ended"]:
+        row = []
+        for a in PAPER:
+            a1 = baseline[(baseline.arch == a) & (baseline.question_type == qt)].groupby("model").score.mean().mean() * 100
+            a2 = act[(act.arch == a) & (act.question_type == qt)].groupby("model").score.mean().mean() * 100
+            row.append(f"{LAB[a]} {a1:.1f}→{a2:.1f}")
+        L.append(f"- **{qt}**: " + "; ".join(row))
 
-L += ["", "## By question type, cross-model means (baseline → curated)", ""]
-for qt in ["calculation", "true_false", "open_ended"]:
-    row = []
+    L += ["", f"Retired qids and reasons: see `BANK_CHANGELOG_{TAG}.md`. Cost columns keep the original "
+          "price table for comparability and remain descriptive only.", ""]
+    DIFF_MD.write_text("\n".join(L), encoding="utf-8")
+    print(f"diff report: {DIFF_MD.name}")
+    print("\n=== Cross-model means (paper arms), baseline -> curated ===")
     for a in PAPER:
-        a1 = baseline[(baseline.arch == a) & (baseline.question_type == qt)].groupby("model").score.mean().mean() * 100
-        a2 = act[(act.arch == a) & (act.question_type == qt)].groupby("model").score.mean().mean() * 100
-        row.append(f"{LAB[a]} {a1:.1f}→{a2:.1f}")
-    L.append(f"- **{qt}**: " + "; ".join(row))
-
-L += ["", f"Retired qids and reasons: see `BANK_CHANGELOG_{TAG}.md`. Cost columns keep the original "
-      "price table for comparability and remain descriptive only.", ""]
-DIFF_MD.write_text("\n".join(L), encoding="utf-8")
-print(f"diff report: {DIFF_MD.name}")
-print("\n=== Cross-model means (paper arms), baseline -> curated ===")
-for a in PAPER:
-    a1 = baseline[baseline.arch == a].groupby("model").score.mean().mean() * 100
-    a2 = act[act.arch == a].groupby("model").score.mean().mean() * 100
-    print(f"  {LAB[a]}: {a1:.1f} -> {a2:.1f}")
+        a1 = baseline[baseline.arch == a].groupby("model").score.mean().mean() * 100
+        a2 = act[act.arch == a].groupby("model").score.mean().mean() * 100
+        print(f"  {LAB[a]}: {a1:.1f} -> {a2:.1f}")

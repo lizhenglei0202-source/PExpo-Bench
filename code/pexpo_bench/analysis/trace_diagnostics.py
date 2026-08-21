@@ -16,10 +16,11 @@ larger step budget) on the SAME items and reports, per question type:
 Output: runs/v4_rerun/_mechanism/summary.json  (+ console table)
 """
 from __future__ import annotations
+import os
 import json, re, pathlib
 import pandas as pd
 
-ROOT = pathlib.Path('${PEXPO_ROOT}')
+ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 PARQ = ROOT / 'runs/v4_scored/all_scored_v4_main.parquet'
 OUT = ROOT / 'runs/v4_rerun/_mechanism'
 MODELS = ['gpt-5.4', 'gpt-5.4-mini', 'gpt-5.4-nano', 'deepseek-v4']

@@ -10,6 +10,7 @@ vector store calls are indicated by `# TODO` markers.
 """
 from __future__ import annotations
 
+import os
 import json
 import pathlib
 import re

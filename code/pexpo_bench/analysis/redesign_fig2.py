@@ -1,4 +1,3 @@
-import os
 #!/usr/bin/env python3
 """Regenerate Figure 2 with compact benchmark markers in the cost panel.
 
@@ -10,6 +9,7 @@ black ring marks Pareto-efficient cells.
 
 from __future__ import annotations
 
+import os
 import pathlib
 
 import matplotlib as mpl

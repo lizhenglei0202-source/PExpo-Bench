@@ -1,9 +1,9 @@
-import os
 """SI Figure S3 (corrected campaign): factorial decomposition of the harness.
 Replaces the original-campaign evidence-use ablation figure (its plain A2/A4 arms exist
 only in the original runs). Design language matches the paper's dot/dumbbell figures.
 Output: article/final/svg-fig-v4/Figure_S3_factorial.{png,svg}
 """
+import os
 import pathlib, sys
 import pandas as pd
 import matplotlib

@@ -1,4 +1,3 @@
-import os
 """New Figure 3 for the reframed paper: 'Execution environment manufactures architecture
 effects.' Three panels from frozen data lines (see DATA_VERSIONS.md):
 (a) accuracy (defective env) -> (corrected env) per model x arm — slope exhibit;
@@ -6,6 +5,7 @@ effects.' Three panels from frozen data lines (see DATA_VERSIONS.md):
 (c) A4−A3 across seeds () vs the main-run value, nano + DeepSeek.
 Output: article/final/svg-fig-v4/Figure_3_environment_effect.{png,svg}
 """
+import os
 import pathlib, sys
 import numpy as np
 import pandas as pd
@@ -69,7 +69,7 @@ ax.spines[["top", "right"]].set_visible(False)
 
 # (b) nano format collapse
 ax = fig.add_subplot(gs[1])
-vals = [9.3, 63.9, 8.7, 8.9]
+vals = [9.3, 63.9, 9.5, 9.8]
 labels = ["A3\norig.", "A4\norig.", "A3\ncorr.", "A4\ncorr."]
 cols = ["#c9c5bc", "#CF8A7E", "#c9c5bc", "#E8B34F"]
 bars = ax.bar(range(4), vals, color=cols, edgecolor="#333333", linewidth=0.8, width=0.62)
