@@ -191,6 +191,30 @@
   "sha256": "e2a198294f59f86abc8a6c62bd352a86621b381534cb017e9bd4b82dd4714140",
   "bytes": 3724845
  },
+ "data/expert_validation/INSTRUCTIONS.md": {
+  "sha256": "c9c36d839ffa0a1ec1357a336762e0f60639563996050936ea164668903144d0",
+  "bytes": 2009
+ },
+ "data/expert_validation/README.md": {
+  "sha256": "8c6620b6f2b8fbba7de8857dd622c453078ad44253864e5747ed69f5b02a7f9d",
+  "bytes": 668
+ },
+ "data/expert_validation/agreement_report.json": {
+  "sha256": "aec8adc2702c64c2a5b9441bfb36501ec2f3cda8a395cbc8848c438cecdd4a13",
+  "bytes": 826
+ },
+ "data/expert_validation/rater1_sheet.csv": {
+  "sha256": "b35206f794d790673183ac963e03739f34ca0ae549a3828911204237096dbf8b",
+  "bytes": 97948
+ },
+ "data/expert_validation/rater2_sheet.csv": {
+  "sha256": "0336b4c778373901cd981371e8e19451455401e1b9aab58a8484634ce2cfce30",
+  "bytes": 99386
+ },
+ "data/expert_validation/sample_manifest.json": {
+  "sha256": "87b919fd3e4b32415680aac3d1f21a12c150673c58418b6dd25b2cd2951590d9",
+  "bytes": 3518
+ },
  "data/judges/calibration/INSTRUCTIONS.md": {
   "sha256": "84911f6d309bbb70063128dc3faa2cf6e7eec5e902449563796298de8cee309d",
   "bytes": 2261

@@ -1,0 +1,39 @@
+{
+ "n": 110,
+ "sample": "stratified seed 20260820 over the curated 1,027-item set",
+ "per_criterion": {
+  "clarity": {
+   "both": 102,
+   "pct": 92.7,
+   "agree": 94.5,
+   "kappa": 0.37
+  },
+  "gold_correctness": {
+   "both": 90,
+   "pct": 81.8,
+   "agree": 95.5,
+   "kappa": 0.83
+  },
+  "reference_support": {
+   "both": 19,
+   "pct": 17.3,
+   "agree": 74.5,
+   "kappa": 0.39
+  },
+  "difficulty_appropriateness": {
+   "both": 76,
+   "pct": 69.1,
+   "agree": 78.2,
+   "kappa": 0.35
+  }
+ },
+ "reference_support_excluding_programmatic": {
+  "n": 97,
+  "both_accept": 19,
+  "pct": 19.6
+ },
+ "acceptance_4of4_pct": 9.1,
+ "acceptance_3of3_pct": 52.7,
+ "programmatic_items_without_references": 13,
+ "caveat": "reference quotes were truncated to 300 characters in the rating sheet, so reference-support acceptance is a lower bound"
+}
