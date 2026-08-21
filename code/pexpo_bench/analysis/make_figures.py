@@ -588,7 +588,7 @@ def fig_S1_taxonomy():
                loc='lower center', ncol=6, fontsize=10, frameon=False,
                title='Number of architectures (0–5) that answer the item correctly',
                title_fontsize=10, bbox_to_anchor=(0.5, -0.02))
-    fig.suptitle('Item-level taxonomy: 1,104 items binned by sub-domain × question type × difficulty',
+    fig.suptitle('Item-level taxonomy: 1,027 curated items binned by sub-domain × question type × difficulty',
                  fontsize=11.5, fontweight='bold', y=0.98)
     p1 = OUT/'Figure_S1_difficulty_taxonomy.png'; p2 = OUT/'Figure_S1_difficulty_taxonomy.svg'
     plt.savefig(p1, dpi=180, bbox_inches='tight'); plt.savefig(p2, bbox_inches='tight')
@@ -1039,7 +1039,7 @@ def fig_5_configuration_contrast():
         for j in range(smat.shape[1]):
             axc.text(j, i, f'{smat[i,j]:+.1f}', ha='center', va='center', fontsize=9,
                      color='white' if abs(smat[i,j]) > 22 else '#333', fontweight='bold')
-    axc.set_xticks(range(2)); axc.set_xticklabels(['Original\n1,004', 'Programmatic\n100'], fontsize=8.7)
+    axc.set_xticks(range(2)); axc.set_xticklabels(['LLM-guided\n927', 'Programmatic\n100'], fontsize=8.7)
     axc.set_yticks(range(4)); axc.set_yticklabels(order, fontsize=8.5)
     axc.set_title('c  Heterogeneity by data stream (pp)', loc='left', fontweight='bold', fontsize=11, pad=8)
     _spines_box(axc)

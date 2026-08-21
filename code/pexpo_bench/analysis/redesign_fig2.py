@@ -74,8 +74,8 @@ def _spines_box(ax) -> None:
 
 def _load_data():
     acc = pd.read_excel(DATA, sheet_name="Fig2a_overall_accuracy")
-    cost = pd.read_excel(DATA, sheet_name="Fig2b_accuracy_cost")
-    subdomain = pd.read_excel(DATA, sheet_name="Fig3_subdomain_accuracy")
+    cost = pd.read_excel(DATA, sheet_name="Fig2c_accuracy_cost")
+    subdomain = pd.read_excel(DATA, sheet_name="Fig2b_subdomain_accuracy")
     for frame in (acc, cost, subdomain):
         frame["model"] = frame["model"].map(KEY2MODEL)
     acc_map = {

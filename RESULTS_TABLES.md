@@ -114,6 +114,15 @@
 - GPT-5.4-nano: A0 0.032, A1 0.040, A2 0.107, A3 0.241, A4 0.270
 - DeepSeek-V4: A0 0.018, A1 0.025, A2 0.071, A3 0.197, A4 0.221
 
+## Instruction following (%) — type-aware, from raw trajectories
+
+| Model | A0 | A1 | A2 | A3 | A4 |
+|---|---|---|---|---|---|
+| GPT-5.4 | 95.8 | 96.9 | 96.9 | 97.6 | 98.3 |
+| GPT-5.4-mini | 96.6 | 98.4 | 98.7 | 95.7 | 95.9 |
+| GPT-5.4-nano | 89.7 | 90.9 | 91.0 | 94.7 | 95.0 |
+| DeepSeek-V4 | 94.6 | 95.2 | 94.7 | 93.1 | 92.9 |
+
 ## Grounding (Table S1, stratified 299-item reference-quoted subsample)
 
 Design: stratified subsample, 299 reference-quoted items, seed 42, proportional over subdomain x question_type, same items all models/archs.

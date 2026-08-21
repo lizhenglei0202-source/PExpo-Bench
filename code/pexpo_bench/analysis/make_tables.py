@@ -172,6 +172,36 @@ for m in MODELS:
         parts.append(f"{LAB[ar]} {c100:.3f}")
     L.append(f"- {MNAME[m]}: " + ", ".join(parts))
 
+
+# ---- instruction following, recomputed from raw trajectories (not 1 - parse_error) ----
+import re as _re
+_NUM = _re.compile(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?")
+def _if_pass(r):
+    if r.get("parse_error"): return False
+    qt = r.get("_question_type") or r.get("question_type"); a = r.get("answer")
+    if qt == "true_false":
+        return isinstance(a, bool) or str(a).strip().lower() in {"true", "false"}
+    if qt == "calculation":
+        u = str(r.get("unit") or "").strip().lower()
+        return bool(_NUM.search(str(a or ""))) and u not in {"", "none", "null"}
+    return a is not None and bool(str(a).strip())
+_IF = {}
+for _m in MODELS:
+    _vals = []
+    for _ar in PAPER:
+        _rec = {}
+        for _f in sorted((ROOT / "runs/v4_rerun" / _m / _ar).glob("*.jsonl")):
+            for _l in _f.read_text().splitlines():
+                if _l.strip():
+                    _r = json.loads(_l); _rec[_r.get("qid")] = _r
+        _vals.append(round(100 * float(np.mean([_if_pass(x) for x in _rec.values()])), 2))
+    _IF[_m] = dict(zip(["A0", "A1", "A2", "A3", "A4"], _vals))
+M["instruction_following_pct"] = {"definition": "type-aware IF from raw trajectories; n=1027/cell", **_IF}
+L += ["", "## Instruction following (%) — type-aware, from raw trajectories", "",
+      "| Model | A0 | A1 | A2 | A3 | A4 |", "|---|---|---|---|---|---|"]
+for _m in MODELS:
+    L.append(f"| {MNAME[_m]} | " + " | ".join(f"{_IF[_m][x]:.1f}" for x in ["A0","A1","A2","A3","A4"]) + " |")
+
 (ROOT / "article/final/V4_NUMBERS_20260818.json").write_text(json.dumps(M, indent=1))
 (ROOT / "article/final/V4_NUMBERS_20260818.md").write_text("\n".join(L), encoding="utf-8")
 print("\n".join(L[:40]))

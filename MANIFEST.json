@@ -12,8 +12,8 @@
   "bytes": 1224
  },
  "RESULTS_TABLES.md": {
-  "sha256": "d578b5b7c80d18ebbab174ce5f0839751d58950aba1d19e296ce40caee20ca26",
-  "bytes": 7376
+  "sha256": "075218c1b1148cf28e34b2634425dd575754787324bf364b948b434ddb732725",
+  "bytes": 7708
  },
  "code/pexpo_bench/__init__.py": {
   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -24,8 +24,8 @@
   "bytes": 2668
  },
  "code/pexpo_bench/analysis/export_figure_data.py": {
-  "sha256": "297073daf9dcb7b2cf891a8ff7fcc9230a85b32e0a18582f324d561ca463b58e",
-  "bytes": 7090
+  "sha256": "63e9abb9bd19853f9676a9b3108b9ca777f9eb55a01f4c1792144ea7d344772f",
+  "bytes": 9053
  },
  "code/pexpo_bench/analysis/grounding_stats.py": {
   "sha256": "7fd8ed041c98d5910c3427f121462766b2557b797eff5b1620133c485f7004df",
@@ -40,16 +40,16 @@
   "bytes": 3058
  },
  "code/pexpo_bench/analysis/make_figures.py": {
-  "sha256": "854eb40ee6c2e1d2e521c2332412228f964cb427e00bdaa8d82a41ec929de556",
-  "bytes": 55963
+  "sha256": "a37b252aafadf3f65732f2befaa29b7192c73c6914fad66dd5f21b0a36f482f0",
+  "bytes": 55971
  },
  "code/pexpo_bench/analysis/make_graphical_abstract.py": {
   "sha256": "04209653687fd6ca0c1d256f4e31647abc37d298010a005ef166141dbc3d2b8f",
   "bytes": 5555
  },
  "code/pexpo_bench/analysis/make_tables.py": {
-  "sha256": "6546513d22a42952ba34e61f8303ca4d38ef2faa8a2d002908818642ac71dea6",
-  "bytes": 10218
+  "sha256": "8f3ed47b502225877824ba6eeaa6586390289d56facca05332403866d29f7d14",
+  "bytes": 11698
  },
  "code/pexpo_bench/analysis/model_code_markers.py": {
   "sha256": "53b3a93cd56c16c38b0ff73c3c8148b9b2a20dccd8ccfc60c068fa2eb8f01319",
@@ -60,8 +60,8 @@
   "bytes": 1742
  },
  "code/pexpo_bench/analysis/redesign_fig2.py": {
-  "sha256": "770463d03c08e8aac975b14ed7c609a82636db554638843ddf24e66ac7f9edcd",
-  "bytes": 11812
+  "sha256": "0eaf8b9d836520c0289a983fb86a65879c225f22a208e42a76644e22f6af9cb3",
+  "bytes": 11813
  },
  "code/pexpo_bench/analysis/redesign_fig4.py": {
   "sha256": "fe732375c1735765dd972d7c5c039c9189d3cd6b8d10490cb4ed1ac18d563fc7",
@@ -468,16 +468,16 @@
   "bytes": 232493
  },
  "figures/Figure_1_arch_mechanism.svg": {
-  "sha256": "12931740edb37e29c7ae9eed70e00bf104171c0376353f9c1dfdea9673d8e2c2",
+  "sha256": "1aa3ab8cf094b3a4d07f397cd02a240ed3b79b6445f7fde0da15bb8c5116aeaf",
   "bytes": 94417
  },
  "figures/Figure_2_results.png": {
-  "sha256": "a68def132ca2e4b3a210338d526ab51456ef3dd105034b9f0ed14a58bc8413cb",
-  "bytes": 287128
+  "sha256": "fd9aaa3db271c6eed0655a2b441701948866d89c079311bbb33e696e90cb408f",
+  "bytes": 281275
  },
  "figures/Figure_2_results.svg": {
-  "sha256": "8a20fca61aae3b650d2b9346ad1e3c023523b6fffb3444eb731b718d5b779616",
-  "bytes": 195594
+  "sha256": "dae3b9cd20741c199795da78a78de65f41d715c5d61b155ab05837b1f9538b36",
+  "bytes": 192541
  },
  "figures/Figure_3_environment_effect.png": {
   "sha256": "92fd68b2f3324bd7b941b0a640cbfe29be2369473b678973611e044c2dc02bd0",
@@ -492,31 +492,31 @@
   "bytes": 200025
  },
  "figures/Figure_4_reliability_diagnostics.svg": {
-  "sha256": "99eae6961b9d34b1ce742e2b4893aa3f5e1eaf7bd4747896ca541e61a772f1e9",
+  "sha256": "f6db277d52b6fc08651a7dd70ab052fd4603f7410c8e5a2da68db45597917ad2",
   "bytes": 143811
  },
  "figures/Figure_5_configuration_contrast.png": {
-  "sha256": "45fee00c646bc3bf42305576ef0e94e346e2275979e6e18741cbcdd069908661",
-  "bytes": 184744
+  "sha256": "886e06a95706e156df3eda960e3e28b365ba34d42ee1884d9d80bb94982f2e70",
+  "bytes": 184912
  },
  "figures/Figure_5_configuration_contrast.svg": {
-  "sha256": "4d3c1d0103eddceecf888d0f9e79fe058c6af516ec1d952b53163a0116d89a17",
-  "bytes": 144378
+  "sha256": "bea8e8e81ef11ae1e5ac033a4563811007d7ee8d2fd434f1ea63b6ad55b3367f",
+  "bytes": 144766
  },
  "figures/Figure_S1_difficulty_taxonomy.png": {
-  "sha256": "56be6112d37ddbd7a55267295db9750694f3dae6e52d2a8c6946a19d1c437e16",
-  "bytes": 556631
+  "sha256": "523afdad056da64d956cfd9818c31a404a1c9ce85d3055f0302204278a96f900",
+  "bytes": 557497
  },
  "figures/Figure_S1_difficulty_taxonomy.svg": {
-  "sha256": "e044d43468d708941818672981bc23d3d6ae441d1db9322ab4c8673b4a4aba96",
-  "bytes": 316129
+  "sha256": "c60be03cdba76117a029c224c9bae63b7bca51b5debfecfa04dedb4b637ed642",
+  "bytes": 317271
  },
  "figures/Figure_S2_efficiency_robustness.png": {
   "sha256": "f7662f333fac4f1c035e2be3db900bb77f5865fb112d5298cad5f15754ac60fa",
   "bytes": 119642
  },
  "figures/Figure_S2_efficiency_robustness.svg": {
-  "sha256": "f1c35b8742c849af79b2d9d6a45acfd3e589cc4121fb70f348d2efd710db1247",
+  "sha256": "13a71b57680e00afd20348a183f4a959671a5cdf0f1ac02dee1ca0f067833828",
   "bytes": 98310
  },
  "figures/Figure_S3_factorial.png": {
@@ -534,6 +534,10 @@
  "figures/PExpo-Bench_graphical_abstract.png": {
   "sha256": "092bd37c34eec2aed17f030dd5e648f1f7b30a702b3c126ee92a0167691a06e7",
   "bytes": 108119
+ },
+ "figures/README.txt": {
+  "sha256": "79b5dcafc89d248e0678a38506eeef1905dab82acc89c9b33313e2eb39747bf1",
+  "bytes": 1037
  },
  "setup_paths.sh": {
   "sha256": "a2d188cb3ca98915e2edad67e32094f883ff183bb14b7be71c32362ecbba58c6",
