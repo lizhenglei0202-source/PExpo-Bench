@@ -96,7 +96,7 @@ MODEL_REGISTRY: dict[str, dict] = {
     "deepseek":      {"backend": "openai_compat", "model": "deepseek-chat",
                       "base_url": "https://api.deepseek.com",
                       "price_in": 0.27, "price_out": 1.1},
-    # DeepSeek V4 — same key as , only model name changes.
+    # DeepSeek V4 — same credentials as the deepseek entry above; only the model name changes.
     # Per DeepSeek deprecation notice: legacy alias "deepseek-chat" stops 2026-07-24.
     # Flash (standard): $0.14 / $0.28 per 1M. Pro (reasoning, promo $0.435/$0.87 till 2026-05-31, regular $1.74/$3.48).
     "deepseek-v4":      {"backend": "openai_compat", "model": "deepseek-v4-flash",

@@ -1,5 +1,5 @@
-# PExpo-Bench 工具注册表 v0.1
-# 用于 A3 Agentic Harness 和 A4 Hybrid 架构
+# PExpo-Bench tool registry
+# Used by the A3 tool agent and the A4 retrieval-plus-tool harness
 # 所有工具签名在此冻结；评估 Tool-Use F1 时以 name 为准
 
 tools:

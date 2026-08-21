@@ -1,4 +1,4 @@
-#  numbers manifest — 2026-08-18 (canonical: all_scored_v4_main.parquet)
+# Results manifest — 2026-08-18 (canonical: data/scored/results_main.parquet)
 
 ## Cell accuracies (%)
 

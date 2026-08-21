@@ -37,7 +37,7 @@ allp = pd.read_parquet(ROOT / "runs/v4_scored/all_scored_v4.parquet")
 prior = pd.read_parquet(ROOT / "runs/v3_scored/all_scored_v2.parquet"); prior = prior[~prior.retired]
 piv = {m: a[a.model == m].pivot_table(index="qid", columns="arch", values="score") for m in MODELS}
 M = {"tag": "corrected-20260818"}
-L = ["# Results manifest — 2026-08-18 (canonical: results_main.parquet)", ""]
+L = ["# Results manifest — 2026-08-18 (canonical: scored main dataset)", ""]
 
 # cells + cross-model means
 cells = {m: {LAB[ar]: float(a[(a.model == m) & (a.arch == ar)].score.mean()) for ar in PAPER} for m in MODELS}

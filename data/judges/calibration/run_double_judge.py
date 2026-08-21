@@ -17,7 +17,7 @@ import argparse, json, pathlib, re, sys, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 PKG = pathlib.Path(__file__).resolve().parent
-REPO = pathlib.Path('~/Library/CloudStorage/OneDrive-Personal/macmini/lzl')
+REPO = pathlib.Path(os.environ.get("PEXPO_ROOT", pathlib.Path(__file__).resolve().parents[3]))
 
 # EXACT prompt from pexpo_bench/runners/run_open_judge.py
 JUDGE_PROMPT = """You are an expert evaluator for an environmental health science exam.
