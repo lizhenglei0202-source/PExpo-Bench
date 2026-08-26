@@ -291,7 +291,7 @@ def draw() -> None:
         arrowprops={"arrowstyle": "-", "color": ALERT, "lw": 0.8},
     )
     axc.set_xscale("log")
-    axc.set_ylim(44, 91)
+    axc.set_ylim(44, 94)   # headroom: top cells sit at 91.4-91.7% and their Pareto rings need clearance
     axc.set_xlabel("Cost (USD / 100 questions, log scale)", fontsize=10)
     axc.set_ylabel("Overall accuracy (%)", fontsize=10.5)
     axc.grid(alpha=0.22, ls=":")

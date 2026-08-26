@@ -1016,7 +1016,7 @@ def fig_5_configuration_contrast():
         axa.text(6.0, i, f'{mean:+.1f} pp  [{lo:+.1f}, {hi:+.1f}]\n{_p_label(p_holm[i])}; n={n}',
                  ha='left', va='center', fontsize=8.2, color='#444')
     axa.set_yticks(y); axa.set_yticklabels(order, fontsize=9.5, fontweight='bold')
-    axa.invert_yaxis(); axa.set_xlim(-31, 23)
+    axa.invert_yaxis(); axa.set_xlim(-3.2, 11.4)  # data span -1.9..+3.3; annotation column starts at x=6
     axa.set_xlabel('A4 − A3 mean accuracy difference (pp)\n95% paired item-bootstrap CI', fontsize=9.5)
     axa.grid(axis='x', alpha=0.22, ls=':'); _spines_box(axa)
     axa.set_title('a  Overall complete-configuration contrast', loc='left', fontweight='bold', fontsize=11, pad=8)

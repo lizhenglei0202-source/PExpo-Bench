@@ -164,7 +164,7 @@ def draw() -> None:
     summaries = build_summaries()
     fig, axes = plt.subplots(1, 3, figsize=(15.8, 5.6), sharex=True)
     metrics = [
-        ("if", "Instruction following ↑", "Instruction-following rate", (0.68, 1.01)),
+        ("if", "Instruction following ↑", "Instruction-following rate", (0.87, 1.005)),
         ("coverage", "Adjudication coverage ↑", "Adjudicated claims", (0, 0.55)),
         ("contradiction", "Contradiction rate ↓", "Contradiction among\nadjudicated claims", (0, 0.20)),
     ]
@@ -223,7 +223,7 @@ def draw() -> None:
         ax.set_ylabel(ylabel, fontsize=9.8)
         ax.set_ylim(*ylim)
         if key == "if":
-            ax.set_yticks(np.arange(0.70, 1.001, 0.05))
+            ax.set_yticks(np.arange(0.88, 1.001, 0.02))
         elif key == "coverage":
             ax.set_yticks(np.arange(0, 0.51, 0.10))
         else:
