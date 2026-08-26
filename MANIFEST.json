@@ -501,7 +501,7 @@
  },
  "figures/Figure_3_environment_effect.svg": {
   "sha256": "7a5adc06d864c0dc62cfb13ba08bd23fdff336db7ed36a9e8d640012f7cbb8f9",
-  "bytes": 0
+  "bytes": 94389
  },
  "figures/Figure_4_reliability_diagnostics.png": {
   "sha256": "847fdfa5cf88558ec9ac813007a1d980d72f996cac44df9565f718ae66e6d055",
@@ -541,7 +541,7 @@
  },
  "figures/Figure_S3_factorial.svg": {
   "sha256": "65b55cb35dff38a8a0d223f8474a2f0f5c0705d4f41a4629806d4ca9e6d1648e",
-  "bytes": 0
+  "bytes": 53588
  },
  "figures/PExpo-Bench_graphical_abstract.pdf": {
   "sha256": "a328857017c135188f980b125d6723c4d979fd83df5809443a336c27e731b1cc",
@@ -553,7 +553,7 @@
  },
  "figures/README.txt": {
   "sha256": "79b5dcafc89d248e0678a38506eeef1905dab82acc89c9b33313e2eb39747bf1",
-  "bytes": 0
+  "bytes": 1037
  },
  "setup_paths.sh": {
   "sha256": "a2d188cb3ca98915e2edad67e32094f883ff183bb14b7be71c32362ecbba58c6",
