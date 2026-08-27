@@ -44,8 +44,8 @@
   "bytes": 56031
  },
  "code/pexpo_bench/analysis/make_graphical_abstract.py": {
-  "sha256": "c92041f418081cae01074976628a06645827f5206f847ab9f38ae4aa72b41a3f",
-  "bytes": 6375
+  "sha256": "fd1fcc43f7079f8b9bb970ca1ab13b4f4135d384a5cbea66be0633aaa77f8b56",
+  "bytes": 6534
  },
  "code/pexpo_bench/analysis/make_tables.py": {
   "sha256": "8f3ed47b502225877824ba6eeaa6586390289d56facca05332403866d29f7d14",
@@ -495,14 +495,6 @@
   "sha256": "72cd1a5cb5d54622856a4f9d204b1a45728d25870173d2cdafa4211d12bf60a9",
   "bytes": 192956
  },
- "figures/Figure_3_environment_effect.png": {
-  "sha256": "92fd68b2f3324bd7b941b0a640cbfe29be2369473b678973611e044c2dc02bd0",
-  "bytes": 126207
- },
- "figures/Figure_3_environment_effect.svg": {
-  "sha256": "7a5adc06d864c0dc62cfb13ba08bd23fdff336db7ed36a9e8d640012f7cbb8f9",
-  "bytes": 94389
- },
  "figures/Figure_4_reliability_diagnostics.png": {
   "sha256": "847fdfa5cf88558ec9ac813007a1d980d72f996cac44df9565f718ae66e6d055",
   "bytes": 211945
@@ -544,16 +536,16 @@
   "bytes": 53588
  },
  "figures/PExpo-Bench_graphical_abstract.pdf": {
-  "sha256": "c3a341991cac8565c54659db3a925e5e0d0fee07a4a95adeea2093a3c9c764df",
-  "bytes": 40418
+  "sha256": "602f3a55296ee03b64a1650aee65d247e742a177071d1941f88818448ccc4d31",
+  "bytes": 41274
  },
  "figures/PExpo-Bench_graphical_abstract.png": {
-  "sha256": "9c1b3e01af5ad599d3c125e298be4007c1e660390259c6144f501049c38e7c9c",
-  "bytes": 106091
+  "sha256": "2e95f09b8c806da09b1ec988e24ac88b0fd346cae4069d246498f26a859be22a",
+  "bytes": 82134
  },
  "figures/README.txt": {
-  "sha256": "79b5dcafc89d248e0678a38506eeef1905dab82acc89c9b33313e2eb39747bf1",
-  "bytes": 1037
+  "sha256": "b7c05d79e8505025cc6861dc7cfec6c2fa358bd18b12a5fead56f6252d26f4d4",
+  "bytes": 1110
  },
  "setup_paths.sh": {
   "sha256": "a2d188cb3ca98915e2edad67e32094f883ff183bb14b7be71c32362ecbba58c6",

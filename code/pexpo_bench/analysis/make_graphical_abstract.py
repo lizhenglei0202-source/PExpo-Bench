@@ -1,110 +1,127 @@
-"""Graphical abstract, drawn entirely with matplotlib from the scored benchmark data
-(no generative artwork; same declared scripting pipeline as the paper's data figures).
-Journal spec: min 531 x 1328 px (h x w), readable at 5 x 13 cm. We render 13 x 5 cm @ 300 dpi.
+"""Graphical abstract — an illustration, not a chart. Drawn with matplotlib primitives.
+Journal spec: min 531 x 1328 px (h x w). Rendered 13 x 5 cm @ 300 dpi.
 Output: article/final/PExpo-Bench_graphical_abstract.{png,pdf}
 
-Narrative: the wrapper beats the tier. A wrapped small model matches the flagship's best
-configuration at a fraction of the cost; the accuracy-cost frontier is owned by
-open-weight + tools.
+One message: three ways to answer an exposure question, and what each buys and costs.
+Cells shown are the manuscript headline cells (Section 3.2):
+  GPT-5.4 A0 (unwrapped flagship) | GPT-5.4-mini A4 (wrapped small) | GPT-5.4 A3 (flagship best)
+Drawing units are 260 x 100 so that x and y are physically equal on a 13 x 5 cm canvas.
 """
 import os
-import json, pathlib, sys
+import json, pathlib
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Rectangle, Circle
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
-sys.path.insert(0, str(ROOT / "pexpo_bench/analysis"))
-from paper_palette import ARCH_FILL, ARCH_EDGE  # noqa: E402
-
 df = pd.read_parquet(ROOT / "runs/v4_scored/all_scored_v4_main.parquet")
 CANON = json.loads((ROOT / "article/final/V4_NUMBERS_20260818.json").read_text())
-PAPER = ["A0_naive", "A1_context_eng", "A2p_rag_constrained", "A3_agent", "A4p_hybrid_constrained"]
-LAB = dict(zip(PAPER, ["A0", "A1", "A2", "A3", "A4"]))
-MODELS = ["gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "deepseek-v4"]
-SHORT = {"gpt-5.4": "GPT-5.4", "gpt-5.4-mini": "GPT-5.4-mini",
-         "gpt-5.4-nano": "GPT-5.4-nano", "deepseek-v4": "DeepSeek-V4"}
 acc = lambda m, a: df[(df.model == m) & (df.arch == a)].score.mean() * 100
-cost = lambda m, a: CANON["cost"][f"{m}|{LAB[a]}"]
+cost = lambda m, k: CANON["cost"][f"{m}|{k}"]
 
+INK, MUTE, GOOD, WARN = "#2b2b2b", "#7d7a73", "#2f6b53", "#9c574b"
+BIG, SMALL, TOOLBG, TOOLED = "#3d6b96", "#2f8f6b", "#efc85e", "#a8801c"
+
+plt.rcParams.update({"font.family": "sans-serif"})
 fig = plt.figure(figsize=(13 / 2.54, 5 / 2.54), dpi=300)
 fig.patch.set_facecolor("white")
-gs = fig.add_gridspec(1, 3, width_ratios=[1.08, 1.12, 1.26], wspace=0.46,
-                      left=0.035, right=0.975, top=0.78, bottom=0.17)
-plt.rcParams.update({"font.family": "sans-serif"})
-fig.suptitle("PExpo-Bench: how you wrap the model matters more than which model you buy",
-             fontsize=7.2, fontweight="bold", y=0.965)
+ax = fig.add_axes([0, 0, 1, 1]); ax.axis("off")
+ax.set_xlim(0, 260); ax.set_ylim(0, 100)
 
-# ---------------- Panel 1: the benchmark and the five wrappers ----------------
-ax = fig.add_subplot(gs[0]); ax.axis("off")
-ax.set_xlim(0, 1); ax.set_ylim(0, 1)
-ax.add_patch(FancyBboxPatch((0.03, 0.62), 0.94, 0.30, boxstyle="round,pad=0.02",
-                            facecolor="#f2f0eb", edgecolor="#8a877e", lw=0.7))
-ax.text(0.5, 0.83, "1,027 curated personal-exposure items", ha="center",
-        fontsize=4.5, fontweight="bold")
-ax.text(0.5, 0.69, "5 sub-domains · 3 question types\nEPA · WHO · IRIS · ICRP · GBD sources",
-        ha="center", fontsize=4.6, va="center")
-for i, (lab, desc) in enumerate([("A0", "naive"), ("A1", "context"), ("A2", "RAG"),
-                                 ("A3", "tools"), ("A4", "tools\n+RAG")]):
-    x = 0.03 + i * 0.194
-    ax.add_patch(FancyBboxPatch((x, 0.18), 0.165, 0.24, boxstyle="round,pad=0.012",
-                                facecolor=ARCH_FILL[lab], edgecolor=ARCH_EDGE[lab], lw=0.8))
-    ax.text(x + 0.082, 0.345, lab, ha="center", fontsize=5.4, fontweight="bold")
-    ax.text(x + 0.082, 0.245, desc, ha="center", fontsize=3.9, va="center", linespacing=0.95)
-ax.add_patch(FancyArrowPatch((0.5, 0.60), (0.5, 0.47), arrowstyle="-|>", mutation_scale=6,
-                             color="#8a877e", lw=0.8))
-ax.text(0.5, 0.05, "5 wrappers × 4 base models", ha="center", fontsize=5.0)
+ax.text(130, 92.5, "Wrap a small model with tools, or buy a bigger one?",
+        ha="center", va="center", fontsize=8.4, fontweight="bold", color=INK)
+ax.text(130, 85, "PExpo-Bench · 1,027 curated personal-exposure questions · EPA · WHO · IRIS · ICRP · GBD",
+        ha="center", va="center", fontsize=4.6, color=MUTE)
 
-# ---------------- Panel 2: wrapper beats tier ----------------
-ax = fig.add_subplot(gs[1])
-bars = [("GPT-5.4\nnaive", acc("gpt-5.4", "A0_naive"), ARCH_FILL["A0"], ARCH_EDGE["A0"]),
-        ("GPT-5.4-mini\n+ tools", acc("gpt-5.4-mini", "A4p_hybrid_constrained"), ARCH_FILL["A4"], ARCH_EDGE["A4"]),
-        ("GPT-5.4\n+ tools", acc("gpt-5.4", "A3_agent"), ARCH_FILL["A3"], ARCH_EDGE["A3"])]
-xs = range(3)
-ax.bar(xs, [b[1] for b in bars], color=[b[2] for b in bars],
-       edgecolor=[b[3] for b in bars], lw=0.9, width=0.64)
-for i, b in enumerate(bars):
-    ax.annotate(f"{b[1]:.1f}", (i, b[1] + 1.2), ha="center", fontsize=5.2, fontweight="bold")
-ax.annotate("", xy=(1, 99.0), xytext=(0, 99.0),
-            arrowprops=dict(arrowstyle="<->", lw=0.7, color="#2f6b53"))
-ax.text(0.5, 100.6, "+16.0 pp", ha="center", fontsize=5.0, color="#2f6b53", fontweight="bold")
-ax.text(2.0, 96.0, "same accuracy,\n9× the price", ha="center", va="center",
-        fontsize=4.6, color="#6b6357", linespacing=1.1)
-ax.set_xticks(list(xs), [b[0] for b in bars], fontsize=4.7, linespacing=1.1)
-ax.set_ylim(60, 108); ax.set_yticks([60, 70, 80, 90])
-ax.tick_params(axis="y", labelsize=4.6, width=0.5, length=2)
-ax.set_ylabel("Accuracy (%)", fontsize=5)
-ax.set_title("Wrapping a small model beats buying a big one", fontsize=5.4)
-ax.spines[["top", "right"]].set_visible(False)
-[s.set_linewidth(0.5) for s in ax.spines.values()]
 
-# ---------------- Panel 3: accuracy-cost frontier ----------------
-ax = fig.add_subplot(gs[2])
-pts = [(m, a, cost(m, a), acc(m, a)) for m in MODELS for a in PAPER]
-front = [p for p in pts if not any(q[2] <= p[2] and q[3] >= p[3] and (q[2] < p[2] or q[3] > p[3])
-                                   for q in pts)]
-fset = {(m, a) for m, a, _, _ in front}
-for m, a, c, y in pts:
-    on = (m, a) in fset
-    ax.scatter([c], [y], s=26 if on else 15, color=ARCH_FILL[LAB[a]],
-               edgecolor="#24272b" if on else ARCH_EDGE[LAB[a]],
-               linewidth=1.1 if on else 0.5, alpha=1.0 if on else 0.45, zorder=3 if on else 2)
-fs = sorted(front, key=lambda p: p[2])
-ax.plot([p[2] for p in fs], [p[3] for p in fs], color="#2f6b53", lw=0.8, ls="-", zorder=1)
-ax.annotate("every efficient choice:\nopen-weight + tools", (fs[-1][2], fs[-1][3]),
-            xytext=(0.30, 70), fontsize=4.6, color="#2f6b53", ha="left",
-            arrowprops=dict(arrowstyle="->", lw=0.6, color="#2f6b53"))
-ax.set_xscale("log")
-ax.set_xlabel("Cost (USD / 100 questions)", fontsize=5)
-ax.set_ylabel("Accuracy (%)", fontsize=5)
-ax.tick_params(labelsize=4.6, width=0.5, length=2)
-ax.set_ylim(48, 99)
-ax.set_title("Accuracy–cost frontier (20 configurations)", fontsize=5.4)
-ax.grid(alpha=0.18, ls=":")
-ax.spines[["top", "right"]].set_visible(False)
-[s.set_linewidth(0.5) for s in ax.spines.values()]
+def model_chip(cx, cy, label, colour, w=62, h=12):
+    for kw in (dict(facecolor=colour, edgecolor="none", alpha=0.14, zorder=2),
+               dict(facecolor="none", edgecolor=colour, lw=1.1, zorder=3)):
+        ax.add_patch(FancyBboxPatch((cx - w / 2, cy - h / 2), w, h,
+                                    boxstyle="round,pad=1.2", **kw))
+    ax.text(cx, cy, label, ha="center", va="center", fontsize=5.9,
+            fontweight="bold", color=colour, zorder=4)
+
+
+def icon_calc(x, y):
+    ax.add_patch(Rectangle((x - 2.1, y - 2.6), 4.2, 5.2, facecolor="white",
+                           edgecolor=TOOLED, lw=0.6, zorder=5))
+    ax.add_patch(Rectangle((x - 1.5, y + 0.9), 3.0, 1.1, facecolor=TOOLED,
+                           edgecolor="none", zorder=6))
+    for r in range(2):
+        for c in range(3):
+            ax.add_patch(Circle((x - 1.3 + c * 1.3, y - 0.5 - r * 1.4), 0.32,
+                                facecolor=TOOLED, edgecolor="none", zorder=6))
+
+
+def icon_units(x, y):
+    ax.add_patch(FancyArrowPatch((x - 2.4, y + 1.1), (x + 2.4, y + 1.1), arrowstyle="-|>",
+                                 mutation_scale=3.5, color=TOOLED, lw=0.75, zorder=5))
+    ax.add_patch(FancyArrowPatch((x + 2.4, y - 1.4), (x - 2.4, y - 1.4), arrowstyle="-|>",
+                                 mutation_scale=3.5, color=TOOLED, lw=0.75, zorder=5))
+
+
+def icon_doc(x, y):
+    ax.add_patch(Rectangle((x - 1.6, y - 2.9), 3.6, 5.0, facecolor="white",
+                           edgecolor=TOOLED, lw=0.55, zorder=5))
+    ax.add_patch(Rectangle((x - 2.4, y - 2.2), 3.6, 5.0, facecolor="white",
+                           edgecolor=TOOLED, lw=0.6, zorder=6))
+    for i in range(3):
+        ax.plot([x - 1.8, x + 0.6], [y + 1.4 - i * 1.3] * 2, color=TOOLED,
+                lw=0.5, zorder=7, solid_capstyle="butt")
+
+
+def tool_chips(cx, cy):
+    for i, (lb, draw) in enumerate([("calc", icon_calc), ("units", icon_units),
+                                    ("EFH / IRIS", icon_doc)]):
+        x = cx - 23 + i * 23
+        ax.add_patch(FancyBboxPatch((x - 10.5, cy - 4.2), 21, 8.4, boxstyle="round,pad=0.8",
+                                    facecolor=TOOLBG, edgecolor=TOOLED, lw=0.7,
+                                    alpha=0.92, zorder=3))
+        draw(x - 6.4, cy)
+        ax.text(x - 2.6, cy, lb, ha="left", va="center", fontsize=3.5,
+                color="#4a3c0c", zorder=6)
+    ax.text(cx, cy - 9.5, "callable tools", ha="center", va="center", fontsize=4.1,
+            color=MUTE, style="italic", zorder=4)
+
+
+def outcome(cx, pct, price, highlight=False):
+    ax.text(cx, 33.5, f"{pct:.1f}%", ha="center", va="center",
+            fontsize=13.5 if highlight else 10.5, fontweight="bold",
+            color=GOOD if highlight else INK, zorder=4)
+    ax.add_patch(FancyBboxPatch((cx - 28, 18.5), 56, 9, boxstyle="round,pad=0.9",
+                                facecolor="#f2f0eb", edgecolor="#c9c5bc", lw=0.6, zorder=3))
+    ax.text(cx, 23, f"${price:.2f} / 100 questions", ha="center", va="center",
+            fontsize=4.7, color=INK, zorder=4)
+
+
+COL = [46, 130, 214]
+
+# recommended configuration, called out with a tinted panel
+ax.add_patch(FancyBboxPatch((COL[1] - 38, 15.5), 76, 64.5, boxstyle="round,pad=1.5",
+                            facecolor=GOOD, edgecolor=GOOD, lw=1.2, alpha=0.06, zorder=1))
+
+model_chip(COL[0], 70, "GPT-5.4", BIG)
+ax.text(COL[0], 56, "no tools", ha="center", va="center", fontsize=4.7,
+        color=MUTE, style="italic")
+outcome(COL[0], acc("gpt-5.4", "A0_naive"), cost("gpt-5.4", "A0"))
+
+for cx, model, colour, arch, key, hi in [
+        (COL[1], "gpt-5.4-mini", SMALL, "A4p_hybrid_constrained", "A4", True),
+        (COL[2], "gpt-5.4", BIG, "A3_agent", "A3", False)]:
+    model_chip(cx, 70, model.upper().replace("GPT", "GPT").replace("-MINI", "-mini"), colour)
+    ax.add_patch(FancyArrowPatch((cx, 63.2), (cx, 59.0), arrowstyle="-|>",
+                                 mutation_scale=6, color=MUTE, lw=0.9, zorder=4))
+    tool_chips(cx, 53)
+    outcome(cx, acc(model, arch), cost(model, key), highlight=hi)
+
+ax.add_patch(FancyBboxPatch((14, 2.8), 232, 8.6, boxstyle="round,pad=0.9",
+                            facecolor="#f2f0eb", edgecolor="#c9c5bc", lw=0.7, zorder=2))
+ax.text(130, 7.1, "+16.0 points over the flagship alone, and cheaper   ·   "
+                  "the flagship's own accuracy at one-eighth the price",
+        ha="center", va="center", fontsize=5.3, fontweight="bold", color=INK, zorder=4)
 
 OUT = ROOT / "article/final/PExpo-Bench_graphical_abstract"
 fig.savefig(f"{OUT}.png", dpi=300, facecolor="white")
