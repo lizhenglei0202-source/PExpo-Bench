@@ -148,7 +148,7 @@ def draw() -> None:
         top=0.92,
         bottom=0.16,
     )
-    left = outer[0].subgridspec(2, 1, height_ratios=[4, 8], hspace=0.92)
+    left = outer[0].subgridspec(2, 1, height_ratios=[4, 8], hspace=0.42)
     right = outer[1].subgridspec(2, 1, height_ratios=[0.84, 0.16], hspace=0)
     axa = fig.add_subplot(left[0])
     axb = fig.add_subplot(left[1])
@@ -191,8 +191,8 @@ def draw() -> None:
         axa.plot([x1, x1], [1.135, 1.10], color="#999999", lw=1.0, transform=transform, clip_on=False)
         axa.text((x0 + x1) / 2, 1.165, label, transform=transform, ha="center", va="bottom", fontsize=8, color="#555555")
     _spines_box(axa)
-    caxa = axa.inset_axes([0.20, -0.28, 0.60, 0.05])
-    colourbar_a = fig.colorbar(im_a, cax=caxa, orientation="horizontal")
+    # vertical colourbar on the right, matching panel b
+    colourbar_a = fig.colorbar(im_a, ax=axa, fraction=0.022, pad=0.02)
     colourbar_a.set_label("Mean accuracy (%)", fontsize=8)
     colourbar_a.ax.tick_params(length=2.5, labelsize=7.5)
     axa.set_title("a", loc="left", fontweight="bold", fontsize=12, pad=44)

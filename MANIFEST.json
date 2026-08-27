@@ -60,8 +60,8 @@
   "bytes": 1742
  },
  "code/pexpo_bench/analysis/redesign_fig2.py": {
-  "sha256": "fc11ca212394085ac2eadfba85bc469a87f7a8373da1aec11dc185cd44a3c423",
-  "bytes": 11893
+  "sha256": "9f38f820b3ea8304bf5926b282d6aa7ea17147f6e8fc5f79a1bc8967047e67f4",
+  "bytes": 11894
  },
  "code/pexpo_bench/analysis/redesign_fig4.py": {
   "sha256": "86939fc3054c84647f0e5720c4c86e3c22ba19f26a8b3b3b4bda579f66c517d1",
@@ -488,12 +488,12 @@
   "bytes": 94417
  },
  "figures/Figure_2_results.png": {
-  "sha256": "3532b87953464c0d1ed420f96ec52e0a38dd9d070aaec68a134d3a3e228188e2",
-  "bytes": 302670
+  "sha256": "1df5d9ffaee34a14e9073ec8f932386e67e6fcd25d2f96a95b92cd6f0d575330",
+  "bytes": 291999
  },
  "figures/Figure_2_results.svg": {
-  "sha256": "72cd1a5cb5d54622856a4f9d204b1a45728d25870173d2cdafa4211d12bf60a9",
-  "bytes": 192956
+  "sha256": "79a8a92aea3f213b51becb0d21da240d80fe41ea16306a38910142db56c43a71",
+  "bytes": 193082
  },
  "figures/Figure_4_reliability_diagnostics.png": {
   "sha256": "847fdfa5cf88558ec9ac813007a1d980d72f996cac44df9565f718ae66e6d055",
