@@ -24,8 +24,8 @@
   "bytes": 2668
  },
  "code/pexpo_bench/analysis/export_figure_data.py": {
-  "sha256": "63e9abb9bd19853f9676a9b3108b9ca777f9eb55a01f4c1792144ea7d344772f",
-  "bytes": 9053
+  "sha256": "c100032a9b7179757b6c25d48c806433f189f3e434183e2caa1e9c6587d9fb07",
+  "bytes": 8068
  },
  "code/pexpo_bench/analysis/grounding_stats.py": {
   "sha256": "7fd8ed041c98d5910c3427f121462766b2557b797eff5b1620133c485f7004df",
@@ -534,6 +534,10 @@
  "figures/Figure_S3_factorial.svg": {
   "sha256": "65b55cb35dff38a8a0d223f8474a2f0f5c0705d4f41a4629806d4ca9e6d1648e",
   "bytes": 53588
+ },
+ "figures/PExpo-Bench_figure_data_v4.xlsx": {
+  "sha256": "dcc9163fa2e55c3e446288517fab170f37065a2f11393dfbcfa1d7ededfea814",
+  "bytes": 115413
  },
  "figures/PExpo-Bench_graphical_abstract.pdf": {
   "sha256": "602f3a55296ee03b64a1650aee65d247e742a177071d1941f88818448ccc4d31",

@@ -112,17 +112,6 @@ figS2 = pd.DataFrame(rows)
 summ = json.loads((ROOT/'runs/v4_rerun/_mechanism/summary.json').read_text())
 figS4 = pd.DataFrame([dict(model=m, **summ[m]) for m in MODELS])
 
-# ---- Fig 3 before/after exhibit (original campaign vs corrected rerun) ----
-prior = pd.read_parquet(ROOT / 'runs/v3_scored/all_scored_v2.parquet')
-prior = prior[~prior.retired]
-prior = prior[prior.arch.isin(PAPER)].copy(); prior['A'] = prior.arch.map(PAPER)
-fig3ba = pd.DataFrame([dict(model=m, architecture=a,
-                            original_campaign_pct=round(prior[(prior.model==m)&(prior.A==a)].score.mean()*100, 2),
-                            corrected_rerun_pct=round(d[(d.model==m)&(d.A==a)].score.mean()*100, 2),
-                            delta_pp=round((d[(d.model==m)&(d.A==a)].score.mean()
-                                            - prior[(prior.model==m)&(prior.A==a)].score.mean())*100, 2))
-                       for m in MODELS for a in ORDER])
-
 # ---- Fig S2 factorial: eight corners of retrieval x rules x budget ----
 figS2f = pd.DataFrame([dict(model=m, arm=k, accuracy_pct=round(v, 2),
                             delta_vs_A3_pp=round(v - CANON['factorial'][m]['A3'], 2))
@@ -132,14 +121,13 @@ readme = pd.DataFrame([
     ('Fig2a_overall_accuracy', 'Figure 2a: overall accuracy + 95% bootstrap CI per model x architecture'),
     ('Fig2b_subdomain_accuracy', 'Figure 2b: accuracy per model x architecture x sub-domain'),
     ('Fig2c_accuracy_cost', 'Figure 2c: accuracy vs dated token charge (USD per 100 questions) per cell'),
-    ('Fig3_before_after', 'Figure 3: original campaign vs corrected rerun accuracy per cell, with delta'),
-    ('Fig4_reliability', 'Figure 4a-c: instruction following, reference-adjudication coverage, and contradiction among adjudicated claims per cell'),
-    ('Fig5_harness_payoff', 'Figure 5a: A4 minus A3 per model, raw and Holm-adjusted Wilcoxon p'),
+    ('Fig3_reliability', 'Figure 3a-c: instruction following, reference-adjudication coverage, and contradiction among adjudicated claims per cell'),
+    ('Fig4_harness_payoff', 'Figure 4a: A4 minus A3 per model, raw and Holm-adjusted Wilcoxon p'),
     ('FigS1_efficiency', 'Figure S1: tokens per correct answer and parse-error rate per cell'),
     ('FigS2_factorial', 'Figure S2: eight factorial corners (retrieval x evidence rules x step budget), calculation stream'),
     ('FigS3_taxonomy', 'Figure S3: per-item count of architectures answering correctly (k, 0-5)'),
     ('TableS5_trace_diagnostics', 'Table S5: control-flow metrics A3 vs A4 per model (corrected rerun)'),
-    ('note', 'Figure 1 is a schematic of the architectures and has no underlying data. All values derive from the corrected rerun unless a column says otherwise.'),
+    ('note', 'Figure 1 is a schematic of the architectures and has no underlying data. Sheet names follow the figure numbers used in the paper.'),
 ], columns=['sheet', 'description'])
 
 with pd.ExcelWriter(OUT, engine='openpyxl') as w:
@@ -147,15 +135,14 @@ with pd.ExcelWriter(OUT, engine='openpyxl') as w:
     fig2a.to_excel(w, sheet_name='Fig2a_overall_accuracy', index=False)
     fig3.to_excel(w, sheet_name='Fig2b_subdomain_accuracy', index=False)
     fig2b.to_excel(w, sheet_name='Fig2c_accuracy_cost', index=False)
-    fig3ba.to_excel(w, sheet_name='Fig3_before_after', index=False)
-    fig4.to_excel(w, sheet_name='Fig4_reliability', index=False)
-    fig5.to_excel(w, sheet_name='Fig5_harness_payoff', index=False)
+    fig4.to_excel(w, sheet_name='Fig3_reliability', index=False)
+    fig5.to_excel(w, sheet_name='Fig4_harness_payoff', index=False)
     figS1.to_excel(w, sheet_name='FigS1_efficiency', index=False)
     figS2f.to_excel(w, sheet_name='FigS2_factorial', index=False)
     figS2.to_excel(w, sheet_name='FigS3_taxonomy', index=False)
     figS4.to_excel(w, sheet_name='TableS5_trace_diagnostics', index=False)
 print('wrote', OUT)
-for nm, fr in [('Fig2a', fig2a), ('Fig2b', fig3), ('Fig2c', fig2b), ('Fig3', fig3ba),
-               ('Fig4', fig4), ('Fig5', fig5), ('FigS1', figS1), ('FigS2', figS2f),
+for nm, fr in [('Fig2a', fig2a), ('Fig2b', fig3), ('Fig2c', fig2b),
+               ('Fig3', fig4), ('Fig4', fig5), ('FigS1', figS1), ('FigS2', figS2f),
                ('FigS3', figS2), ('TableS5', figS4)]:
     print(f'  {nm}: {fr.shape[0]} rows')
