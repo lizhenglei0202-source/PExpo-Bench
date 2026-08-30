@@ -53,5 +53,5 @@ ax.spines[["top", "right"]].set_visible(False)
 fig.tight_layout()
 OUT = ROOT / "article/final/svg-fig-v4"
 for ext in ["png", "svg"]:
-    fig.savefig(OUT / f"Figure_S3_factorial.{ext}", dpi=200)
+    fig.savefig(OUT / f"Figure_S3_factorial.{ext}", dpi=320)
 print("saved Figure_S3_factorial")

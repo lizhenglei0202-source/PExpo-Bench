@@ -640,7 +640,7 @@ def fig_S2_efficiency_robustness():
             ha='right', va='bottom', style='italic')
 
     p1 = OUT/'Figure_S2_efficiency_robustness.png'; p2 = OUT/'Figure_S2_efficiency_robustness.svg'
-    plt.savefig(p1, dpi=180, bbox_inches='tight'); plt.savefig(p2, bbox_inches='tight')
+    plt.savefig(p1, dpi=320, bbox_inches='tight'); plt.savefig(p2, bbox_inches='tight')
     plt.close()
     print(f'  Fig S2 → {p1.name}')
 
