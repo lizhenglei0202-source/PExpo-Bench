@@ -160,7 +160,11 @@ for m in MODELS:
         L.append(f"| {sdlab} | " + " | ".join(f"{M['subdomain'][m][sd][x]:.3f}" for x in ["A0","A1","A2","A3","A4"]) + " |")
 
 # costs ( tokens × registry prices)
-PRICE = {"gpt-5.4": (2.5, 15.0), "gpt-5.4-mini": (0.25, 2.0), "gpt-5.4-nano": (0.20, 1.25), "deepseek-v4": (0.14, 0.28)}
+# USD per 1M tokens (input, output), provider list prices as of 2026-08-17, the date of the
+# reported runs (manifest_run_1.yaml). DeepSeek-V4-flash is the rate recorded in that
+# manifest at run time. GPT-5.4-mini was previously entered as (0.25, 2.0), which is
+# GPT-5-mini's rate, not GPT-5.4-mini's; corrected to the 5.4-mini list rate.
+PRICE = {"gpt-5.4": (2.5, 15.0), "gpt-5.4-mini": (0.75, 4.50), "gpt-5.4-nano": (0.20, 1.25), "deepseek-v4": (0.14, 0.28)}
 M["cost"] = {}
 L += ["", "## Cost per 100 questions (corrected-rerun tokens × 2026-08 registry prices, USD)", ""]
 for m in MODELS:

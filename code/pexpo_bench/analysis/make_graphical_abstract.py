@@ -119,8 +119,8 @@ for cx, model, colour, arch, key, hi in [
 
 ax.add_patch(FancyBboxPatch((14, 2.8), 232, 8.6, boxstyle="round,pad=0.9",
                             facecolor="#f2f0eb", edgecolor="#c9c5bc", lw=0.7, zorder=2))
-ax.text(130, 7.1, "+16.0 points over the flagship alone, and cheaper   ·   "
-                  "the flagship's own accuracy at one-eighth the price",
+ax.text(130, 7.1, "+16.0 points over the flagship used alone   ·   "
+                  "the flagship's own accuracy at roughly a third of its price",
         ha="center", va="center", fontsize=5.3, fontweight="bold", color=INK, zorder=4)
 
 OUT = ROOT / "article/final/PExpo-Bench_graphical_abstract"

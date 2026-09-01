@@ -135,9 +135,41 @@ def _draw_legend_band(fig) -> None:
         ax.text(x + 0.018, 0.23, label, fontsize=7.8, ha="left", va="center")
 
 
+def _draw_panel_legend(axc) -> None:
+    """Legend inside panel c (author layout, 2026-08-30): keeps the figure compact by
+    dropping the full-width bottom band."""
+    from matplotlib.lines import Line2D
+    arch_h = [Line2D([], [], marker="s", linestyle="none", markersize=7,
+                     markerfacecolor=FILL[a], markeredgecolor=EDGE[a], markeredgewidth=1.1,
+                     label=ARCH_DESC[a]) for a in ARCHS]
+    arch_h += [
+        Line2D([], [], marker="o", linestyle="none", markersize=9, markerfacecolor="white",
+               markeredgecolor="#24272b", markeredgewidth=1.5, label="Pareto-efficient"),
+        Line2D([], [], marker="o", linestyle="none", markersize=7, markerfacecolor="#cfcfcf",
+               markeredgecolor="none", alpha=0.45, label="Dominated"),
+    ]
+    l1 = axc.legend(handles=arch_h, title="Architecture", loc="lower right",
+                    bbox_to_anchor=(0.995, 0.035), fontsize=7.6, title_fontsize=8.2,
+                    frameon=False, handletextpad=0.6, labelspacing=0.5, borderpad=0.2)
+    l1._legend_box.align = "left"
+    axc.add_artist(l1)
+    # base-model key drawn on an inset axes so the F/M/N/D codes render exactly as the
+    # scatter markers do; a plain legend handle cannot carry the letter
+    key = axc.inset_axes([0.655, 0.315, 0.34, 0.235])
+    key.set_xlim(0, 1); key.set_ylim(0, 1); key.axis("off")
+    key.text(0.0, 0.90, "Base model", fontsize=8.2, fontweight="bold", va="center")
+    for i, m in enumerate(MODELS):
+        y = 0.68 - i * 0.20
+        add_model_code_marker(key, 0.06, y, m, "#65717c", size=92, zorder=10)
+        key.text(0.16, y, m + (" (open-weight)" if m == "DeepSeek-V4" else ""),
+                 fontsize=7.6, ha="left", va="center")
+
+    l1.get_title().set_fontweight("bold")
+
+
 def draw() -> None:
     accuracy, cost, subdomain = _load_data()
-    fig = plt.figure(figsize=(14.4, 9.0))
+    fig = plt.figure(figsize=(14.4, 7.4))
     outer = fig.add_gridspec(
         1,
         2,
@@ -146,7 +178,7 @@ def draw() -> None:
         left=0.115,
         right=0.955,
         top=0.92,
-        bottom=0.16,
+        bottom=0.075,
     )
     left = outer[0].subgridspec(2, 1, height_ratios=[4, 8], hspace=0.42)
     right = outer[1].subgridspec(2, 1, height_ratios=[0.84, 0.16], hspace=0)
@@ -281,9 +313,9 @@ def draw() -> None:
         arrowprops={"arrowstyle": "-", "color": POSITIVE, "lw": 0.8},
     )
     axc.annotate(
-        "GPT-5.4 naive: dominated\nby GPT-5.4-mini + tools",
+        "GPT-5.4 naive: dominated\nby DeepSeek-V4 naive",
         (cost["GPT-5.4"]["A0"], accuracy["GPT-5.4"]["A0"]),
-        (0.55, 67.5),
+        (0.038, 68.5),
         fontsize=8.2,
         color="#9c574b",
         ha="left",
@@ -298,7 +330,7 @@ def draw() -> None:
     _spines_box(axc)
     axc.set_title("c", loc="left", fontweight="bold", fontsize=12, pad=8)
 
-    _draw_legend_band(fig)
+    _draw_panel_legend(axc)
     png = OUT / "Figure_2_results.png"
     svg = OUT / "Figure_2_results.svg"
     fig.savefig(png, dpi=180, bbox_inches="tight")
