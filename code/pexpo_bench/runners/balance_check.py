@@ -32,10 +32,10 @@ def _check_deepseek() -> dict:
                     "balance": total, "currency": currency,
                     "available": data.get("is_available", True)}
         return {"endpoint": "deepseek", "status": f"HTTP {r.status_code}",
-                "body": r.text[:200]}
+                "body": "[REDACTED_RESPONSE_BODY]"}
     except Exception as e:
         return {"endpoint": "deepseek", "status": f"ERROR: {type(e).__name__}",
-                "msg": str(e)[:200]}
+                "msg": type(e).__name__}
 
 
 def _check_openai_native() -> dict:
@@ -51,10 +51,10 @@ def _check_openai_native() -> dict:
                     "balance": "check at platform.openai.com/usage",
                     "note": "project-scoped key cannot query billing endpoint"}
         return {"endpoint": "openai_native", "status": f"HTTP {r.status_code}",
-                "body": r.text[:200]}
+                "body": "[REDACTED_RESPONSE_BODY]"}
     except Exception as e:
         return {"endpoint": "openai_native", "status": f"ERROR: {type(e).__name__}",
-                "msg": str(e)[:200]}
+                "msg": type(e).__name__}
 
 
 def _check_proxy() -> dict:
@@ -66,12 +66,12 @@ def _check_proxy() -> dict:
                          timeout=10.0)
         if r.status_code == 200:
             return {"endpoint": "proxy", "status": "OK_AUTH",
-                    "balance": "check manually at https://proxy.plus/dashboard"}
+                    "balance": "check manually in your provider's billing dashboard"}
         return {"endpoint": "proxy", "status": f"HTTP {r.status_code}",
-                "body": r.text[:200]}
+                "body": "[REDACTED_RESPONSE_BODY]"}
     except Exception as e:
         return {"endpoint": "proxy", "status": f"ERROR: {type(e).__name__}",
-                "msg": str(e)[:200]}
+                "msg": type(e).__name__}
 
 
 def pre_flight_balance_check(min_required_usd: dict | None = None) -> bool:
@@ -112,6 +112,7 @@ def pre_flight_balance_check(min_required_usd: dict | None = None) -> bool:
 
 if __name__ == "__main__":
     from dotenv import load_dotenv
-    load_dotenv("${HOME}/Desktop/lzl/.env")
+    from pathlib import Path
+    load_dotenv(Path(os.environ.get("PEXPO_ROOT", Path(__file__).resolve().parents[3])) / ".env")
     ok = pre_flight_balance_check()
     sys.exit(0 if ok else 1)

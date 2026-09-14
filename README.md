@@ -1,27 +1,31 @@
-# PExpo-Bench Release
+# PExpo-Bench publication snapshot
 
-Benchmark, code, and complete experimental data for "A Defective Execution Environment
-Can Manufacture LLM Architecture Effects: Corrected-Rerun Evidence from a 1,104-Item
-Personal Exposure Assessment Benchmark".
+Experimental software and research data supporting "The Wrapper Beats the Tier: Tool
+Access Lets a Small Language Model Keep Pace with a Flagship on a 1,104-Item Personal
+Exposure Assessment Benchmark".
+
+This snapshot includes the final A0–A4 implementations and the factorial variants used
+in the manuscript. The full 1,104-item bank, curated 1,027-item evaluation set, original
+response records, scoring inputs and published replication data are retained.
 
 ## Contents
-- `code/pexpo_bench/` — benchmark harness: five architectures (A0–A4 plus factorial
-  variants), thread-safe tool sandbox, retrieval stack, runners, scoring, judges,
-  analysis and figure scripts. Set `PEXPO_ROOT` to this release's root; put credentials
-  in `.env` (see `.env.example` — no keys are shipped).
-- `data/bank/` — the 1,104-item question bank with the per-item curation changelog and
-  the curated 1,027-item evaluation set (361-item calculation stream separately).
-- `data/trajectories/` — raw model trajectories: `main/` (4 models × 5 architectures),
-  `factorial/` (8-corner harness decomposition, calculation stream), `seeds/` (three-seed
-  replication).
-- `data/scored/` — scored datasets (`results_main.parquet` is the paper's source of
-  record).
-- `data/judges/` — open-ended judgments, grounding adjudications, and the blinded
-  judge-calibration sample with agreement analysis.
-- `data/manifests/` — run manifests (bank checksums, endpoints, seeds) and the
-  environment lock.
-- `figures/`, `RESULTS_TABLES.md` — the paper's figures and numeric tables.
-- `REPRODUCE.md` — end-to-end reproduction guide.
 
-Knowledge-base source documents are not redistributed (copyright); the ingestion script
-and document list allow rebuilding the retrieval index from public sources.
+- `code/pexpo_bench/`: experiment runner, model clients, retrieval and tools, judges,
+  numerical scoring, table statistics and trace diagnostics.
+- `data/bank/`: full and curated question banks and the item-level curation record.
+- `data/trajectories/main/`: four models × five configurations.
+- `data/trajectories/factorial/`: the reported retrieval/rules/budget decomposition.
+- `data/trajectories/seeds/`: the reported seed replications.
+- `data/scored/`, `data/judges/`, `data/expert_validation/`: recorded scores and validation inputs.
+- `data/manifests/`: original run/environment records. Original run identifiers, timestamps,
+  errors and retry metadata are retained; private paths and host identifiers are redacted.
+- `RESULTS_TABLES.md`: numerical results; `MANIFEST.json`: per-file SHA-256 checksums.
+
+Plotting scripts and rendered figure assets are distributed separately from this code
+package. Manuscript figures and their source workbook accompany the journal submission.
+This is a publication snapshot; development-only utilities are outside its scope.
+
+See `REPRODUCE.md` for commands and `SANITIZATION.md` for the public redaction policy. Downloading the package is free; new provider API
+calls require credentials and may incur charges. Third-party source documents and
+the derived retrieval index are not bundled. An external index is required for new
+retrieval-based inference; analysis of recorded results does not require it.

@@ -6,7 +6,7 @@ Loads artifacts produced by knowledge_base/ingest.py:
 
 Usage:
     from pexpo_bench.retrieval import Retriever
-    r = Retriever.load("pexpo_bench/knowledge_base/index")
+    r = Retriever.load(os.environ["PEXPO_INDEX_DIR"])
     passages = r.retrieve("WHO PM2.5 guideline", k=5)
 """
 from __future__ import annotations

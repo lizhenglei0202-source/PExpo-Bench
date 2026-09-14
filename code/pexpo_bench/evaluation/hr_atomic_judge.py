@@ -167,8 +167,7 @@ def extract_claims(reasoning: str, question: str,
         "latency_s": time.time() - t0, "cache_hit": False,
     }
     # Write to cache — but NEVER cache the empty result of a failed call
-    # (fix 2026-08-18c: swallowed API errors return content="" with
-    # finish_reason "error:<Name>"; caching that as [] poisoned two passes).
+    # Empty responses and error finish reasons must remain retryable.
     call_failed = (resp.finish_reason or "").startswith("error:") or not resp.content.strip()
     if cache_path and not call_failed:
         cache_path.parent.mkdir(parents=True, exist_ok=True)

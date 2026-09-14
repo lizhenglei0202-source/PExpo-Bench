@@ -1,7 +1,7 @@
 """Aggregate per-question results into the tables / figures reported in the paper.
 
 Input:  runs/<arch>/<repeat>.jsonl (per-question Result records)
-        pexpo_bench/samples/*.yaml (gold)
+        data/bank/*.yaml (gold)
 
 Output: runs/_agg/metrics_by_arch.parquet
         runs/_agg/metrics_by_arch_subdomain.parquet

@@ -48,7 +48,7 @@ def _normalize(s) -> str:
     return re.sub(r"\s+", " ", str(s)).strip().lower()
 
 
-# Schema adapters — v3_release uses flat fields (answer/unit/tolerance,
+# Schema adapters — the released bank uses flat fields (answer/unit/tolerance,
 # question_type) while the original seed schema used nested (gold_answer.value,
 # type). Accept either.
 def _gold_value(g: dict):

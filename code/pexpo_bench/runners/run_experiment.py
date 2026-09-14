@@ -1,25 +1,6 @@
-""" experiment driver: 3 model × 7 arch × 1004 question × n runs.
-
-Features:
-  • Concurrency: ThreadPoolExecutor, default 10 workers per (model, arch)
-  • Checkpoint: write one JSONL line per question; resume by scanning existing rows
-  • n-run support: separate run_idx output files (run_1.jsonl, run_2.jsonl, ...)
-  • Manifest: auto-dumped per run via reproducibility_manifest.py
-  • Balance check: pre-flight; abort if any key/endpoint is broken
-  • Retry policy: per-question retry ≤2 on transient failures; mark parse_error else
-
-Usage:
-    python -m pexpo_bench.runners.run_experiment \\
-        --models gpt-5.4 gpt-5.4-nano deepseek-v4 \\
-        --archs A0_naive A1_context_eng A2_rag A2p_rag_constrained \\
-                A3_agent A4_hybrid A4p_hybrid_constrained \\
-        --bank pexpo_bench/samples/pexpo_bench_v3_release.yaml \\
-        --out runs/v3_main \\
-        --run-idx 1 \\
-        --concurrency 10
-
-Resume: just re-invoke same command; already-completed (qid) lines are skipped.
-"""
+"""Run the benchmark configurations with explicit model, question-bank, seed and run identifiers.
+Checkpointing preserves completed responses. Transport retries and recorded failures remain visible in output metadata.
+See REPRODUCE.md for the manuscript configuration."""
 from __future__ import annotations
 
 import argparse
@@ -56,7 +37,7 @@ def _conc_for(model_key: str, default: int) -> int:
 # Helpers
 # ==========================================================================
 def load_bank(path: pathlib.Path) -> list[dict]:
-    qs = yaml.safe_load(path.read_text())  # unsafe_load executed arbitrary tags (fix 2026-08-12)
+    qs = yaml.safe_load(path.read_text())
     print(f"  loaded {len(qs)} questions from {path}")
     return qs
 
@@ -113,7 +94,7 @@ def _run_one_question(runner, q: dict, model_key: str,
                 "architecture": getattr(runner, "name", "?"),
                 "answer": None, "unit": None,
                 "reasoning": "", "citations": [], "tool_calls": [],
-                "raw_output": "", "retrieved_docs": [],  # schema parity with asdict(Result) rows (fix 2026-08-12)
+                "raw_output": "", "retrieved_docs": [],  # schema parity with asdict(Result) rows
                 "input_tokens": 0, "output_tokens": 0,
                 "total_latency_s": 0, "_attempt": attempt + 1,
                 "_question_text": q.get("question", ""),
@@ -221,7 +202,7 @@ def run_cell(
 def main(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument("--bank", required=True, help="Path to question bank YAML")
-    p.add_argument("--out", required=True, help="Output dir (e.g. runs/v3_main)")
+    p.add_argument("--out", required=True, help="Output dir (e.g. outputs/main)")
     p.add_argument("--models", nargs="+", required=True,
                    help="Model keys (e.g. gpt-5.4 gpt-5.4-nano deepseek-v4)")
     p.add_argument("--archs", nargs="+", required=True,
@@ -238,11 +219,11 @@ def main(argv=None):
                    help="Don't pre-check API balances (not recommended)")
     p.add_argument("--retry-failed", action="store_true",
                    help="On resume, re-run qids whose recorded row has parse_error=True "
-                        "(default keeps them, matching historical behavior)")
+                        "(default keeps recorded failures)")
     args = p.parse_args(argv)
 
-    # project-root .env, resolved relative to this file (stale Desktop path fix 2026-08-12)
-    env_path = pathlib.Path(__file__).resolve().parents[2] / ".env"
+    # Package-root .env
+    env_path = pathlib.Path(os.environ.get("PEXPO_ROOT", str(pathlib.Path(__file__).resolve().parents[3]))) / ".env"
     if not load_dotenv(env_path):
         raise SystemExit(f"FATAL: could not load {env_path} — refusing to run with missing API keys")
 

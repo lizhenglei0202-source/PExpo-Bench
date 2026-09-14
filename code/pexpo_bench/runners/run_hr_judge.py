@@ -3,12 +3,13 @@ entailment via cross-family LLM judge. Outputs per-row HR scores with caching.
 
 Usage:
     python3 -m pexpo_bench.runners.run_hr_judge \\
-        --runs runs/v3_main \\
-        --out runs/v3_main/_hr \\
+        --runs outputs/main \\
+        --out outputs/main/_hr \\
         --concurrency 8 \\
         --max-rows 10   # for smoke; remove for full
 """
 from __future__ import annotations
+import os
 import argparse, json, pathlib, sys, time, traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict
@@ -24,7 +25,7 @@ def main():
     p.add_argument("--max-rows", type=int, default=None)
     args = p.parse_args()
 
-    load_dotenv(pathlib.Path(__file__).resolve().parents[2] / ".env")  # fix 2026-08-18: stale Desktop path
+    load_dotenv(pathlib.Path(os.environ.get("PEXPO_ROOT", str(pathlib.Path(__file__).resolve().parents[3]))) / ".env")
     from pexpo_bench.llm_clients import LLMClient
     from pexpo_bench.evaluation.hr_atomic_judge import evaluate_hr_reasoning
     from pexpo_bench.evaluation.judge_dispatch import judge_model_for
@@ -41,8 +42,7 @@ def main():
         for line in out_file.read_text().splitlines():
             try:
                 r = json.loads(line)
-                # fix 2026-08-18: zero-claim rows with no recorded error were produced by
-                # silently failing extractor calls (provider 402) — treat as NOT done.
+                # A zero-claim row without an error record is incomplete and is revisited.
                 if r.get('n_claims', 0) == 0 and not r.get('error'):
                     continue
                 done_keys.add((r['model'], r['arch'], r['qid']))
@@ -72,12 +72,11 @@ def main():
     # Load retriever (with dedup + low-info filter)
     print("[load] retriever ...")
     retriever = Retriever.load(
-        str(pathlib.Path(__file__).resolve().parents[1] / "knowledge_base" / "index"),  # fix 2026-08-18
+        str(pathlib.Path(os.environ.get("PEXPO_INDEX_DIR", str(pathlib.Path(__file__).resolve().parents[1] / "knowledge_base" / "index")))),
         embed_model_name="all-MiniLM-L6-v2",
         reranker_name=None, use_bm25=False,
     )
-    # fix 2026-08-18b: the embedding/reranker/faiss stack is not thread-safe; the
-    # threaded judge workers crashed natively without traceback. Serialize retrieval.
+    # Serialize access to the shared embedding and index objects.
     import threading as _th
     class _LockedRetriever:
         def __init__(self, r): self._r, self._lk = r, _th.Lock()

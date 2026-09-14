@@ -366,10 +366,7 @@ def _sandbox_worker(code: str, conn) -> None:
 def python_sandbox(code: str, timeout_s: int = 5) -> dict:
     """Execute a small arithmetic snippet in an isolated subprocess with a hard timeout.
 
-    Thread-safe (no signals): callable from ThreadPoolExecutor workers. The 2026-08-12 fix
-    replaces the previous signal.alarm implementation, which raised
-    'signal only works in main thread' under the threaded runner and silently failed
-    every call (see QUESTION_BANK_AUDIT/PEER_REVIEW P0 items).
+    Thread-safe: the worker subprocess enforces the timeout without main-thread signals.
     """
     import multiprocessing as mp
 

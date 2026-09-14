@@ -1,13 +1,5 @@
-"""Unified orchestrator for the 5 architectures (A0–A4).
-
-Design principles:
-  • Same interface: each architecture exposes `run(question: dict) -> Result`.
-  • Same LLM call wrapper so token / latency accounting is comparable.
-  • Differences are isolated in build_messages() and the tool/retrieval loop.
-
-This is a reference implementation skeleton — concrete LLM client and
-vector store calls are indicated by `# TODO` markers.
-"""
+"""Benchmark configurations A0–A4 and the reported retrieval/rules/budget factorial arms.
+Each architecture exposes run(question) and uses common token and latency accounting."""
 from __future__ import annotations
 
 import os
@@ -141,17 +133,17 @@ def retrieve(query: str, k: int = 5,
     Returns list of {doc_id, section, text, score, chunk_id}.
     """
     global _RETRIEVER_CACHE
-    with _RETRIEVER_LOCK:  # check-then-set was racy under the threaded runner (fix 2026-08-12)
+    with _RETRIEVER_LOCK:  # check-then-set was racy under the threaded runner
         if _RETRIEVER_CACHE is None:
             from pexpo_bench.retrieval import Retriever
-            _index_dir = pathlib.Path(__file__).resolve().parents[1] / "knowledge_base" / "index"
+            _index_dir = pathlib.Path(os.environ.get("PEXPO_INDEX_DIR", str(pathlib.Path(__file__).resolve().parents[1] / "knowledge_base" / "index")))
             _RETRIEVER_CACHE = Retriever.load(
-                str(_index_dir),  # was a stale absolute path to ~/Desktop/lzl (fix 2026-08-12)
+                str(_index_dir),
                 embed_model_name="all-MiniLM-L6-v2",
                 reranker_name="cross-encoder/ms-marco-MiniLM-L-6-v2",  # small, fast cross-encoder
                 use_bm25=True,
             )
-    # 2026-08-17: retrieve() must be serialized — SentenceTransformer/CrossEncoder/faiss
+    # retrieve() must be serialized — SentenceTransformer/CrossEncoder/faiss
     # are not thread-safe under the concurrent runner (native crash, no traceback, when
     # 10 worker threads query simultaneously). LLM calls remain parallel; only the
     # retrieval step queues here (~0.5-1 s per query).
@@ -541,7 +533,7 @@ class A3_Agent(BaseArch):
         # Token kwarg name varies: native OpenAI 5.x requires max_completion_tokens.
         # For native reasoning models the cap must include hidden reasoning tokens; a bare
         # 2048 is consumed entirely by reasoning and yields empty answers (same floor
-        # LLMClient.chat applies for A0-A2; agent-path parity fix 2026-08-12).
+        # LLMClient.chat also applies this token floor for A0-A2).
         if self.cfg.get("_native_openai"):
             tokens_kwarg = 'max_completion_tokens'
             tokens_value = max(self.max_tokens, 16384)
@@ -684,122 +676,11 @@ class A4P_Hybrid_Constrained(A4_Hybrid):
 
 
 # ==========================================================================
-# A3_AEGEA — Adaptive Evidence-Gated Expert Agent ( main A3)
-# Replaces basic A3_Agent (which is kept as A3_BasicToolUse for SI comparison).
-# ==========================================================================
-class A3_AEGEA(BaseArch):
-    """4-module routing pipeline:
-       Scenario Parser → Task Router → (Hybrid Retrieve → Evidence Gate)
-       → per-route LLM call (DIRECT / RAG / CALCULATOR / RAG_CALCULATOR / SAFETY_LIMITED)"""
-    name = "A3_agent"  # registry key stays A3_agent so existing analysis works
-
-    def __init__(self, model_key: str = "gpt-5.4", temperature: float = 0.3,
-                 max_tokens: int = 2048, seed: int | None = 42):
-        super().__init__(model_key=model_key, temperature=temperature,
-                         max_tokens=max_tokens, seed=seed)
-
-    def run(self, question: dict) -> Result:
-        from pexpo_bench.architectures.aegea import run_aegea
-        t0 = time.time()
-        try:
-            r = run_aegea(question["question"],
-                          main_model_key=self.model_key,
-                          temperature=self.temperature,
-                          max_tokens=self.max_tokens)
-            return Result(
-                qid=question["qid"], architecture=self.name,
-                answer=r.answer, unit=r.unit,
-                reasoning=r.reasoning, citations=r.citations,
-                retrieved_docs=r.retrieved,
-                tool_calls=[],  # AEGEA's tool_use is encoded in 'route' field
-                raw_output=r.raw_output,
-                input_tokens=r.in_tokens, output_tokens=r.out_tokens,
-                total_latency_s=time.time() - t0,
-                parse_error=r.parse_error,
-                error_msg=f"route={r.route}",  # encode route in error_msg field
-            )
-        except Exception as e:
-            import traceback
-            return Result(
-                qid=question["qid"], architecture=self.name,
-                answer=None, unit=None,
-                reasoning="", citations=[], retrieved_docs=[], tool_calls=[],
-                total_latency_s=time.time() - t0,
-                parse_error=True,
-                error_msg=f"AEGEA exception: {type(e).__name__}: {str(e)[:200]}",
-            )
-
-
-# A3_Agent (basic tool-use) is canonical A3; A3_AEGEA kept only as SI exploration.
-A3_Agent.name = "A3_agent"
-A3_AEGEA.name = "A3_aegea"
-
-
-# ==========================================================================
-# Oracle-retrieval arms (perfect-recall upper bound)
-# ==========================================================================
-# The deployed retriever surfaces the gold passage in the top-5 for only ~41%
-# of items, so "retrieval adds nothing" is confounded with retriever quality.
-# These arms replace retrieval with the item's own gold_references chunk, i.e.
-# recall is 100% by construction. They bound what retrieval could contribute.
-def _gold_passages(question: dict, k: int = 5) -> list[dict]:
-    """Gold passages for the oracle arm.
-
-    The programmatic-template stream (n = 100) stores gold_references as bare
-    citation strings with no quoted text, so the oracle is undefined there and
-    those items fall back to the real retriever.
-    """
-    out = []
-    for g in (question.get("gold_references") or [])[:k]:
-        if isinstance(g, dict) and g.get("quote"):
-            out.append({"doc_id": g.get("doc_id", ""),
-                        "section": f"p.{g.get('page', '')}",
-                        "text": g.get("quote", ""),
-                        "score": 1.0,
-                        "chunk_id": g.get("chunk_id", "")})
-    return out
-
-
-class A2_Oracle(A2P_RAG_Constrained):
-    """A2+ with the item's own gold passage injected as RETRIEVED_CONTEXT."""
-    name = "A2_oracle"
-
-    def _get_passages(self, question: dict) -> list[dict]:
-        return _gold_passages(question, k=self.top_k)
-
-
-class A4_Oracle(A4P_Hybrid_Constrained):
-    """A4+ whose retrieve() tool always returns the item's own gold passage.
-
-    2026-08-12 fix: the current question is kept in a threading.local. The previous
-    `self._gold_q` attribute was shared across the runner's worker threads, so with
-    concurrency >= 2 a question could receive ANOTHER question's gold passages (audit B8).
-    """
-    name = "A4_oracle"
-    _tls = threading.local()
-
-    def run(self, question: dict) -> Result:
-        self._tls.gold_q = question      # per-thread: A3 loop calls self._execute_tool
-        try:
-            return super().run(question)
-        finally:
-            self._tls.gold_q = None
-
-    def _execute_tool(self, action: dict) -> ToolCall:
-        if action.get("tool") == "retrieve":
-            t0 = time.time()
-            return ToolCall(tool="retrieve", args=action.get("args", {}),
-                            output=_gold_passages(getattr(self._tls, "gold_q", None) or {}),
-                            latency_s=time.time() - t0)
-        return A3_Agent._execute_tool(action)
-
-
-# ==========================================================================
-# Factorial arms (Phase B rerun, 2026-08-13): decompose the A4p−A3 contrast into
+# Factorial arms: decompose the A4p−A3 contrast into
 # R = retrieval availability, P = evidence-use rules, B = step budget (10 vs 8).
 # Cube corners already present: A3_Agent = (R0,P0,B0); A4_Hybrid = (R1,P0,B1);
 # A4P_Hybrid_Constrained = (R1,P1,B1). The five classes below complete the 2x2x2.
-# Known minor prompt confound, documented in RERUN_PROTOCOL: R-arms inherit the
+# Prompt/budget caveat: retrieval arms inherit the
 # A4/A4P system text whose step-count sentence says 10 even when max_steps is 8.
 # ==========================================================================
 from pexpo_bench.architectures.prompts import _EVIDENCE_RULES  # noqa: E402
@@ -842,14 +723,10 @@ ARCHITECTURES = {
     "fA3_PB":                    F_A3_PB,            # factorial: rules + budget
     "A0_naive":                  A0_Naive,
     "A1_context_eng":            A1_ContextEng,
-    "A2_rag":                    A2_RAG,
     "A2p_rag_constrained":       A2P_RAG_Constrained,
-    "A2_oracle":                 A2_Oracle,          # perfect-recall upper bound
     "A3_agent":                  A3_Agent,           # basic tool-use (canonical A3)
-    "A3_aegea":                  A3_AEGEA,           # SI: negative-result variant
     "A4_hybrid":                 A4_Hybrid,
     "A4p_hybrid_constrained":    A4P_Hybrid_Constrained,
-    "A4_oracle":                 A4_Oracle,          # perfect-recall upper bound
 }
 
 
@@ -860,7 +737,7 @@ if __name__ == "__main__":
     import argparse, yaml, pathlib, sys
     parser = argparse.ArgumentParser()
     parser.add_argument("--arch", required=True, choices=list(ARCHITECTURES))
-    parser.add_argument("--questions", default="pexpo_bench/samples/sample_questions.yaml")
+    parser.add_argument("--questions", default="data/bank/bank_evaluation_set.yaml")
     parser.add_argument("--out", default="pilot_results.jsonl")
     args = parser.parse_args()
 

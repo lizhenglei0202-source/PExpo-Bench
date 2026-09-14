@@ -1,12 +1,12 @@
 run_idx: 1
 started_at: 2026-08-17T16:30:44+0200
-host: Mus-Mac-mini.local
+host: '[REDACTED_HOST]'
 git_commit_pexpo_bench: null
 python_version: 3.12.13
-bank_path: pexpo_bench/samples/pexpo_bench_v3_active_20260813.yaml
+bank_path: '[REDACTED_PATH]'
 bank_sha256_16: 5bcf249657d7ef6c
-kb_chunks_path: ~/Desktop/lzl/pexpo_bench/knowledge_base/index/chunks.parquet
-kb_chunks_sha256_16: 'MISSING: ~/Desktop/lzl/pexpo_bench/knowledge_base/index/chunks.parquet'
+kb_chunks_path: '[REDACTED_PATH]'
+kb_chunks_sha256_16: 'MISSING: [REDACTED_PATH]'
 prompt_hashes:
   A0_SYSTEM: e7acff3f44aa7067
   A1_SYSTEM: a2750716d197ad09

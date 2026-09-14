@@ -1,24 +1,18 @@
-"""Grounding (HR) statistics for the corrected rerun, computed on the stratified
-299-item reference-quoted subsample (seed 42, identical items for all models/archs).
-
-Dedups per_row_hr.jsonl (best row per model×arch×qid, claims>0 preferred), then emits:
-  - Table S1 markdown (atomic-claim breakdown incl. legacy ratios) -> stdout + file
-  - grounding_subsample block appended to V4_NUMBERS_20260818.json
-  - the ranges needed for the two manuscript placeholders -> stdout
-"""
+"""Compute reference-grounding statistics on the manuscript’s fixed 299-item subsample, retaining the coverage and contradiction denominators."""
 import os
 import json, pathlib
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
+(ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
 PAPER = ["A0_naive", "A1_context_eng", "A2p_rag_constrained", "A3_agent", "A4p_hybrid_constrained"]
 LAB = dict(zip(PAPER, ["A0", "A1", "A2", "A3", "A4"]))
 MODELS = ["gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "deepseek-v4"]
 MNAME = {"gpt-5.4": "GPT-5.4", "gpt-5.4-mini": "GPT-5.4-mini",
          "gpt-5.4-nano": "GPT-5.4-nano", "deepseek-v4": "DeepSeek-V4"}
 
-sub = set((ROOT / "runs/v4_rerun/_hr/grounding_subsample_qids.txt").read_text().split())
+sub = set((ROOT / "data/judges/grounding_subsample_qids.txt").read_text().split())
 best = {}
-for l in (ROOT / "runs/v4_rerun/_hr/per_row_hr.jsonl").read_text().splitlines():
+for l in (ROOT / "data/judges/grounding_judgments.jsonl").read_text().splitlines():
     if not l.strip():
         continue
     r = json.loads(l)
@@ -49,7 +43,7 @@ for m in MODELS:
                      f"| {cov:.1f} | {con:.1f} | {strict:.1f} | {wide:.1f} |")
 
 table_md = "\n".join(lines)
-(ROOT / "article/final/table_S1_grounding_v4.md").write_text(table_md + "\n")
+(ROOT / "analysis_outputs/table_S1_grounding.md").write_text(table_md + "\n")
 print(table_md)
 
 def rng(vals):
@@ -70,12 +64,12 @@ for m in MODELS:
     summary[f"contra_adj_by_arch_{m}"] = {LAB[a]: cells[(m, a)]["contra_adj"] for a in PAPER}
     summary[f"coverage_by_arch_{m}"] = {LAB[a]: cells[(m, a)]["coverage"] for a in PAPER}
 
-vn = ROOT / "article/final/V4_NUMBERS_20260818.json"
+vn = ROOT / "analysis_outputs/statistics.json"
 d = json.loads(vn.read_text())
 d["grounding_subsample"] = summary
 vn.write_text(json.dumps(d, indent=1))
 
-md = ROOT / "article/final/V4_NUMBERS_20260818.md"
+md = ROOT / "analysis_outputs/statistics.md"
 txt = md.read_text()
 marker = "## Grounding (Table S1, stratified 299-item reference-quoted subsample)"
 block = (f"\n\n{marker}\n\nDesign: {summary['design']}.\n\n{table_md}\n")

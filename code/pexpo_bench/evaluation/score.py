@@ -8,7 +8,7 @@ Scores each (result, gold) pair using type-specific logic:
 Usage:
     python -m pexpo_bench.evaluation.score \
         --results pexpo_bench/runs/exp_gpt4o_v2/A0_naive.jsonl \
-        --gold pexpo_bench/samples/pexpo_bench_v2.yaml \
+        --gold data/bank/bank_evaluation_set.yaml \
         --out pexpo_bench/runs/exp_gpt4o_v2/A0_naive_scored.jsonl
 """
 from __future__ import annotations
@@ -232,7 +232,7 @@ if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True)
-    ap.add_argument("--gold", default="pexpo_bench/samples/pexpo_bench_v2.yaml")
+    ap.add_argument("--gold", default="data/bank/bank_evaluation_set.yaml")
     ap.add_argument("--out", required=True)
     ap.add_argument("--judge", default=None, help="Model key for LLM judge (e.g. gpt-4o)")
     args = ap.parse_args()

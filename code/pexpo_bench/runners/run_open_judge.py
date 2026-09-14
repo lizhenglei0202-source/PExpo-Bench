@@ -2,6 +2,7 @@
 Uses a cross-family judge (DeepSeek-V4) to score each prediction 0-5 against the gold reference.
 Output: per_row_open_judge.jsonl"""
 from __future__ import annotations
+import os
 import argparse, json, pathlib, re, sys, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
@@ -26,21 +27,18 @@ STUDENT ANSWER: {pred}
 Respond with a single integer 0 to 5 and nothing else."""
 
 def main():
-    # load project-root .env (fix 2026-08-17: judge calls previously went out with key
-    # 'EMPTY' and failed 401 on every row)
+    # Load credentials from the publication-package root.
     from dotenv import load_dotenv
-    load_dotenv(__import__('pathlib').Path(__file__).resolve().parents[2] / '.env')
+    load_dotenv(pathlib.Path(os.environ.get('PEXPO_ROOT', str(pathlib.Path(__file__).resolve().parents[3]))) / '.env')
     p = argparse.ArgumentParser()
     p.add_argument('--runs', required=True)
-    p.add_argument('--bank', default='${HOME}/Desktop/lzl/pexpo_bench/samples/pexpo_bench_v3_release.yaml')
+    p.add_argument('--bank', default='data/bank/bank_evaluation_set.yaml')
     p.add_argument('--out', required=True)
     p.add_argument('--judge', default='auto', help='auto = cross-family per evaluated model')
     p.add_argument('--concurrency', type=int, default=8)
     p.add_argument('--max-rows', type=int, default=None)
     args = p.parse_args()
 
-    load_dotenv('${HOME}/Desktop/lzl/.env')
-    sys.path.insert(0, '${HOME}/Desktop/lzl')
     from pexpo_bench.llm_clients import LLMClient
     import yaml
 

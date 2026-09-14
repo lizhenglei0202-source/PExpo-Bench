@@ -1,35 +1,20 @@
-"""Mechanism analysis for A4 (harness) sub-additivity.
-
-Tests the hypothesis that A4 sub-additivity is an agentic CONTROL-FLOW collapse
-on weak base models (enlarged action space the agent cannot govern), NOT
-retrieved-default displacement.
-
-For each base model it contrasts A3 (tool agent) with A4 (A3 + retrieve tool +
-larger step budget) on the SAME items and reports, per question type:
-  - open-ended answer-type collapse: prose question answered with a
-    boolean / bare number / <15-char string (a tool-style output)
-  - calculation non-numeric rate: no parseable number returned
-  - mean tool-call steps, and the max_steps_exceeded (budget-exhaustion) rate
-  - the rate at which A4 actually invokes retrieve (to show the harm is the
-    action-space overhead, not retrieved content)
-
-Output: runs/v4_rerun/_mechanism/summary.json  (+ console table)
-"""
+"""Descriptive A3/A4 trajectory diagnostics for the manuscript: answer types, tool calls, retrieval use and step-budget exhaustion. These diagnostics do not establish a causal mechanism."""
 from __future__ import annotations
 import os
 import json, re, pathlib
 import pandas as pd
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
-PARQ = ROOT / 'runs/v4_scored/all_scored_v4_main.parquet'
-OUT = ROOT / 'runs/v4_rerun/_mechanism'
+(ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
+PARQ = ROOT / 'data/scored/results_main.parquet'
+OUT = ROOT / 'analysis_outputs/trace_diagnostics'
 MODELS = ['gpt-5.4', 'gpt-5.4-mini', 'gpt-5.4-nano', 'deepseek-v4']
 A3, A4 = 'A3_agent', 'A4p_hybrid_constrained'
 
 
 def load(model, arch):
     d = {}
-    for base in ('runs/v4_rerun', 'runs/_none_v4'):
+    for base in ('data/trajectories/main',):
         p = ROOT / base / model / arch / 'run_1.jsonl'
         if p.exists():
             for line in p.read_text().splitlines():

@@ -6,16 +6,16 @@ Purpose: validate the automated LLM judge used for open-ended scoring by
 
 ## Sample
 
-- Source: `runs/v3_scored/all_scored_v2.parquet`, ACTIVE (`retired == False`)
+- Source: the archived scoring snapshot (private source path redacted), ACTIVE (`retired == False`)
   `open_ended` items only — 482 unique qids.
 - 100 qids stratified-sampled by subdomain x difficulty (15 non-empty strata),
   proportional allocation with at least 1 per stratum, largest-remainder
   rounding, numpy `default_rng(42)`. Full allocation in `sample_manifest.json`.
 - For each sampled qid, the `A3_agent` answer of all four models
   (gpt-5.4, gpt-5.4-mini, gpt-5.4-nano, deepseek-v4) was pulled from
-  `runs/v3_main/<model>/A3_agent/run_1.jsonl` → 400 (item, answer) rows.
+  the archived A3 response records (private source path redacted) → 400 (item, answer) rows.
 - Question text and gold answer/rationale come from
-  `pexpo_bench/samples/pexpo_bench_v3_full.patched_20260811.yaml`.
+  the archived question-bank snapshot (private source path redacted).
   Gold and predicted answers are truncated to 2500 chars, exactly as in
   `run_open_judge.py`.
 

@@ -1,10 +1,4 @@
-"""Build the CANONICAL paper dataset: runs/v4_scored/all_scored_v4_main.parquet.
-
-Phase A cells only (4 models x 5 paper arms, curated bank n=1,027), full -compatible
-schema (incl. latency_s, error_msg), open-ended scores from the corrected judge pass
-(runs/v4_rerun/_open_judge). This file is THE single source for all figures/tables.
- files (runs/v3_scored/*) are frozen history — never overwritten.
-"""
+"""Recompute the 20-cell main evaluation from the released trajectories and recorded judge scores. No model/API calls are made. The original data/scored/ files are not overwritten."""
 import os
 import json, pathlib, sys
 import pandas as pd
@@ -16,15 +10,16 @@ import scoring as r2
 r2._OPEN_JUDGE = {}  # open-ended comes from the judge file below
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
-gold = {q["qid"]: q for q in yaml.safe_load((ROOT / "pexpo_bench/samples/pexpo_bench_v3_full.patched_20260811.yaml").read_text())}
+(ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
+gold = {q["qid"]: q for q in yaml.safe_load((ROOT / "data/bank/bank_full.yaml").read_text())}
 judge = {}
-for l in (ROOT / "runs/v4_rerun/_open_judge").read_text().splitlines():
+for l in (ROOT / "data/judges/open_ended_judgments.jsonl").read_text().splitlines():
     if l.strip():
         r = json.loads(l)
         judge[(r["model"], r["arch"], r["qid"])] = r["score"]
 
 rows = []
-for f in (ROOT / "runs/v4_rerun").glob("*/*/run_1.jsonl"):
+for f in (ROOT / "data/trajectories/main").glob("*/*/run_1.jsonl"):
     model, arch = f.parent.parent.name, f.parent.name
     for line in f.read_text().splitlines():
         if not line.strip():
@@ -51,7 +46,7 @@ for f in (ROOT / "runs/v4_rerun").glob("*/*/run_1.jsonl"):
                      "error_msg": r.get("error_msg") or ""})
 
 df = pd.DataFrame(rows).drop_duplicates(subset=["model", "arch", "qid"], keep="last")
-out = ROOT / "runs/v4_scored/all_scored_v4_main.parquet"
+out = ROOT / "analysis_outputs/results_main_recomputed.parquet"
 df.to_parquet(out)
 print(f"{out.name}: {len(df)} rows, {df.groupby(['model','arch']).ngroups} cells, "
       f"open-ended NaN: {int(df[df.question_type=='open_ended'].score.isna().sum())}")

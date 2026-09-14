@@ -13,7 +13,7 @@ NOTE: this script makes API calls and costs money (see README.md estimate).
 It has NOT been executed as part of package construction.
 """
 from __future__ import annotations
-import argparse, json, pathlib, re, sys, time
+import argparse, json, os, pathlib, re, sys, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 PKG = pathlib.Path(__file__).resolve().parent
@@ -57,7 +57,7 @@ def main() -> int:
 
     from dotenv import load_dotenv
     load_dotenv(REPO / '.env')
-    sys.path.insert(0, str(REPO))
+    sys.path.insert(0, str(REPO / "code"))
     from pexpo_bench.llm_clients import LLMClient
 
     inputs = [json.loads(l) for l in

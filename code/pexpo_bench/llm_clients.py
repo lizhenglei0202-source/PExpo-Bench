@@ -48,49 +48,47 @@ class LLMResponse:
 # ==========================================================================
 MODEL_REGISTRY: dict[str, dict] = {
     # ---- Primary: GPT-5.4 on the NATIVE OpenAI endpoint ----
-    # DeepSeek endpoints are active. gpt-5.4 now routes NATIVE (supersedes the earlier
-    # do-not-failover note). This also removes the proxy as a reproducibility confound
-    # for the frozen rerun; record the endpoint change in the run manifest, since the
+    # Native endpoints are defaults; record the actual provider and snapshot in each run manifest.
     "gpt-5.4":       {"backend": "openai_compat", "model": "gpt-5.4",
-                      "base_url": os.environ.get("OPENAI_BASE_URL_NATIVE", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "_native_openai": True,
                       "price_in": 2.5, "price_out": 15.0},
     # gpt-5.4-nano: uses NATIVE OpenAI endpoint with separate sk-proj-... key
     "gpt-5.4-nano":  {"backend": "openai_compat", "model": "gpt-5.4-nano",
-                      "base_url": os.environ.get("OPENAI_BASE_URL_NATIVE", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "price_in": 0.20, "price_out": 1.25,
                       "_native_openai": True},
     # gpt-5.4-mini: NATIVE OpenAI endpoint (same key path as nano). Confirmed live —
     # model id resolves to gpt-5.4-mini-2026-03-17. price_* are estimates; recompute
     # cost from real token usage after the run.
     "gpt-5.4-mini":  {"backend": "openai_compat", "model": "gpt-5.4-mini",
-                      "base_url": os.environ.get("OPENAI_BASE_URL_NATIVE", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "price_in": 0.25, "price_out": 2.00,
                       "_native_openai": True},
     "gpt-5.4-native": {"backend": "openai_compat", "model": "gpt-5.4",
-                      "base_url": os.environ.get("OPENAI_BASE_URL_NATIVE", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "price_in": 2.5, "price_out": 15.0,
                       "_native_openai": True},
     "gpt-5":         {"backend": "openai_compat", "model": "gpt-5",
-                      "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
                       "price_in": 5.0, "price_out": 15.0},
     "gpt-4o":        {"backend": "openai_compat", "model": "gpt-4o-2024-11-20",
-                      "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
                       "price_in": 2.5, "price_out": 10.0},
     # gpt-4o-mini is the HR grounding judge for DeepSeek outputs — also NATIVE now
     "gpt-4o-mini":   {"backend": "openai_compat", "model": "gpt-4o-mini",
-                      "base_url": os.environ.get("OPENAI_BASE_URL_NATIVE", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "_native_openai": True,
                       "price_in": 0.15, "price_out": 0.6},
     "gpt-4.1":       {"backend": "openai_compat", "model": "gpt-4.1",
-                      "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+                      "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
                       "price_in": 2.0, "price_out": 8.0},
     # ---- Gemini via proxy ----
     "gemini-2.5-flash": {"backend": "openai_compat", "model": "gemini-2.5-flash",
-                         "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+                         "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
                          "price_in": 0.15, "price_out": 0.6},
     "gemini-2.0-flash": {"backend": "openai_compat", "model": "gemini-2.0-flash",
-                         "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+                         "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
                          "price_in": 0.10, "price_out": 0.4},
     # ---- DeepSeek (native API) ----
     "deepseek":      {"backend": "openai_compat", "model": "deepseek-chat",
@@ -203,13 +201,12 @@ class LLMClient:
                 finish = resp.choices[0].finish_reason
             except Exception as e:
                 # Auth / permission errors mean the whole run is misconfigured — fail loudly
-                # instead of silently recording 1,104 empty answers (audit B5, fix 2026-08-12).
+                # instead of treating missing responses as completed predictions.
                 name = type(e).__name__
                 if "Authentication" in name or "PermissionDenied" in name or getattr(e, "status_code", None) in (401, 402, 403):
                     raise
                 # A quota-exhausted 429 is a dead account, not a transient rate
-                # limit — every retry returns the same error (fix 2026-08-18c:
-                # OpenAI credit_balance_exhausted silently emptied a judge pass).
+                # limit; fail immediately when provider credits are exhausted.
                 if "insufficient_quota" in str(e) or "credit_balance_exhausted" in str(e):
                     raise
                 # content-filter / invalid_prompt / transient API error: return an

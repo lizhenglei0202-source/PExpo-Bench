@@ -2,8 +2,8 @@
   "package": "judge_calibration_20260812",
   "created": "2026-08-12",
   "seed": 42,
-  "source_parquet": "~/Library/CloudStorage/OneDrive-Personal/macmini/lzl/runs/v3_scored/all_scored_v2.parquet",
-  "bank": "~/Library/CloudStorage/OneDrive-Personal/macmini/lzl/pexpo_bench/samples/pexpo_bench_v3_full.patched_20260811.yaml",
+  "source_parquet": "[REDACTED_PATH]",
+  "bank": "[REDACTED_PATH]",
   "arch": "A3_agent",
   "models": [
     "gpt-5.4",

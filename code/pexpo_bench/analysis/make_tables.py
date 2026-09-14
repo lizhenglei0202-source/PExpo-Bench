@@ -1,9 +1,4 @@
-"""All statistics for the (reframed) manuscript, from the canonical dataset.
-Sources: runs/v4_scored/all_scored_v4_main.parquet (Phase A), all_scored_v4.parquet
-(factorial B + seeds C), runs/v3_scored/all_scored_v2.parquet (the frozen line, used
-ONLY for the before/after exhibit). Grounding (S11/Fig4bc) is appended by the HR step.
-Outputs: article/final/V4_NUMBERS_20260818.md + .json
-"""
+"""Compute statistics for the manuscript from the released main, factorial and seed-replication datasets. Outputs are written to analysis_outputs/."""
 import os
 import json, math, pathlib
 import numpy as np
@@ -11,6 +6,7 @@ import pandas as pd
 from scipy.stats import wilcoxon
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
+(ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
 PAPER = ["A0_naive", "A1_context_eng", "A2p_rag_constrained", "A3_agent", "A4p_hybrid_constrained"]
 LAB = dict(zip(PAPER, ["A0", "A1", "A2", "A3", "A4"]))
 MODELS = ["gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "deepseek-v4"]
@@ -32,11 +28,10 @@ def holm(ps):
         prev = max(prev, min(1.0, (len(ps) - rank) * ps[i])); out[i] = prev
     return out
 
-a = pd.read_parquet(ROOT / "runs/v4_scored/all_scored_v4_main.parquet")
-allp = pd.read_parquet(ROOT / "runs/v4_scored/all_scored_v4.parquet")
-prior = pd.read_parquet(ROOT / "runs/v3_scored/all_scored_v2.parquet"); prior = prior[~prior.retired]
+a = pd.read_parquet(ROOT / "data/scored/results_main.parquet")
+allp = pd.read_parquet(ROOT / "data/scored/results_all_phases.parquet")
 piv = {m: a[a.model == m].pivot_table(index="qid", columns="arch", values="score") for m in MODELS}
-M = {"tag": "corrected-20260818"}
+M = {"release": "publication-snapshot-20260914"}
 L = ["# Results manifest — 2026-08-18 (canonical: scored main dataset)", ""]
 
 # cells + cross-model means
@@ -52,7 +47,7 @@ L.append("| **Mean** | " + " | ".join(f"{M['cross_model_means'][x]*100:.1f}" for
 M["by_type"] = {m: {qt: {LAB[ar]: float(a[(a.model==m)&(a.arch==ar)&(a.question_type==qt)].score.mean())
                           for ar in PAPER} for qt in ["calculation","true_false","open_ended"]} for m in MODELS}
 
-# Table S1: within-model contrasts (Holm across 20)
+# Table S2: within-model contrasts (Holm across 20)
 CONTRASTS = [("A0_naive","A1_context_eng"),("A0_naive","A2p_rag_constrained"),("A0_naive","A3_agent"),
              ("A3_agent","A4p_hybrid_constrained"),("A0_naive","A4p_hybrid_constrained")]
 s1, ps = [], []
@@ -64,14 +59,14 @@ for x, y in CONTRASTS:
         s1.append({"contrast": f"{LAB[x]} vs {LAB[y]}", "model": m, "p": float(p), "diff_pp": float(d.mean()*100)})
         ps.append(p)
 for r, ph in zip(s1, holm(np.array(ps))): r["p_holm"] = float(ph)
-M["table_S1"] = s1
-L += ["", "## Table S1 (within-model Wilcoxon; Holm across 20)", "",
+M["within_model_contrasts"] = s1
+L += ["", "## Table S2 (within-model Wilcoxon; Holm across 20)", "",
       "| Contrast | " + " | ".join(MNAME[m] for m in MODELS) + " |", "|---|---|---|---|---|"]
 for x, y in CONTRASTS:
     row = [next(r for r in s1 if r["contrast"]==f"{LAB[x]} vs {LAB[y]}" and r["model"]==m) for m in MODELS]
     L.append(f"| {LAB[x]} vs {LAB[y]} | " + " | ".join(f"{fmt_p(r['p'])} ({r['diff_pp']:+.1f} pp)" for r in row) + " |")
 
-# Table S2: between-model at fixed arch (Holm across 30)
+# Table S3: between-model at fixed arch (Holm across 30)
 pairs = [(x, y) for i, x in enumerate(MODELS) for y in MODELS[i+1:]]
 s2, ps2 = [], []
 for m1, m2 in pairs:
@@ -82,14 +77,14 @@ for m1, m2 in pairs:
         s2.append({"pair": f"{MNAME[m1]} vs {MNAME[m2]}", "arch": LAB[ar], "p": float(p), "diff_pp": float(d.mean()*100)})
         ps2.append(p)
 for r, ph in zip(s2, holm(np.array(ps2))): r["p_holm"] = float(ph)
-M["table_S2"] = s2
-L += ["", "## Table S2 (between-model at fixed arch; Holm across 30)", "",
+M["between_model_contrasts"] = s2
+L += ["", "## Table S3 (between-model at fixed arch; Holm across 30)", "",
       "| Pair | A0 | A1 | A2 | A3 | A4 |", "|---|---|---|---|---|---|"]
 for m1, m2 in pairs:
     row = [next(r for r in s2 if r["pair"]==f"{MNAME[m1]} vs {MNAME[m2]}" and r["arch"]==LAB[ar]) for ar in PAPER]
     L.append(f"| {MNAME[m1]} vs {MNAME[m2]} | " + " | ".join(f"{fmt_p(r['p'])} ({r['diff_pp']:+.1f})" for r in row) + " |")
 
-# Fig5 contrasts: A4-A3 with bootstrap CI
+# A4/A3 contrasts: A4-A3 with bootstrap CI
 rng = np.random.default_rng(42); f5 = []
 for m in MODELS:
     pp = piv[m][["A3_agent","A4p_hybrid_constrained"]].dropna()
@@ -99,21 +94,21 @@ for m in MODELS:
     f5.append({"model": m, "diff_pp": float(d.mean()*100), "ci_lo": float(np.percentile(boots,2.5)*100),
                "ci_hi": float(np.percentile(boots,97.5)*100), "p": float(p), "n": int(len(d))})
 for r, ph in zip(f5, holm(np.array([r["p"] for r in f5]))): r["p_holm"] = float(ph)
-M["fig5_A4_vs_A3"] = f5
+M["a4_vs_a3"] = f5
 L += ["", "## A4−A3 focal contrasts (bootstrap CI, Holm across 4)", ""]
 for r in f5:
     L.append(f"- {MNAME[r['model']]}: {r['diff_pp']:+.1f} pp (CI {r['ci_lo']:+.1f} to {r['ci_hi']:+.1f}), p={fmt_p(r['p'])}, p_Holm={fmt_p(r['p_holm'])}")
 
-# factorial (phase B) — nano + deepseek, calc stream, deltas vs A3
+# factorial (phase B) — all four base models calc stream, deltas vs A3
 fact = allp[allp.phase=="B"]; calcA = allp[(allp.phase=="A") & (allp.question_type=="calculation")]
 ARMS = [("A3","A","A3_agent"),("+R","B","fA3_R"),("+P","B","fA3_P"),("+B","B","fA3_B"),
         ("+R+P","B","fA3_RP"),("+R+B","B","A4_hybrid"),("+P+B","B","fA3_PB"),("A4 (+R+P+B)","A","A4p_hybrid_constrained")]
 M["factorial"] = {}
 L += ["", "## Factorial (calc stream n=361): accuracy % (delta vs A3)", "",
-      "| Arm | GPT-5.4-nano | DeepSeek-V4 |", "|---|---|---|"]
+      "| Arm | " + " | ".join(MNAME[m] for m in MODELS) + " |", "|---|---|---|---|---|"]
 for label, ph, ar in ARMS:
     row = []
-    for m in ["gpt-5.4-nano","deepseek-v4"]:
+    for m in MODELS:
         qids = set(fact[fact.model==m].qid.unique())
         src = calcA if ph=="A" else fact
         acc = float(src[(src.model==m)&(src.arch==ar)&(src.qid.isin(qids))].score.mean()*100)
@@ -127,7 +122,7 @@ c = allp[(allp.phase=="C") & (allp.question_type!="open_ended")]
 M["seeds"] = {}
 L += ["", "## Seeds 43-45 (objective subset n=545): A4−A3 pp", "",
       "| Model | 42 (main) | 43 | 44 | 45 | mean ± SD |", "|---|---|---|---|---|---|"]
-for m in ["gpt-5.4-nano","deepseek-v4"]:
+for m in MODELS:
     obj = a[(a.model==m)&(a.question_type!="open_ended")].pivot_table(index="qid",columns="arch",values="score")[["A3_agent","A4p_hybrid_constrained"]].dropna()
     main = float((obj.A4p_hybrid_constrained-obj.A3_agent).mean()*100)
     ds = []
@@ -137,19 +132,16 @@ for m in ["gpt-5.4-nano","deepseek-v4"]:
     M["seeds"][m] = {"main": main, "seeds": ds, "mean": float(np.mean(ds)), "sd": float(np.std(ds, ddof=1))}
     L.append(f"| {MNAME[m]} | {main:+.2f} | " + " | ".join(f"{d:+.2f}" for d in ds) + f" | {np.mean(ds):+.2f} ± {np.std(ds, ddof=1):.2f} |")
 
-# before/after exhibit ( vs )
-M["before_after"] = {}
-L += ["", "## Before/after exhibit (original campaign, defective env -> corrected rerun)", "",
-      "| Model | " + " | ".join(f"{LAB[ar]}" for ar in PAPER) + " |", "|---|---|---|---|---|---|"]
+# seeds — single-arm accuracy per seed (objective n=545): SD over 43-45; seed 42 = main grid (2026-09-05)
+M["seeds_single_arm"] = {}
+L += ["", "## Seeds: single-arm accuracy % (objective n=545); SD over seeds 43-45; seed 42 = main grid", "",
+      "| Model | Arm | 42 (main) | 43 | 44 | 45 | mean 43-45 | SD 43-45 | main − mean |", "|---|---|---|---|---|---|---|---|---|"]
 for m in MODELS:
-    row = []
-    for ar in PAPER:
-        x2 = float(prior[(prior.model==m)&(prior.arch==ar)].score.mean()*100)
-        x4 = cells[m][LAB[ar]]*100
-        M["before_after"].setdefault(m, {})[LAB[ar]] = {"original": x2, "corrected": x4}
-        row.append(f"{x2:.1f}→{x4:.1f}")
-    L.append(f"| {MNAME[m]} | " + " | ".join(row) + " |")
-M["format_collapse"] = {"nano_A4_original": 63.9, "nano_A4_corrected": 9.8, "nano_A3_corrected": 9.5}
+    for ar in ["A3_agent","A4p_hybrid_constrained"]:
+        main = float(a[(a.model==m)&(a.arch==ar)&(a.question_type!="open_ended")].score.mean()*100)
+        vals = [float(c[(c.model==m)&(c.seed==s)&(c.arch==ar)].score.mean()*100) for s in [43,44,45]]
+        M["seeds_single_arm"][f"{m}|{LAB[ar]}"] = {"main": main, "seeds": vals, "mean": float(np.mean(vals)), "sd": float(np.std(vals, ddof=1))}
+        L.append(f"| {MNAME[m]} | {LAB[ar]} | {main:.2f} | " + " | ".join(f"{v:.2f}" for v in vals) + f" | {np.mean(vals):.2f} | {np.std(vals, ddof=1):.2f} | {main-np.mean(vals):+.2f} |")
 
 # sub-domain tables
 M["subdomain"] = {m: {sd: {LAB[ar]: float(a[(a.model==m)&(a.arch==ar)&(a.subdomain==sd)].score.mean())
@@ -162,11 +154,10 @@ for m in MODELS:
 # costs ( tokens × registry prices)
 # USD per 1M tokens (input, output), provider list prices as of 2026-08-17, the date of the
 # reported runs (manifest_run_1.yaml). DeepSeek-V4-flash is the rate recorded in that
-# manifest at run time. GPT-5.4-mini was previously entered as (0.25, 2.0), which is
-# GPT-5-mini's rate, not GPT-5.4-mini's; corrected to the 5.4-mini list rate.
+# manifest at run time. These are the dated prices used in the manuscript.
 PRICE = {"gpt-5.4": (2.5, 15.0), "gpt-5.4-mini": (0.75, 4.50), "gpt-5.4-nano": (0.20, 1.25), "deepseek-v4": (0.14, 0.28)}
 M["cost"] = {}
-L += ["", "## Cost per 100 questions (corrected-rerun tokens × 2026-08 registry prices, USD)", ""]
+L += ["", "## Cost per 100 questions (recorded tokens × 2026-08 registry prices, USD)", ""]
 for m in MODELS:
     parts = []
     for ar in PAPER:
@@ -194,7 +185,7 @@ for _m in MODELS:
     _vals = []
     for _ar in PAPER:
         _rec = {}
-        for _f in sorted((ROOT / "runs/v4_rerun" / _m / _ar).glob("*.jsonl")):
+        for _f in sorted((ROOT / "data/trajectories/main" / _m / _ar).glob("*.jsonl")):
             for _l in _f.read_text().splitlines():
                 if _l.strip():
                     _r = json.loads(_l); _rec[_r.get("qid")] = _r
@@ -206,7 +197,7 @@ L += ["", "## Instruction following (%) — type-aware, from raw trajectories", 
 for _m in MODELS:
     L.append(f"| {MNAME[_m]} | " + " | ".join(f"{_IF[_m][x]:.1f}" for x in ["A0","A1","A2","A3","A4"]) + " |")
 
-(ROOT / "article/final/V4_NUMBERS_20260818.json").write_text(json.dumps(M, indent=1))
-(ROOT / "article/final/V4_NUMBERS_20260818.md").write_text("\n".join(L), encoding="utf-8")
+(ROOT / "analysis_outputs/statistics.json").write_text(json.dumps(M, indent=1))
+(ROOT / "analysis_outputs/statistics.md").write_text("\n".join(L), encoding="utf-8")
 print("\n".join(L[:40]))
-print(f"\n... saved V4_NUMBERS_20260818.md/.json ({len(L)} lines)")
+print(f"\n... saved statistics.md/.json ({len(L)} lines)")
