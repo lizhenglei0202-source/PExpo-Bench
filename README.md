@@ -1,8 +1,7 @@
 # PExpo-Bench publication snapshot
 
-Experimental software and research data supporting "The Wrapper Beats the Tier: Tool
-Access Lets a Small Language Model Keep Pace with a Flagship on a 1,104-Item Personal
-Exposure Assessment Benchmark".
+Experimental software and research data supporting "Tool Access Helps a Small Language
+Model Approach Flagship Performance on a Personal Exposure Assessment Benchmark".
 
 This snapshot includes the final A0–A4 implementations and the factorial variants used
 in the manuscript. The full 1,104-item bank, curated 1,027-item evaluation set, original
