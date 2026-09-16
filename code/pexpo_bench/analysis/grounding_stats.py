@@ -1,10 +1,11 @@
 """Compute reference-grounding statistics on the manuscript’s fixed 299-item subsample, retaining the coverage and contradiction denominators."""
 import os
+from pexpo_bench.data_schema import configuration_id, record_id
 import json, pathlib
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 (ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
-PAPER = ["A0_naive", "A1_context_eng", "A2p_rag_constrained", "A3_agent", "A4p_hybrid_constrained"]
+PAPER = ["A0", "A1", "A2", "A3", "A4"]
 LAB = dict(zip(PAPER, ["A0", "A1", "A2", "A3", "A4"]))
 MODELS = ["gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "deepseek-v4"]
 MNAME = {"gpt-5.4": "GPT-5.4", "gpt-5.4-mini": "GPT-5.4-mini",
@@ -16,13 +17,14 @@ for l in (ROOT / "data/judges/grounding_judgments.jsonl").read_text().splitlines
     if not l.strip():
         continue
     r = json.loads(l)
+    r["arch"] = configuration_id(r["arch"])
     k = (r.get("model"), r.get("arch"), r.get("qid"))
     cur = best.get(k)
     if cur is None or ((r.get("n_claims", 0) or 0) > 0 and (cur.get("n_claims", 0) or 0) == 0):
         best[k] = r
 
 cells, lines = {}, []
-lines.append("| Model | Arch | Items with claims | Claims | SUPPORTED | CONTRADICTED | NO_INFO | Coverage % | Contradiction (adjudicated) % | Legacy strict % | Legacy wide % |")
+lines.append("| Model | Arch | Items with claims | Claims | SUPPORTED | CONTRADICTED | NO_INFO | Coverage % | Contradiction (adjudicated) % | Contradicted / all claims % | Unresolved or contradicted / all claims % |")
 lines.append("|---|---|---|---|---|---|---|---|---|---|---|")
 for m in MODELS:
     for a in PAPER:

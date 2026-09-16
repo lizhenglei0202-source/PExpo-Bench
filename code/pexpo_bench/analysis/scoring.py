@@ -121,9 +121,5 @@ def score_row(r, gq, model, arch):
         key = (model, arch, r.get("qid"))
         if key in _OPEN_JUDGE:
             return _OPEN_JUDGE[key], False
-        gw = set(re.findall(r"\b[a-zA-Z]{3,}\b", str(ga or "").lower()))
-        pw = set(re.findall(r"\b[a-zA-Z]{3,}\b", str(pred or "").lower()))
-        if not gw:
-            return 0.5, False
-        return min(len(gw & pw) / len(gw), 1.0), False
+        raise ValueError("Open-ended answers require a recorded rubric-based judge score")
     return 0.0, False

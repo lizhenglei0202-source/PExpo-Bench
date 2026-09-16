@@ -1,32 +1,30 @@
 """Recompute the 20-cell main evaluation from the released trajectories and recorded judge scores. No model/API calls are made. The original data/scored/ files are not overwritten."""
 import os
+from pexpo_bench.data_schema import configuration_id
 import json, pathlib, sys
 import pandas as pd
 import yaml
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from scoring import score_row
-import scoring as r2
-r2._OPEN_JUDGE = {}  # open-ended comes from the judge file below
+from pexpo_bench.analysis.scoring import score_row
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 (ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
-gold = {q["qid"]: q for q in yaml.safe_load((ROOT / "data/bank/bank_full.yaml").read_text())}
+gold = {q["qid"]: q for q in yaml.safe_load((ROOT / "data/bank/bank_evaluation_set.yaml").read_text())}
 judge = {}
 for l in (ROOT / "data/judges/open_ended_judgments.jsonl").read_text().splitlines():
     if l.strip():
         r = json.loads(l)
-        judge[(r["model"], r["arch"], r["qid"])] = r["score"]
+        judge[(r["model"], configuration_id(r["arch"]), r["qid"])] = r["score"]
 
 rows = []
 for f in (ROOT / "data/trajectories/main").glob("*/*/run_1.jsonl"):
-    model, arch = f.parent.parent.name, f.parent.name
+    model, arch = f.parent.parent.name, configuration_id(f.parent.name)
     for line in f.read_text().splitlines():
         if not line.strip():
             continue
         r = json.loads(line)
         gq = gold.get(r.get("qid"))
-        if not gq or gq.get("_retired_20260811"):
+        if not gq:
             continue
         qt = gq["question_type"]
         if qt == "open_ended":

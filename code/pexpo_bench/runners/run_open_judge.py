@@ -1,5 +1,5 @@
 """LLM-judge for open-ended answers.
-Uses a cross-family judge (DeepSeek-V4) to score each prediction 0-5 against the gold reference.
+Uses the task-specific cross-family judge to score each prediction against the reference answer.
 Output: per_row_open_judge.jsonl"""
 from __future__ import annotations
 import os
@@ -45,7 +45,7 @@ def main():
     runs_dir = pathlib.Path(args.runs)
     out_file = pathlib.Path(args.out); out_file.parent.mkdir(parents=True, exist_ok=True)
 
-    bank = yaml.unsafe_load(open(args.bank).read())
+    bank = yaml.safe_load(pathlib.Path(args.bank).read_text())
     gold = {q['qid']: q for q in bank if q.get('question_type') == 'open_ended'}
     print(f'[init] {len(gold)} open-ended gold items')
 
@@ -82,13 +82,8 @@ def main():
         print('nothing to do'); return 0
 
     # Cross-family judges: OpenAI outputs judged by DeepSeek, DeepSeek by OpenAI
-    JUDGE_FOR = {
-        'gpt-5.4':       ('deepseek-v4', 600),    # DeepSeek reasoning model, needs >500 tok
-        'gpt-5.4-native': ('deepseek-v4', 600),
-        'gpt-5.4-mini':  ('deepseek-v4', 600),
-        'gpt-5.4-nano':  ('deepseek-v4', 600),
-        'deepseek-v4':   ('gpt-5.4-nano', 16),    # nano: single-token output, cheap
-    }
+    from pexpo_bench.evaluation.judge_dispatch import OPEN_ANSWER_JUDGES
+    JUDGE_FOR = dict(OPEN_ANSWER_JUDGES)
     if args.judge != 'auto':
         JUDGE_FOR = {k: (args.judge, 600 if 'deepseek' in args.judge else 16) for k in JUDGE_FOR}
     clients = {}

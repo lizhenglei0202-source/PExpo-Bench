@@ -18,8 +18,7 @@ from __future__ import annotations
 from typing import Optional, Union
 
 # ==========================================================================
-# IRIS toxicity database — 10 chemicals (the only ones referenced in the
-# 1004-question bank, per chemical-frequency audit 2026-05).
+# IRIS toxicity lookup table for the benchmark's ten supported chemicals.
 # Units:
 #   RfD        mg/kg-day  (oral chronic reference dose)
 #   RfC        mg/m³      (inhalation chronic reference concentration)

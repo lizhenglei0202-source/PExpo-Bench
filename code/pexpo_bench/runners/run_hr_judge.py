@@ -49,8 +49,8 @@ def main():
             except: pass
     print(f"[init] resuming with {len(done_keys)} already-done")
 
-    # Load all per-row data from Phase 1
-    print("[load] reading 21k rows from", runs_dir)
+    # Load the recorded main-experiment responses
+    print("[load] reading responses from", runs_dir)
     rows = []
     for jsonl in sorted(runs_dir.glob('*/*/run_1.jsonl')):
         for line in jsonl.read_text().splitlines():

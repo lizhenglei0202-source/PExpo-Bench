@@ -1,13 +1,7 @@
-"""Unified LLM client wrapper.
+"""Model clients for the four evaluated models and the auxiliary grounding judge.
 
-Supports:
-  • OpenAI-compatible API (GPT-4o, GPT-4o-mini, and any OpenAI-compatible endpoint
-    such as DeepSeek, Together, Fireworks, or a local vLLM server).
-  • Anthropic (Claude).
-  • Local HuggingFace / vLLM (via OpenAI-compatible server at localhost:8000).
-
-All backends return the same Response dataclass so the orchestrator is
-model-agnostic. Token accounting is mandatory — it feeds Layer-3 cost metrics.
+Requests, decoding settings and token accounting follow the experiment protocol.
+The registered prices describe the manuscript cost calculation.
 """
 from __future__ import annotations
 
@@ -22,10 +16,6 @@ try:
 except Exception:
     OpenAI = None  # type: ignore
 
-try:
-    import anthropic  # type: ignore
-except Exception:
-    anthropic = None  # type: ignore
 
 
 # ==========================================================================
@@ -47,69 +37,25 @@ class LLMResponse:
 # Model registry — snapshot IDs locked for reproducibility
 # ==========================================================================
 MODEL_REGISTRY: dict[str, dict] = {
-    # ---- Primary: GPT-5.4 on the NATIVE OpenAI endpoint ----
-    # Native endpoints are defaults; record the actual provider and snapshot in each run manifest.
-    "gpt-5.4":       {"backend": "openai_compat", "model": "gpt-5.4",
+    'gpt-5.4': {"backend": "openai_compat", "model": "gpt-5.4",
                       "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "_native_openai": True,
                       "price_in": 2.5, "price_out": 15.0},
-    # gpt-5.4-nano: uses NATIVE OpenAI endpoint with separate sk-proj-... key
-    "gpt-5.4-nano":  {"backend": "openai_compat", "model": "gpt-5.4-nano",
+    'gpt-5.4-nano': {"backend": "openai_compat", "model": "gpt-5.4-nano",
                       "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "price_in": 0.20, "price_out": 1.25,
                       "_native_openai": True},
-    # gpt-5.4-mini: NATIVE OpenAI endpoint (same key path as nano). Confirmed live —
-    # model id resolves to gpt-5.4-mini-2026-03-17. price_* are estimates; recompute
-    # cost from real token usage after the run.
-    "gpt-5.4-mini":  {"backend": "openai_compat", "model": "gpt-5.4-mini",
+    'gpt-5.4-mini': {"backend": "openai_compat", "model": "gpt-5.4-mini",
                       "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
-                      "price_in": 0.25, "price_out": 2.00,
+                      "price_in": 0.75, "price_out": 4.50,
                       "_native_openai": True},
-    "gpt-5.4-native": {"backend": "openai_compat", "model": "gpt-5.4",
-                      "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
-                      "price_in": 2.5, "price_out": 15.0,
-                      "_native_openai": True},
-    "gpt-5":         {"backend": "openai_compat", "model": "gpt-5",
-                      "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
-                      "price_in": 5.0, "price_out": 15.0},
-    "gpt-4o":        {"backend": "openai_compat", "model": "gpt-4o-2024-11-20",
-                      "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
-                      "price_in": 2.5, "price_out": 10.0},
-    # gpt-4o-mini is the HR grounding judge for DeepSeek outputs — also NATIVE now
-    "gpt-4o-mini":   {"backend": "openai_compat", "model": "gpt-4o-mini",
+    'gpt-4o-mini': {"backend": "openai_compat", "model": "gpt-4o-mini",
                       "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "_native_openai": True,
                       "price_in": 0.15, "price_out": 0.6},
-    "gpt-4.1":       {"backend": "openai_compat", "model": "gpt-4.1",
-                      "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
-                      "price_in": 2.0, "price_out": 8.0},
-    # ---- Gemini via proxy ----
-    "gemini-2.5-flash": {"backend": "openai_compat", "model": "gemini-2.5-flash",
-                         "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
-                         "price_in": 0.15, "price_out": 0.6},
-    "gemini-2.0-flash": {"backend": "openai_compat", "model": "gemini-2.0-flash",
-                         "base_url": (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1"),
-                         "price_in": 0.10, "price_out": 0.4},
-    # ---- DeepSeek (native API) ----
-    "deepseek":      {"backend": "openai_compat", "model": "deepseek-chat",
-                      "base_url": "https://api.deepseek.com",
-                      "price_in": 0.27, "price_out": 1.1},
-    # DeepSeek V4 — same credentials as the deepseek entry above; only the model name changes.
-    # Per DeepSeek deprecation notice: legacy alias "deepseek-chat" stops 2026-07-24.
-    # Flash (standard): $0.14 / $0.28 per 1M. Pro (reasoning, promo $0.435/$0.87 till 2026-05-31, regular $1.74/$3.48).
-    "deepseek-v4":      {"backend": "openai_compat", "model": "deepseek-v4-flash",
+    'deepseek-v4': {"backend": "openai_compat", "model": "deepseek-v4-flash",
                          "base_url": "https://api.deepseek.com",
                          "price_in": 0.14, "price_out": 0.28},
-    "deepseek-v4-pro":  {"backend": "openai_compat", "model": "deepseek-v4-pro",
-                         "base_url": "https://api.deepseek.com",
-                         "price_in": 1.74, "price_out": 3.48},
-    # ---- Kimi / Moonshot (native API) ----
-    "kimi-k2":       {"backend": "openai_compat", "model": "kimi-k2-0711-preview",
-                      "base_url": "https://api.moonshot.cn/v1",
-                      "price_in": 0.5, "price_out": 2.0},
-    # ---- Anthropic ----
-    "claude-4-6":    {"backend": "anthropic", "model": "claude-opus-4-6",
-                      "price_in": 15.0, "price_out": 75.0},
 }
 
 
@@ -140,15 +86,11 @@ class LLMClient:
             if backend == "openai_compat":
                 kwargs["base_url"] = self.cfg["base_url"]
                 kwargs["api_key"] = os.environ.get(
-                    self._env_key(), "EMPTY"  # vLLM accepts anything
+                    self._env_key(), "EMPTY"
                 )
             else:
                 kwargs["api_key"] = os.environ["OPENAI_API_KEY"]
             self._client = OpenAI(timeout=60.0, max_retries=3, **kwargs)
-        elif backend == "anthropic":
-            if anthropic is None:
-                raise ImportError("pip install anthropic")
-            self._client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
         else:
             raise ValueError(f"Unsupported backend: {backend}")
 
@@ -159,12 +101,6 @@ class LLMClient:
             return "OPENAI_API_KEY_NATIVE"
         if "deepseek" in base:
             return "deepseek_API_KEY"
-        if "moonshot" in base:
-            return "KIMI_API_KEY"
-        if "proxy" in base:
-            return "OPENAI_API_KEY"
-        if "together" in base:
-            return "TOGETHER_API_KEY"
         return "OPENAI_API_KEY"
 
     # ---------------------- main call ----------------------
@@ -178,10 +114,8 @@ class LLMClient:
             tokens_kwarg = ('max_completion_tokens'
                             if self.cfg.get("_native_openai")
                             else 'max_tokens')
-            # Native gpt-5.x are reasoning models: the budget is shared by hidden
-            # reasoning tokens + visible answer. A 2048 cap is consumed entirely by
-            # reasoning, leaving an empty answer (80%+ parse_error). Give reasoning
-            # models a large floor so the JSON answer still fits.
+            # The completion budget covers reasoning and visible output.
+            # Use the protocol's 16,384-token floor for these model endpoints.
             tok = max_tokens or self.max_tokens
             if self.cfg.get("_native_openai"):
                 tok = max(tok, 16384)
@@ -213,22 +147,6 @@ class LLMClient:
                 # empty response so the item is recorded as a failure (parse_error)
                 # rather than crashing the whole run.
                 content, in_tok, out_tok, finish = "", 0, 0, f"error:{name}"
-        elif backend == "anthropic":
-            system_msg = next((m["content"] for m in messages if m["role"] == "system"), "")
-            other = [m for m in messages if m["role"] != "system"]
-            resp = self._client.messages.create(
-                model=self.cfg["model"],
-                system=system_msg,
-                messages=other,
-                temperature=temperature if temperature is not None else self.temperature,
-                max_tokens=max_tokens or self.max_tokens,
-            )
-            content = "".join(
-                b.text for b in resp.content if getattr(b, "type", "") == "text"
-            )
-            in_tok = resp.usage.input_tokens
-            out_tok = resp.usage.output_tokens
-            finish = resp.stop_reason
         else:
             raise ValueError(backend)
 
@@ -250,7 +168,7 @@ class LLMClient:
 _default_client: LLMClient | None = None
 
 
-def get_client(model_key: str = "gpt-4o") -> LLMClient:
+def get_client(model_key: str = "gpt-5.4") -> LLMClient:
     global _default_client
     if _default_client is None or _default_client.model_key != model_key:
         _default_client = LLMClient(model_key)

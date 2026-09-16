@@ -89,16 +89,16 @@ def mppd_deposition(particle_size_um: float, region: str, breathing: str = "rest
 
 
 # --------------------------------------------------------------------------
-# 4. airquality_lookup  (offline cache stub)
+# 4. airquality_lookup  (offline cache with deterministic fallback values)
 # --------------------------------------------------------------------------
-_AQ_CACHE: dict[tuple, dict] = {}  # populated from snapshot CSV in production
+_AQ_CACHE: dict[tuple, dict] = {}  # Optional externally supplied concentration snapshot.
 
 
 def airquality_lookup(lat: float, lon: float, time: str, pollutant: str) -> dict:
     key = (round(lat, 2), round(lon, 2), time[:10], pollutant)
     if key in _AQ_CACHE:
         return _AQ_CACHE[key]
-    # Fallback default (for pilot); replace with real snapshot later.
+    # An uncached location returns a fixed default, not a measured concentration.
     defaults = {"PM2.5": 20.0, "PM10": 35.0, "NO2": 30.0, "O3": 50.0, "CO": 0.5, "SO2": 5.0}
     return {
         "value": defaults.get(pollutant, 0.0),
@@ -108,10 +108,10 @@ def airquality_lookup(lat: float, lon: float, time: str, pollutant: str) -> dict
 
 
 # --------------------------------------------------------------------------
-# 5. trajectory_match  (stub; expects CSV of lat,lon,t,speed)
+# 5. trajectory_match  (fixed example activity segments)
 # --------------------------------------------------------------------------
 def trajectory_match(gps_csv: str, microenv_db: str = "default") -> dict:
-    # Pilot stub: in production this runs land-use + dwell-time heuristic
+    # Returns fixed example segments; the supplied GPS text is not parsed.
     return {
         "segments": [
             {"start": "07:00", "end": "08:00", "microenv": "home_indoor", "duration_h": 1.0},

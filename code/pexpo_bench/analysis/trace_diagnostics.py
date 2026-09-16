@@ -1,6 +1,7 @@
 """Descriptive A3/A4 trajectory diagnostics for the manuscript: answer types, tool calls, retrieval use and step-budget exhaustion. These diagnostics do not establish a causal mechanism."""
 from __future__ import annotations
 import os
+from pexpo_bench.data_schema import configuration_id, record_id
 import json, re, pathlib
 import pandas as pd
 
@@ -9,13 +10,13 @@ ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 PARQ = ROOT / 'data/scored/results_main.parquet'
 OUT = ROOT / 'analysis_outputs/trace_diagnostics'
 MODELS = ['gpt-5.4', 'gpt-5.4-mini', 'gpt-5.4-nano', 'deepseek-v4']
-A3, A4 = 'A3_agent', 'A4p_hybrid_constrained'
+A3, A4 = 'A3', 'A4'
 
 
 def load(model, arch):
     d = {}
     for base in ('data/trajectories/main',):
-        p = ROOT / base / model / arch / 'run_1.jsonl'
+        p = ROOT / base / model / record_id(arch) / 'run_1.jsonl'
         if p.exists():
             for line in p.read_text().splitlines():
                 if line.strip():
@@ -55,6 +56,7 @@ def budget_exhausted(r):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     df = pd.read_parquet(PARQ)
+    df["arch"] = df["arch"].map(configuration_id)
     open_q = set(df[df.question_type == 'open_ended'].qid)
     calc_q = set(df[df.question_type == 'calculation'].qid)
 
@@ -93,7 +95,7 @@ def main():
 
     (OUT / 'summary.json').write_text(json.dumps(summary, indent=2))
 
-    print("=== A4 sub-additivity mechanism: control-flow collapse on weak models ===\n")
+    print("=== Descriptive A3/A4 trajectory diagnostics ===\n")
     hdr = f"{'model':13} | open acc A3->A4 | open collapse% A3->A4 | calc acc A3->A4 | calc non-num% A3->A4 | steps A3->A4 | budget-exh% | retrieve-call%"
     print(hdr)
     for m, r in rows:

@@ -1,4 +1,4 @@
-# Results manifest — 2026-08-18 (canonical: scored main dataset)
+# Results for the manuscript experiment
 
 ## Cell accuracies (%)
 
@@ -133,7 +133,7 @@
 
 Design: stratified subsample, 299 reference-quoted items, seed 42, proportional over subdomain x question_type, same items all models/archs.
 
-| Model | Arch | Items with claims | Claims | SUPPORTED | CONTRADICTED | NO_INFO | Coverage % | Contradiction (adjudicated) % | Legacy strict % | Legacy wide % |
+| Model | Arch | Items with claims | Claims | SUPPORTED | CONTRADICTED | NO_INFO | Coverage % | Contradiction (adjudicated) % | Contradicted / all claims % | Unresolved or contradicted / all claims % |
 |---|---|---|---|---|---|---|---|---|---|---|
 | GPT-5.4 | A0 | 195 | 1300 | 191 | 10 | 1099 | 15.5 | 5.0 | 0.8 | 85.3 |
 | GPT-5.4 | A1 | 203 | 1605 | 211 | 8 | 1386 | 13.6 | 3.7 | 0.5 | 86.9 |

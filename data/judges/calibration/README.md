@@ -1,86 +1,39 @@
-# Judge Calibration Package — PEXPO-Bench (built 2026-08-12)
+# Judge calibration
 
-Purpose: validate the automated LLM judge used for open-ended scoring by
-(a) double-judging a stratified sample with two judge models and
-(b) collecting blinded human ratings on the same sample.
+The calibration study contains 400 answers: 100 questions sampled proportionally
+across subdomain and difficulty, with the A3 response from each of the four
+evaluated models. Sampling and row shuffling use seed 42.
 
-## Sample
-
-- Source: the archived scoring snapshot (private source path redacted), ACTIVE (`retired == False`)
-  `open_ended` items only — 482 unique qids.
-- 100 qids stratified-sampled by subdomain x difficulty (15 non-empty strata),
-  proportional allocation with at least 1 per stratum, largest-remainder
-  rounding, numpy `default_rng(42)`. Full allocation in `sample_manifest.json`.
-- For each sampled qid, the `A3_agent` answer of all four models
-  (gpt-5.4, gpt-5.4-mini, gpt-5.4-nano, deepseek-v4) was pulled from
-  the archived A3 response records (private source path redacted) → 400 (item, answer) rows.
-- Question text and gold answer/rationale come from
-  the archived question-bank snapshot (private source path redacted).
-  Gold and predicted answers are truncated to 2500 chars, exactly as in
-  `run_open_judge.py`.
-
-## Blinding
-
-Rows were shuffled with `default_rng(42)` and assigned codes JC-001..JC-400.
-`human_rating_sheet.csv` contains NO model identity. The mapping
-code → (qid, model) lives in `blinding_key.json` — **withhold this file (and
-`judge_inputs.jsonl`) from raters until both rating columns are complete.**
+Two model judges score every answer with the same 0–5 rubric. Two human raters
+independently score the blinded rows. Model identity is excluded from the rating
+sheet; the mapping in `blinding_key.json` is used after rating is complete.
 
 ## Files
 
-| File | Role |
+| File | Contents |
 |---|---|
-| `sample_manifest.json` | sampled qids, strata, allocation, seed |
-| `human_rating_sheet.csv` | 400 blinded rows; COMPLETED 2026-08-21 (both rater columns filled) |
-| `INSTRUCTIONS.md` | rater instructions with the exact 0-5 rubric from `run_open_judge.py` |
-| `blinding_key.json` | code → model/qid map — WITHHELD from raters |
-| `judge_inputs.jsonl` | machine-readable rows for the double-judge run (contains model identity) |
-| `run_double_judge.py` | scores all 400 rows with BOTH judges — EXECUTED 2026-08-13; output in `per_row_double_judge.jsonl` |
-| `analyze_agreement.py` | agreement statistics (no API calls) |
-| `_cost_estimate.json` | machine-readable copy of the cost estimate below |
+| `sample_manifest.json` | Sampled questions, strata, allocation and seed |
+| `human_rating_sheet.csv` | Completed anonymous ratings for 400 answers |
+| `INSTRUCTIONS.md` | Rating instructions and rubric |
+| `blinding_key.json` | Sample-code to question/model mapping |
+| `judge_inputs.jsonl` | Inputs for the two model judges |
+| `per_row_double_judge.jsonl` | Recorded scores from both judges |
+| `agreement_report.json` | Agreement statistics |
+| `run_double_judge.py` | Execute model judging with local credentials |
+| `analyze_agreement.py` | Recompute agreement without API calls |
 
-## Status (2026-08-13)
+The English and Chinese instruction documents provide the same rating protocol
+in accessible formats.
 
-The machine-vs-machine half is **complete**: 800 judgments across 400 answers, both
-judges. Result: Pearson r = 0.73, within-one-point agreement 90%, quadratic κ = 0.58,
-and the GPT-5.4-nano judge is +0.38 points more lenient on the 0–5 scale (reported in
-SI Section C). The **human** half is now complete as well (2026-08-21): both raters scored all 400
-rows. Rater-to-rater agreement r = 0.92 (quadratic κ = 0.92, within-one 99.5%); against
-the mean human score the DeepSeek-V4 judge is −0.15 and the GPT-5.4-nano judge +0.24,
-so the human standard sits between the two judges. Full statistics in
-`agreement_report.json`; the completed sheet is preserved as
-`human_rating_sheet_completed_20260821.csv`.
+## Analysis
 
-## Workflow
+From the package root:
 
-1. Give raters `human_rating_sheet.csv` + `INSTRUCTIONS.md` only. Two raters
-   score independently.
-2. Run the double judge (makes API calls; ALREADY DONE — results shipped):
-   `python run_double_judge.py` → `per_row_double_judge.jsonl`
-   (800 judgments: 400 rows x 2 judges — gpt-5.4-nano and deepseek-v4 —
-   identical prompt/rubric/settings to the production judge: temperature 0.0,
-   seed 42, max_tokens 16 for nano / 600 for deepseek-v4; resumable).
-3. When the human columns are filled, run
-   `python analyze_agreement.py` → `agreement_report.json` with per-judge
-   means (overall and by source model), judge-judge Pearson/Spearman,
-   exact/within-1 agreement, unweighted/linear/quadratic Cohen's kappa,
-   rater1-rater2 agreement, and each judge vs the mean human score.
+```bash
+python data/judges/calibration/analyze_agreement.py --out analysis_outputs/judge_agreement.json
+```
 
-## API cost of the double-judge run (spent 2026-08-13)
-
-Computed from actual character counts of the 400 assembled prompts
-(question + gold + answer + ~700-char template), at ~4 chars/token:
-
-- Input: ~192k tokens per judge (~384k total).
-- Output: gpt-5.4-nano emits a single integer (~5 tok/row → ~2k tok);
-  deepseek-v4 is a reasoning model capped at 600 tok (~550 tok/row → ~220k tok).
-
-| Judge | Input tok | Output tok | Assumed $/MTok (in/out) | Est. cost |
-|---|---|---|---|---|
-| gpt-5.4-nano | ~192k | ~2k | 0.05 / 0.40 | ~$0.01 |
-| deepseek-v4 | ~192k | ~220k | 0.28 / 1.10 | ~$0.30 |
-| **Total** | | | | **~$0.31** (order of magnitude: well under $1) |
-
-Prices are assumptions recorded in `_cost_estimate.json`; rescale linearly if
-actual list prices differ. Wall-clock at concurrency 8: roughly 10-20 min,
-dominated by deepseek-v4 reasoning latency.
+Outputs include judge means, Pearson/Spearman correlations, exact and within-one
+agreement, weighted Cohen's kappa, rater agreement, and comparisons against the
+mean human score. Questions, reference answers and responses in the judge inputs
+follow the recorded 2,500-character truncation policy.

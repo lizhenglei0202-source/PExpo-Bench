@@ -1,49 +1,77 @@
 # Reproduction
 
 Run commands from the extracted package root in an isolated Python environment.
-The original environment record is retained in `data/manifests/environment_lock.txt`.
-Use PyArrow 25.0.1 for the released Parquet files; PyArrow 19 cannot read them reliably.
 
 ```bash
 export PEXPO_ROOT="$PWD"
-export PYTHONPATH="$PEXPO_ROOT/code${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="$PEXPO_ROOT/code"
 python -m pip install pandas numpy scipy PyYAML python-dotenv pyarrow==25.0.1
 ```
 
-## Numerical reproduction without API calls
+The recorded software environment is listed in
+`data/manifests/environment_lock.txt`. PyArrow 25.0.1 is required to read the
+distributed Parquet files reliably.
+
+## Recompute recorded results
+
+These commands make no model API calls and write to `analysis_outputs/`.
 
 ```bash
 python -m pexpo_bench.analysis.build_scored_dataset
 python -m pexpo_bench.analysis.make_tables
 python -m pexpo_bench.analysis.grounding_stats
 python -m pexpo_bench.analysis.trace_diagnostics
+python data/judges/calibration/analyze_agreement.py --out analysis_outputs/judge_agreement.json
 ```
 
-Outputs go to `analysis_outputs/`; input records in `data/` are not overwritten.
-The main-table check compares 20,540 records (1,027 questions × 20 model/configuration
-cells). Factorial and seed-replication results are included in the numerical summary.
+The main-table check recomputes 20,540 scores from response records and saved
+open-ended judgments. Statistics include the factorial and seed-replication
+datasets. Reference-grounding statistics use the fixed 299-item subsample.
+Input data files are preserved.
 
-## New model executions
+## Execute experiments
 
-Install the model/retrieval dependencies recorded in the original environment file
-and place the required credentials in `.env` at this package root. The `.env.example`
-file contains variable names only. Configure the model endpoints explicitly for the
-intended provider snapshots; current defaults do not establish historical availability.
+Install the model and retrieval dependencies listed in the environment record.
+Copy `.env.example` to a local `.env` and configure your model credentials and
+endpoints. New model calls incur provider charges.
 
-For retrieval configurations, supply an index directory through `PEXPO_INDEX_DIR`.
-`Retriever.load` expects `chunks.parquet` and `faiss.index`, with the embedding and
-reranking models specified in the implementation. The third-party corpus/index is
-not included, so a new retrieval run requires this separately prepared resource.
+Retrieval conditions require `PEXPO_INDEX_DIR` containing `chunks.parquet` and
+`faiss.index`, together with the embedding and reranking models specified in
+`architectures/orchestrator.py`. Supply the external corpus and index before
+running these conditions.
+
+Inspect the commands with `--dry-run`, then remove that option to execute:
+
+```bash
+python -m pexpo_bench.runners.run_paper --experiment main --dry-run
+python -m pexpo_bench.runners.run_paper --experiment factorial --dry-run
+python -m pexpo_bench.runners.run_paper --experiment seeds --dry-run
+```
+
+Use `--models` to select a subset of the four evaluated models and `--out` to set
+the output directory. The complete settings are in
+[CONFIGURATIONS.md](CONFIGURATIONS.md).
+
+For individual configurations:
 
 ```bash
 python -m pexpo_bench.runners.run_experiment \
-  --bank data/bank/bank_evaluation_set.yaml --out outputs/main --run-idx 1 \
+  --bank data/bank/bank_evaluation_set.yaml --out outputs/main \
   --models gpt-5.4 gpt-5.4-mini gpt-5.4-nano deepseek-v4 \
-  --archs A0_naive A1_context_eng A2p_rag_constrained A3_agent A4p_hybrid_constrained \
-  --seed 42 --temperature 0.3
+  --archs A0 A1 A2 A3 A4 --seed 42 --temperature 0.3 --run-idx 1
 ```
 
-`--seed`, `--run-idx`, checkpointing and transport retry behavior remain explicit.
-To repeat the reported replication design use seeds 43, 44 and 45 with A3 and A4;
-use separate output directories. Recorded failures must be included when scoring the
-same evaluation set. Recorded provenance is retained to support reproduction.
+Checkpointing preserves completed responses. Transient transport retries and
+recorded model failures remain explicit in the output. Use separate directories
+for independent experiments and seed replications.
+
+## Score new open-ended responses
+
+```bash
+python -m pexpo_bench.runners.run_open_judge \
+  --runs outputs/main --bank data/bank/bank_evaluation_set.yaml \
+  --out outputs/judgments/open_ended.jsonl
+```
+
+This step makes new cross-family judge calls. The distributed numerical analysis
+uses the saved judgments and datasets in `data/`.

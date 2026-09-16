@@ -1,14 +1,6 @@
-""" system prompts for 7 architectures.
+"""System prompts for A0–A4 and the retrieval/rules/budget factorial experiment.
 
-Design principles:
-  • All architectures share OUTPUT_SCHEMA so Instruction-Following is comparable
-  • A1/A3/A4 embed a *small* knowledge primer (~10 key reference values),
-    NOT the full handbook — that would conflate the test of "what model knows"
-    with "what the prompt provides"
-  • Worked examples: 2-3 per architecture covering T/F, calculation, open-ended
-  • A3/A4 explicitly require `submit_plan` first
-  • A2+/A4+ have the evidence-use rules block (4 numbered rules)
-  • Literature source names listed so model knows what to cite
+The strings below are the prompts used by the recorded configurations.
 """
 
 OUTPUT_SCHEMA = """
@@ -111,16 +103,6 @@ For open-ended: cite specific mechanisms.
 # ==========================================================================
 # A2 — RAG (A1 + retrieved context, light grounding rule)
 # ==========================================================================
-A2_SYSTEM = f"""{A1_SYSTEM}
-
-ADDITIONAL: a RETRIEVED_CONTEXT block of top-5 passages from the knowledge base will be appended.
-
-GROUNDING:
-  • Every factual claim in "reasoning" should trace to either KEY REFERENCE DATA above
-    OR a retrieved passage.
-  • If retrieved context is insufficient, say so explicitly — do not fabricate.
-  • In "citations", list the source/section of every passage you actually used.
-"""
 
 A2_USER_TEMPLATE = """RETRIEVED_CONTEXT:
 {passages}
@@ -130,7 +112,7 @@ QUESTION:
 
 
 # ==========================================================================
-# A2+ — RAG with evidence-use rules (the rules that A2 lacks)
+# Evidence-use rules for A2, A4 and the P=1 factorial conditions
 # ==========================================================================
 _EVIDENCE_RULES = """EVIDENCE-USE RULES (apply to CALCULATION and T/F):
 
@@ -155,7 +137,7 @@ _EVIDENCE_RULES = """EVIDENCE-USE RULES (apply to CALCULATION and T/F):
      KEY REFERENCE DATA.
 """
 
-A2P_SYSTEM = f"""{A1_SYSTEM}
+A2_SYSTEM = f"""{A1_SYSTEM}
 
 ADDITIONAL: a RETRIEVED_CONTEXT block of top-5 passages from the knowledge base will be appended.
 
@@ -248,9 +230,9 @@ DO NOT:
 
 
 # ==========================================================================
-# A4 — Hybrid (A3 + retrieve tool)
+# Factorial retrieval prompt for the P=0 conditions
 # ==========================================================================
-A4_SYSTEM = f"""{A3_SYSTEM}
+FACTORIAL_RETRIEVAL_SYSTEM = f"""{A3_SYSTEM}
 
 ADDITIONAL TOOL (17 total):
   • retrieve(query, k=5) — search the PEA knowledge base (1103 documents, EPA EFH /
@@ -268,9 +250,9 @@ STRATEGY:
 
 
 # ==========================================================================
-# A4+ — Hybrid + evidence-use rules
+# A4 — Retrieval, tools and evidence-use rules
 # ==========================================================================
-A4P_SYSTEM = f"""{A3_SYSTEM}
+A4_SYSTEM = f"""{A3_SYSTEM}
 
 ADDITIONAL TOOL (17 total):
   • retrieve(query, k=5) — see A4 description

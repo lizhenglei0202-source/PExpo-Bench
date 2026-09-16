@@ -19,9 +19,7 @@ from dotenv import load_dotenv
 
 # ==========================================================================
 # Per-model concurrency caps (override default --concurrency)
-# Based on observed rate-limit tier:
-#   gpt-5.4-nano  — 200k TPM, hit at concurrency 5; safe at 2
-#   deepseek-v4   — generous TPM
+# Concurrency caps used by the experiment runner.
 # ==========================================================================
 PER_MODEL_CONC = {
     "gpt-5.4":      10,
@@ -155,18 +153,7 @@ def run_cell(
         return {"cell": (model_key, arch_name, run_idx), "n_done": len(done_qids),
                 "n_new": 0, "elapsed_s": 0}
 
-    # Instantiate arch: A3/A4 support model_key; A0/A1/A2 do too via base BaseArch
-    # If arch class doesn't accept model_key, fall back to no-arg constructor.
-    try:
-        runner = arch_cls(model_key=model_key,
-                          temperature=temperature, seed=seed)
-    except TypeError:
-        # Older archs may not accept these kwargs
-        runner = arch_cls()
-        if hasattr(runner, "model_key"):
-            runner.model_key = model_key
-        if hasattr(runner, "temperature"):
-            runner.temperature = temperature
+    runner = arch_cls(model_key=model_key, temperature=temperature, seed=seed)
 
     t0 = time.time()
     n_new = 0
@@ -200,21 +187,23 @@ def run_cell(
 # Top-level
 # ==========================================================================
 def main(argv=None):
+    from pexpo_bench.architectures.orchestrator import ARCHITECTURES
+    from pexpo_bench.data_schema import SUBJECT_MODELS
     p = argparse.ArgumentParser()
     p.add_argument("--bank", required=True, help="Path to question bank YAML")
     p.add_argument("--out", required=True, help="Output dir (e.g. outputs/main)")
-    p.add_argument("--models", nargs="+", required=True,
+    p.add_argument("--models", nargs="+", required=True, choices=SUBJECT_MODELS,
                    help="Model keys (e.g. gpt-5.4 gpt-5.4-nano deepseek-v4)")
-    p.add_argument("--archs", nargs="+", required=True,
-                   help="Architecture names (A0_naive, A3_agent, ...)")
+    p.add_argument("--archs", nargs="+", required=True, choices=tuple(ARCHITECTURES),
+                   help="Paper configurations A0-A4 or factorial conditions F(R,P,B)")
     p.add_argument("--run-idx", type=int, default=1,
-                   help="Which run this is (1, 2, or 3). Outputs to run_<idx>.jsonl")
+                   help="Run identifier; outputs to run_<idx>.jsonl")
     p.add_argument("--concurrency", type=int, default=10,
                    help="Default concurrency; overridden per-model via PER_MODEL_CONC")
     p.add_argument("--temperature", type=float, default=0.3)
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--max-questions", type=int, default=None,
-                   help="(debug) cap questions per cell")
+                   help="Limit the number of questions per cell")
     p.add_argument("--skip-balance-check", action="store_true",
                    help="Don't pre-check API balances (not recommended)")
     p.add_argument("--retry-failed", action="store_true",
@@ -233,7 +222,7 @@ def main(argv=None):
     # Pre-flight: balance check
     if not args.skip_balance_check:
         from pexpo_bench.runners.balance_check import pre_flight_balance_check
-        if not pre_flight_balance_check():
+        if not pre_flight_balance_check(models=args.models):
             print("\nABORTING — fix API key/balance issues, or rerun with --skip-balance-check")
             return 1
 

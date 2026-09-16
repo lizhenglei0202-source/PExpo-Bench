@@ -1,12 +1,4 @@
-"""Pre-flight API balance check.
-
-Queries balances on 3 endpoints (where APIs allow):
-  • DeepSeek native    — has /user/balance endpoint
-  • OpenAI native      — billing API requires admin key; falls back to "manual"
-  • proxy proxy       — no public balance API; instructs user to check dashboard
-
-Designed to FAIL LOUD before a long run, not silently mid-run.
-"""
+"""Check the provider credentials and available balance for the selected models."""
 from __future__ import annotations
 
 import os
@@ -57,24 +49,8 @@ def _check_openai_native() -> dict:
                 "msg": type(e).__name__}
 
 
-def _check_proxy() -> dict:
-    key = os.environ.get("OPENAI_API_KEY")
-    if not key: return {"endpoint": "proxy", "status": "NO_KEY"}
-    try:
-        r = requests.get("https://api.openai.com/v1/models",
-                         headers={"Authorization": f"Bearer {key}"},
-                         timeout=10.0)
-        if r.status_code == 200:
-            return {"endpoint": "proxy", "status": "OK_AUTH",
-                    "balance": "check manually in your provider's billing dashboard"}
-        return {"endpoint": "proxy", "status": f"HTTP {r.status_code}",
-                "body": "[REDACTED_RESPONSE_BODY]"}
-    except Exception as e:
-        return {"endpoint": "proxy", "status": f"ERROR: {type(e).__name__}",
-                "msg": type(e).__name__}
-
-
-def pre_flight_balance_check(min_required_usd: dict | None = None) -> bool:
+def pre_flight_balance_check(min_required_usd: dict | None = None,
+                             models: list[str] | None = None) -> bool:
     """Print balances, return True if all endpoints look safe to proceed.
 
     min_required_usd: optional {endpoint_name: minimum_balance_usd}.
@@ -83,7 +59,12 @@ def pre_flight_balance_check(min_required_usd: dict | None = None) -> bool:
     print("=" * 60)
     print("API PRE-FLIGHT BALANCE CHECK")
     print("=" * 60)
-    results = [_check_deepseek(), _check_openai_native(), _check_proxy()]
+    models = models or ["gpt-5.4", "deepseek-v4"]
+    results = []
+    if any(model.startswith("gpt-") for model in models):
+        results.append(_check_openai_native())
+    if "deepseek-v4" in models:
+        results.append(_check_deepseek())
     all_ok = True
     for r in results:
         ep = r["endpoint"]

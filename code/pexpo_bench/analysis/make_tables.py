@@ -1,5 +1,6 @@
 """Compute statistics for the manuscript from the released main, factorial and seed-replication datasets. Outputs are written to analysis_outputs/."""
 import os
+from pexpo_bench.data_schema import configuration_id, record_id
 import json, math, pathlib
 import numpy as np
 import pandas as pd
@@ -7,7 +8,7 @@ from scipy.stats import wilcoxon
 
 ROOT = pathlib.Path(os.environ.get("PEXPO_ROOT", "."))
 (ROOT / "analysis_outputs").mkdir(parents=True, exist_ok=True)
-PAPER = ["A0_naive", "A1_context_eng", "A2p_rag_constrained", "A3_agent", "A4p_hybrid_constrained"]
+PAPER = ["A0", "A1", "A2", "A3", "A4"]
 LAB = dict(zip(PAPER, ["A0", "A1", "A2", "A3", "A4"]))
 MODELS = ["gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "deepseek-v4"]
 MNAME = {"gpt-5.4": "GPT-5.4", "gpt-5.4-mini": "GPT-5.4-mini", "gpt-5.4-nano": "GPT-5.4-nano", "deepseek-v4": "DeepSeek-V4"}
@@ -30,9 +31,11 @@ def holm(ps):
 
 a = pd.read_parquet(ROOT / "data/scored/results_main.parquet")
 allp = pd.read_parquet(ROOT / "data/scored/results_all_phases.parquet")
+a["arch"] = a["arch"].map(configuration_id)
+allp["arch"] = allp["arch"].map(configuration_id)
 piv = {m: a[a.model == m].pivot_table(index="qid", columns="arch", values="score") for m in MODELS}
-M = {"release": "publication-snapshot-20260914"}
-L = ["# Results manifest — 2026-08-18 (canonical: scored main dataset)", ""]
+M = {"release": "publication-snapshot-20260916"}
+L = ["# Results for the manuscript experiment", ""]
 
 # cells + cross-model means
 cells = {m: {LAB[ar]: float(a[(a.model == m) & (a.arch == ar)].score.mean()) for ar in PAPER} for m in MODELS}
@@ -48,8 +51,8 @@ M["by_type"] = {m: {qt: {LAB[ar]: float(a[(a.model==m)&(a.arch==ar)&(a.question_
                           for ar in PAPER} for qt in ["calculation","true_false","open_ended"]} for m in MODELS}
 
 # Table S2: within-model contrasts (Holm across 20)
-CONTRASTS = [("A0_naive","A1_context_eng"),("A0_naive","A2p_rag_constrained"),("A0_naive","A3_agent"),
-             ("A3_agent","A4p_hybrid_constrained"),("A0_naive","A4p_hybrid_constrained")]
+CONTRASTS = [("A0","A1"),("A0","A2"),("A0","A3"),
+             ("A3","A4"),("A0","A4")]
 s1, ps = [], []
 for x, y in CONTRASTS:
     for m in MODELS:
@@ -87,10 +90,10 @@ for m1, m2 in pairs:
 # A4/A3 contrasts: A4-A3 with bootstrap CI
 rng = np.random.default_rng(42); f5 = []
 for m in MODELS:
-    pp = piv[m][["A3_agent","A4p_hybrid_constrained"]].dropna()
-    d = (pp.A4p_hybrid_constrained - pp.A3_agent).values
+    pp = piv[m][["A3","A4"]].dropna()
+    d = (pp.A4 - pp.A3).values
     boots = np.array([d[rng.integers(0, len(d), len(d))].mean() for _ in range(5000)])
-    p = wilcoxon(pp.A3_agent, pp.A4p_hybrid_constrained, zero_method="wilcox", method="approx").pvalue
+    p = wilcoxon(pp.A3, pp.A4, zero_method="wilcox", method="approx").pvalue
     f5.append({"model": m, "diff_pp": float(d.mean()*100), "ci_lo": float(np.percentile(boots,2.5)*100),
                "ci_hi": float(np.percentile(boots,97.5)*100), "p": float(p), "n": int(len(d))})
 for r, ph in zip(f5, holm(np.array([r["p"] for r in f5]))): r["p_holm"] = float(ph)
@@ -99,10 +102,10 @@ L += ["", "## A4−A3 focal contrasts (bootstrap CI, Holm across 4)", ""]
 for r in f5:
     L.append(f"- {MNAME[r['model']]}: {r['diff_pp']:+.1f} pp (CI {r['ci_lo']:+.1f} to {r['ci_hi']:+.1f}), p={fmt_p(r['p'])}, p_Holm={fmt_p(r['p_holm'])}")
 
-# factorial (phase B) — all four base models calc stream, deltas vs A3
+# Factorial experiment — all four base models calc stream, deltas vs A3
 fact = allp[allp.phase=="B"]; calcA = allp[(allp.phase=="A") & (allp.question_type=="calculation")]
-ARMS = [("A3","A","A3_agent"),("+R","B","fA3_R"),("+P","B","fA3_P"),("+B","B","fA3_B"),
-        ("+R+P","B","fA3_RP"),("+R+B","B","A4_hybrid"),("+P+B","B","fA3_PB"),("A4 (+R+P+B)","A","A4p_hybrid_constrained")]
+ARMS = [("A3","A","A3"),("+R","B","F100"),("+P","B","F010"),("+B","B","F001"),
+        ("+R+P","B","F110"),("+R+B","B","F101"),("+P+B","B","F011"),("A4 (+R+P+B)","A","A4")]
 M["factorial"] = {}
 L += ["", "## Factorial (calc stream n=361): accuracy % (delta vs A3)", "",
       "| Arm | " + " | ".join(MNAME[m] for m in MODELS) + " |", "|---|---|---|---|---|"]
@@ -117,27 +120,27 @@ for label, ph, ar in ARMS:
         row.append(f"{acc:.1f} ({acc-base:+.1f})")
     L.append(f"| {label} | " + " | ".join(row) + " |")
 
-# seeds (phase C) — objective subset
+# Seed-replication experiment — objective subset
 c = allp[(allp.phase=="C") & (allp.question_type!="open_ended")]
 M["seeds"] = {}
 L += ["", "## Seeds 43-45 (objective subset n=545): A4−A3 pp", "",
       "| Model | 42 (main) | 43 | 44 | 45 | mean ± SD |", "|---|---|---|---|---|---|"]
 for m in MODELS:
-    obj = a[(a.model==m)&(a.question_type!="open_ended")].pivot_table(index="qid",columns="arch",values="score")[["A3_agent","A4p_hybrid_constrained"]].dropna()
-    main = float((obj.A4p_hybrid_constrained-obj.A3_agent).mean()*100)
+    obj = a[(a.model==m)&(a.question_type!="open_ended")].pivot_table(index="qid",columns="arch",values="score")[["A3","A4"]].dropna()
+    main = float((obj.A4-obj.A3).mean()*100)
     ds = []
     for s in [43,44,45]:
-        pp = c[(c.model==m)&(c.seed==s)].pivot_table(index="qid",columns="arch",values="score")[["A3_agent","A4p_hybrid_constrained"]].dropna()
-        ds.append(float((pp.A4p_hybrid_constrained-pp.A3_agent).mean()*100))
+        pp = c[(c.model==m)&(c.seed==s)].pivot_table(index="qid",columns="arch",values="score")[["A3","A4"]].dropna()
+        ds.append(float((pp.A4-pp.A3).mean()*100))
     M["seeds"][m] = {"main": main, "seeds": ds, "mean": float(np.mean(ds)), "sd": float(np.std(ds, ddof=1))}
     L.append(f"| {MNAME[m]} | {main:+.2f} | " + " | ".join(f"{d:+.2f}" for d in ds) + f" | {np.mean(ds):+.2f} ± {np.std(ds, ddof=1):.2f} |")
 
-# seeds — single-arm accuracy per seed (objective n=545): SD over 43-45; seed 42 = main grid (2026-09-05)
+# seeds — single-arm accuracy per seed (objective n=545): SD over 43-45; seed 42 = main grid
 M["seeds_single_arm"] = {}
 L += ["", "## Seeds: single-arm accuracy % (objective n=545); SD over seeds 43-45; seed 42 = main grid", "",
       "| Model | Arm | 42 (main) | 43 | 44 | 45 | mean 43-45 | SD 43-45 | main − mean |", "|---|---|---|---|---|---|---|---|---|"]
 for m in MODELS:
-    for ar in ["A3_agent","A4p_hybrid_constrained"]:
+    for ar in ["A3","A4"]:
         main = float(a[(a.model==m)&(a.arch==ar)&(a.question_type!="open_ended")].score.mean()*100)
         vals = [float(c[(c.model==m)&(c.seed==s)&(c.arch==ar)].score.mean()*100) for s in [43,44,45]]
         M["seeds_single_arm"][f"{m}|{LAB[ar]}"] = {"main": main, "seeds": vals, "mean": float(np.mean(vals)), "sd": float(np.std(vals, ddof=1))}
@@ -185,7 +188,7 @@ for _m in MODELS:
     _vals = []
     for _ar in PAPER:
         _rec = {}
-        for _f in sorted((ROOT / "data/trajectories/main" / _m / _ar).glob("*.jsonl")):
+        for _f in sorted((ROOT / "data/trajectories/main" / _m / record_id(_ar)).glob("*.jsonl")):
             for _l in _f.read_text().splitlines():
                 if _l.strip():
                     _r = json.loads(_l); _rec[_r.get("qid")] = _r

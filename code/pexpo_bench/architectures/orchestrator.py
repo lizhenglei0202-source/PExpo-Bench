@@ -12,8 +12,8 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from pexpo_bench.architectures.prompts import (
-    A0_SYSTEM, A1_SYSTEM, A2_SYSTEM, A2P_SYSTEM, A2_USER_TEMPLATE,
-    A3_SYSTEM, A4_SYSTEM, A4P_SYSTEM,
+    A0_SYSTEM, A1_SYSTEM, A2_SYSTEM, A2_USER_TEMPLATE,
+    A3_SYSTEM, A4_SYSTEM, FACTORIAL_RETRIEVAL_SYSTEM,
 )
 from pexpo_bench.tools import TOOL_REGISTRY  # unified: base + health + meta
 
@@ -51,7 +51,7 @@ class Result:
 
 
 # ==========================================================================
-# Rate-limit aware retry ()
+# Rate-limit backoff
 # ==========================================================================
 def _call_with_rate_limit_retry(client, kwargs, max_retries=6,
                                 base_delay=8.0, max_delay=120.0):
@@ -92,7 +92,7 @@ def _call_with_rate_limit_retry(client, kwargs, max_retries=6,
 
 
 # ==========================================================================
-# LLM wrapper (: model_key-dispatched via LLMClient)
+# Model client adapter
 # ==========================================================================
 def llm_call(messages: list[dict], model_key: str = "gpt-5.4",
              temperature: float = 0.3, max_tokens: int = 2048,
@@ -266,7 +266,7 @@ class BaseArch:
 # A0 — Naive
 # ==========================================================================
 class A0_Naive(BaseArch):
-    name = "A0_naive"
+    name = "A0"
     system_prompt = A0_SYSTEM
 
 
@@ -274,7 +274,7 @@ class A0_Naive(BaseArch):
 # A1 — Context Engineering
 # ==========================================================================
 class A1_ContextEng(BaseArch):
-    name = "A1_context_eng"
+    name = "A1"
     system_prompt = A1_SYSTEM
 
 
@@ -282,12 +282,12 @@ class A1_ContextEng(BaseArch):
 # A2 — RAG
 # ==========================================================================
 class A2_RAG(BaseArch):
-    name = "A2_rag"
+    name = "A2"
     system_prompt = A2_SYSTEM
     top_k: int = 5
 
     def _get_passages(self, question: dict) -> list[dict]:
-        """Passage source for the RAG arm. Overridden by the oracle arm."""
+        """Retrieve the five passages supplied to configuration A2."""
         return retrieve(question["question"], k=self.top_k)
 
     def run(self, question: dict) -> Result:
@@ -323,20 +323,12 @@ class A2_RAG(BaseArch):
         )
 
 
-# A2+ — RAG with tightened evidence-use constraints.
-# Same pipeline as A2_RAG but with a prompt that forbids retrieved
-# authoritative values from displacing question-embedded scenario parameters.
-class A2P_RAG_Constrained(A2_RAG):
-    name = "A2p_rag_constrained"
-    system_prompt = A2P_SYSTEM
-
-
 # ==========================================================================
 # A3 — Agentic Harness (ReAct loop)
 # ==========================================================================
 class A3_Agent(BaseArch):
     """Agentic Harness using OpenAI-native function calling (not text-based ReAct)."""
-    name = "A3_agent"
+    name = "A3"
     system_prompt = A3_SYSTEM
     max_steps: int = 8
 
@@ -494,7 +486,7 @@ class A3_Agent(BaseArch):
     def __init__(self, model_key: str = "gpt-5.4",
                  temperature: float = 0.3, max_tokens: int = 2048,
                  seed: int | None = 42):
-        """: accepts model_key dispatched via MODEL_REGISTRY."""
+        """Initialize the registered model client for tool calling."""
         super().__init__() if hasattr(super(), "__init__") else None
         self.model_key = model_key
         self.temperature = temperature
@@ -516,8 +508,6 @@ class A3_Agent(BaseArch):
             api_key = os.environ.get("OPENAI_API_KEY_NATIVE")
         elif "deepseek" in base:
             api_key = os.environ.get("deepseek_API_KEY")
-        elif "moonshot" in base:
-            api_key = os.environ.get("KIMI_API_KEY")
         else:
             api_key = os.environ.get("OPENAI_API_KEY")
 
@@ -531,9 +521,7 @@ class A3_Agent(BaseArch):
         in_tok = out_tok = 0
 
         # Token kwarg name varies: native OpenAI 5.x requires max_completion_tokens.
-        # For native reasoning models the cap must include hidden reasoning tokens; a bare
-        # 2048 is consumed entirely by reasoning and yields empty answers (same floor
-        # LLMClient.chat also applies this token floor for A0-A2).
+        # The protocol uses the same 16,384-token floor for A0-A4 native calls.
         if self.cfg.get("_native_openai"):
             tokens_kwarg = 'max_completion_tokens'
             tokens_value = max(self.max_tokens, 16384)
@@ -628,16 +616,16 @@ class A3_Agent(BaseArch):
 
 
 # ==========================================================================
-# A4 — Hybrid (Agent + Retrieval as a tool)
+# F101 — Retrieval and ten-step budget, without evidence-use rules
 # ==========================================================================
-class A4_Hybrid(A3_Agent):
-    name = "A4_hybrid"
-    system_prompt = A4_SYSTEM
+class F101_RetrievalBudget(A3_Agent):
+    name = "F101"
+    system_prompt = FACTORIAL_RETRIEVAL_SYSTEM
     max_steps: int = 10
 
     # Inherits __init__ from A3_Agent (model_key dispatch).
 
-    # : A4 = A3's 16 tools + retrieve (17 total)
+    # Retrieval adds one function to the 17-function tool registry.
     TOOL_DEFS = A3_Agent.TOOL_DEFS + [
         {"type": "function", "function": {
             "name": "retrieve",
@@ -668,46 +656,43 @@ class A4_Hybrid(A3_Agent):
         return A3_Agent._execute_tool(action)
 
 
-# A4+ — Hybrid with the same tightened evidence-use rules applied to the
-# retrieve() tool (parallel to A2+).
-class A4P_Hybrid_Constrained(A4_Hybrid):
-    name = "A4p_hybrid_constrained"
-    system_prompt = A4P_SYSTEM
+# A4 — Retrieval and tools with evidence-use rules.
+class A4_Hybrid(F101_RetrievalBudget):
+    name = "A4"
+    system_prompt = A4_SYSTEM
 
 
 # ==========================================================================
-# Factorial arms: decompose the A4p−A3 contrast into
-# R = retrieval availability, P = evidence-use rules, B = step budget (10 vs 8).
-# Cube corners already present: A3_Agent = (R0,P0,B0); A4_Hybrid = (R1,P0,B1);
-# A4P_Hybrid_Constrained = (R1,P1,B1). The five classes below complete the 2x2x2.
-# Prompt/budget caveat: retrieval arms inherit the
-# A4/A4P system text whose step-count sentence says 10 even when max_steps is 8.
+# Factorial conditions F(R,P,B): retrieval, evidence rules, ten-step budget.
+# A3 supplies F000; A4 supplies F111. The six other corners are explicit.
+# The recorded retrieval prompts specify ten steps even for the B=0 corners;
+# max_steps enforces the eight-step execution budget in those conditions.
 # ==========================================================================
 from pexpo_bench.architectures.prompts import _EVIDENCE_RULES  # noqa: E402
 
 
-class F_A3_R(A4_Hybrid):                    # (R1,P0,B0)
-    name = "fA3_R"
+class F100_Retrieval(F101_RetrievalBudget):                    # (R1,P0,B0)
+    name = "F100"
     max_steps = 8
 
 
-class F_A3_P(A3_Agent):                     # (R0,P1,B0)
-    name = "fA3_P"
+class F010_EvidenceRules(A3_Agent):                     # (R0,P1,B0)
+    name = "F010"
     system_prompt = A3_SYSTEM + "\n\n" + _EVIDENCE_RULES
 
 
-class F_A3_B(A3_Agent):                     # (R0,P0,B1)
-    name = "fA3_B"
+class F001_Budget(A3_Agent):                     # (R0,P0,B1)
+    name = "F001"
     max_steps = 10
 
 
-class F_A3_RP(A4P_Hybrid_Constrained):      # (R1,P1,B0)
-    name = "fA3_RP"
+class F110_RetrievalRules(A4_Hybrid):      # (R1,P1,B0)
+    name = "F110"
     max_steps = 8
 
 
-class F_A3_PB(A3_Agent):                    # (R0,P1,B1)
-    name = "fA3_PB"
+class F011_RulesBudget(A3_Agent):                    # (R0,P1,B1)
+    name = "F011"
     system_prompt = A3_SYSTEM + "\n\n" + _EVIDENCE_RULES
     max_steps = 10
 
@@ -716,38 +701,15 @@ class F_A3_PB(A3_Agent):                    # (R0,P1,B1)
 # Registry
 # ==========================================================================
 ARCHITECTURES = {
-    "fA3_R":                     F_A3_R,             # factorial: retrieval only
-    "fA3_P":                     F_A3_P,             # factorial: evidence rules only
-    "fA3_B":                     F_A3_B,             # factorial: budget only
-    "fA3_RP":                    F_A3_RP,            # factorial: retrieval + rules
-    "fA3_PB":                    F_A3_PB,            # factorial: rules + budget
-    "A0_naive":                  A0_Naive,
-    "A1_context_eng":            A1_ContextEng,
-    "A2p_rag_constrained":       A2P_RAG_Constrained,
-    "A3_agent":                  A3_Agent,           # basic tool-use (canonical A3)
-    "A4_hybrid":                 A4_Hybrid,
-    "A4p_hybrid_constrained":    A4P_Hybrid_Constrained,
+    "A0": A0_Naive,
+    "A1": A1_ContextEng,
+    "A2": A2_RAG,
+    "A3": A3_Agent,
+    "A4": A4_Hybrid,
+    "F100": F100_Retrieval,
+    "F010": F010_EvidenceRules,
+    "F001": F001_Budget,
+    "F110": F110_RetrievalRules,
+    "F101": F101_RetrievalBudget,
+    "F011": F011_RulesBudget,
 }
-
-
-# ==========================================================================
-# CLI entry (pilot)
-# ==========================================================================
-if __name__ == "__main__":
-    import argparse, yaml, pathlib, sys
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--arch", required=True, choices=list(ARCHITECTURES))
-    parser.add_argument("--questions", default="data/bank/bank_evaluation_set.yaml")
-    parser.add_argument("--out", default="pilot_results.jsonl")
-    args = parser.parse_args()
-
-    questions = yaml.safe_load(pathlib.Path(args.questions).read_text())
-    runner = ARCHITECTURES[args.arch]()
-    with open(args.out, "a") as f:
-        for q in questions:
-            try:
-                r = runner.run(q)
-            except NotImplementedError as e:
-                print(f"[skip] {q['qid']}: {e}", file=sys.stderr)
-                continue
-            f.write(json.dumps(r.__dict__, default=lambda o: o.__dict__) + "\n")

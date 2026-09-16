@@ -63,10 +63,8 @@ def _tool_registry_signature() -> dict:
 
 
 def _prompt_hashes() -> dict:
-    from pexpo_bench.architectures import prompts as pmod
-    keys = ["A0_SYSTEM", "A1_SYSTEM", "A2_SYSTEM", "A2P_SYSTEM",
-            "A3_SYSTEM", "A4_SYSTEM", "A4P_SYSTEM"]
-    return {k: _text_sha256(getattr(pmod, k, "")) for k in keys}
+    from pexpo_bench.architectures.orchestrator import ARCHITECTURES
+    return {key: _text_sha256(cls.system_prompt) for key, cls in ARCHITECTURES.items()}
 
 
 def _model_snapshots(model_keys: list[str]) -> dict:
@@ -91,7 +89,7 @@ def write_manifest(
     kb_chunks_path: str | None = None,
 ) -> pathlib.Path:
     """Dump a YAML manifest. Returns the path."""
-    from pexpo_bench.evaluation.judge_dispatch import JUDGE_FOR
+    from pexpo_bench.evaluation.judge_dispatch import OPEN_ANSWER_JUDGES, GROUNDING_JUDGES
 
     if kb_chunks_path is None:
         index_dir = pathlib.Path(os.environ.get("PEXPO_INDEX_DIR", str(pathlib.Path(__file__).resolve().parents[1] / "knowledge_base/index")))
@@ -117,8 +115,8 @@ def write_manifest(
         "seed": seed,
         "concurrency": concurrency,
         # Judge dispatch
-        "judge_dispatch": JUDGE_FOR,
-        "judge_models_used": _model_snapshots(list(set(JUDGE_FOR.values()))),
+        "judge_dispatch": {"open_answers": OPEN_ANSWER_JUDGES, "grounding": GROUNDING_JUDGES},
+        "judge_models_used": _model_snapshots(sorted(set(GROUNDING_JUDGES.values()) | {v[0] for v in OPEN_ANSWER_JUDGES.values()})),
         "notes": [
             "Run identifiers, seeds, model snapshots and retrieval-index hashes identify this execution.",
             "Replications and factorial settings must be recorded explicitly in the run arguments.",
