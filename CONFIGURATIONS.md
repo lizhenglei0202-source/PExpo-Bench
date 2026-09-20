@@ -39,6 +39,8 @@ in the B=0 conditions; the execution loop enforces the eight-round limit there.
 A3 and A4 are evaluated on the 1,027-item bank for all four models with requested
 seeds 43, 44 and 45. Statistical comparisons of seed effects use the 545
 true/false and calculation items, as specified in the manuscript.
+The distributed seed-replication files contain those 545 items; open-ended seed
+responses were not re-generated after the 2026-09-18 revision and are not distributed.
 
 ## Evaluation
 

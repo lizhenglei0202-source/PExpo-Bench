@@ -1,0 +1,16 @@
+# Gold-standard revision executed 18 September 2026 (see data/bank/revision_20260918/)
+revised_bank_sha256: 6254d61a20e34279678b0e99095a1294424dd671821f6e2c916fe03bfa39f3be
+questions_reworded_and_rerun: 97
+answer_or_unit_corrections_rescored_on_original_responses: 87
+explanation_only_edits: 57
+new_responses: {main: 1940, factorial: 1440, seeds: 2088, total: 5468}
+rejudged_open_ended_main_responses: 700
+new_open_ended_main_judgments: 200
+main_scores_changed: 1304
+settings: same prompts, tool schemas, temperature (0.3), requested seeds, budgets and retrieval index as manifest_run_1.yaml
+returned_model_snapshots_identical_to_original_runs: true
+scoring_rule: analysis/numeric_revision.py (full-precision references; displayed rounding accepted; applied to all calculation items)
+grounding_judgments: re-run for the 16 reworded subsample items (320 rows) with the original judge protocol; all other rows unchanged
+seed_files: 545 objective items per model/configuration/seed (open-ended seed responses not regenerated, not distributed)
+main_scores_independently_recomputed: 20540
+maximum_score_difference: 0.0

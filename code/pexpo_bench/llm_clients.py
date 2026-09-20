@@ -53,7 +53,10 @@ MODEL_REGISTRY: dict[str, dict] = {
                       "base_url": (os.environ.get("OPENAI_BASE_URL_NATIVE") or "https://api.openai.com/v1"),
                       "_native_openai": True,
                       "price_in": 0.15, "price_out": 0.6},
+    # The provider changed the default of deepseek-v4-flash to a thinking mode after the recorded
+    # runs; the non-thinking behaviour used by every recorded run and judge pass is pinned here.
     'deepseek-v4': {"backend": "openai_compat", "model": "deepseek-v4-flash",
+                    "extra_body": {"thinking": {"type": "disabled"}},
                          "base_url": "https://api.deepseek.com",
                          "price_in": 0.14, "price_out": 0.28},
 }
@@ -127,6 +130,8 @@ class LLMClient:
             }
             if self.seed is not None and not self.cfg.get("_native_openai"):
                 call_kwargs['seed'] = self.seed
+            if self.cfg.get("extra_body"):
+                call_kwargs['extra_body'] = dict(self.cfg["extra_body"])
             try:
                 resp = self._client.chat.completions.create(**call_kwargs)
                 content = resp.choices[0].message.content or ""

@@ -1,0 +1,25 @@
+{
+  "status": "all_scoped_responses_and_scores_complete",
+  "main_questions": 1027,
+  "main_response_rows": 20540,
+  "factorial_questions": 361,
+  "seed_objective_questions": 545,
+  "new_response_rows": 5468,
+  "new_open_judgments": 200,
+  "reused_answer_local_score_rows": 20776,
+  "reused_answer_main_open_judgments": 700,
+  "active_analysis_rows": 42284,
+  "historical_seed_open_rows_excluded_as_before": 11568,
+  "trajectory_rows": 42284,
+  "main_open_judgments_total": 9640,
+  "new_response_parse_failures": 39,
+  "score_status_counts": {
+    "reused_response_local_rounding_consistency": 17408,
+    "changed_question_new_response": 5468,
+    "original_response_original_score": 15340,
+    "reused_response_local_rescore": 3368,
+    "reused_response_rejudged": 700
+  },
+  "final_bank_sha256": "6254d61a20e34279678b0e99095a1294424dd671821f6e2c916fe03bfa39f3be",
+  "public_files_modified": false
+}

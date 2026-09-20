@@ -34,7 +34,7 @@ allp = pd.read_parquet(ROOT / "data/scored/results_all_phases.parquet")
 a["arch"] = a["arch"].map(configuration_id)
 allp["arch"] = allp["arch"].map(configuration_id)
 piv = {m: a[a.model == m].pivot_table(index="qid", columns="arch", values="score") for m in MODELS}
-M = {"release": "publication-snapshot-20260916"}
+M = {"release": "publication-snapshot-20260919"}
 L = ["# Results for the manuscript experiment", ""]
 
 # cells + cross-model means

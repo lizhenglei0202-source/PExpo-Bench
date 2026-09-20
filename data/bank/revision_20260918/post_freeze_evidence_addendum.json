@@ -1,0 +1,18 @@
+[
+  {
+    "qid": "S1-0187",
+    "reason": "Located the original handbook Table 5-1 after the generation freeze; fixes the supporting input from 1153 to 1152 without changing the question or the approximately 80% answer. No response to this question has yet been generated.",
+    "question_unchanged": true,
+    "answer_meaning_unchanged": true,
+    "source": {
+      "title": "Duan, X. (2015). Highlights of the Chinese Exposure Factors Handbook (Adults). Academic Press.",
+      "url": "https://www.researchgate.net/publication/294645842_Highlights_of_the_Chinese_Exposure_Factors_HandbookAdults",
+      "publisher_url": "https://www.sciencedirect.com/book/9780128031254/highlights-of-the-chinese-exposure-factors-handbook-adults",
+      "locator": "Chapter 5, Table 5-1, printed page 32; Male row, Mean column",
+      "status": "primary_source_checked",
+      "basis": "The mean is 1,152 min/day (the median is 1,185). Mean indoor fraction = 1152/1440 = 0.80. Transit is a separate category in Table 5-3."
+    },
+    "answer": "Approximately 80% of a 24-hour day, excluding transportation from the indoor category (1152/1440 × 100 = 80%).",
+    "rationale": "Table 5-1 of Highlights of the Chinese Exposure Factors Handbook (Adults), printed page 32, reports a mean indoor time of 1,152 min/day for adult males. Dividing by 1,440 min/day gives exactly 80%. The male median of 1,185 min/day is a different statistic."
+  }
+]

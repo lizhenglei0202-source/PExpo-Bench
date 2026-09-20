@@ -108,14 +108,19 @@ def score_row(r, gq, model, arch):
         p, g = norm_tf(pred), norm_tf(ga)
         return (1.0 if (p is not None and g is not None and p == g) else 0.0), False
     if qt == "calculation":
-        pn = extract_num(pred)
-        gn = float(ga) if isinstance(ga, (int, float)) else extract_num(ga)
+        from .numeric_revision import named_component_score, scalar_score, default_rounding, number
+        spec = gq.get("scoring") or {}
+        if spec.get("kind") == "named_numeric_components":
+            return named_component_score(pred, spec, gq.get("tolerance", 0.10))[0], False
+        pn = number(pred)
+        gn = gq.get("numeric_reference", number(ga))
         tol = gq.get("tolerance", 0.10)
-        raw = calc_score(pn, gn, tol)
+        policy = gq.get("rounding", default_rounding(gn, gq.get("unit")))
+        raw = scalar_score(pn, gn, tol, policy)
         conv = 0.0
         pu, gu = parse_unit(r.get("unit")), parse_unit(gq.get("unit"))
         if pn is not None and pu and gu and pu[0] == gu[0] and pu[1] != gu[1]:
-            conv = calc_score(pn * pu[1] / gu[1], gn, tol)
+            conv = scalar_score(pn * pu[1] / gu[1], gn, tol, policy)
         return max(raw, conv), conv > raw
     if qt == "open_ended":
         key = (model, arch, r.get("qid"))

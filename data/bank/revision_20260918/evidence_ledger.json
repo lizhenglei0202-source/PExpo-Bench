@@ -1,0 +1,1108 @@
+{
+  "S2-0353": {
+    "title": "A pilot study on characterization of air pollutants from typical Chinese cooking with clean fuels without and with range hood usage",
+    "url": "https://doi.org/10.1016/j.apr.2022.101537",
+    "locator": "Abstract and experiment comparing natural gas/electric cooking",
+    "status": "checked",
+    "basis": "Direct fuel comparison under tested cooking/ventilation conditions; does not establish universal superiority."
+  },
+  "S1-0276": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 6",
+    "url": "https://www.epa.gov/sites/production/files/2015-09/documents/efh-chapter06.pdf",
+    "locator": "Tables 6-17 and 6-19, pp. 6-39–6-50 (PDF pp.45–56)",
+    "status": "checked",
+    "basis": "最终表False来自误报。EPA EFH 2011 Tables 6-17/6-19确有6至<11岁男/女不同活动水平吸入率，保留原True并更换为直接表格依据。"
+  },
+  "TS1-014": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(20.9+1.3)/24 = 0.925; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0008": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "4*2.5+4*4.8 = 29.2; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0189": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 3",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter03.pdf",
+    "locator": "Table 3-1, per-capita intakes",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0256": {
+    "title": "EPA Exposure Factors Handbook; Gehan–George age-specific surface-area coefficients",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100TLTB.TXT",
+    "locator": "Coefficients 0.03050, 0.35129, 0.54375",
+    "status": "checked",
+    "basis": ".03050*140**.35129*32**.54375 = 1.13930094527; height 140 cm supplied per author instruction."
+  },
+  "S2-0027": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".5*50/(.5+.1) = 41.6666666666667; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0028": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(.3*30+10/50)/(.3+.1)/30 = 0.766666666666666; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0030": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "75*.2/(100-75) = 0.6; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0032": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "40+60*exp(-(.4+.1)*2) = 62.0727664702865; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0206": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(.75*.8*60+500/40)/(.8+.25) = 46.1904761904762; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0236": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".6*.5*30 = 9; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0245": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".7*.5*100 = 35; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0259": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".8*50 = 40; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0362": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".6*40 = 24; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0364": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".7*60 = 42; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0366": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".8*80 = 64; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0368": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".6*45 = 27; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0371": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".2*60 = 12; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0372": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".8*75 = 60; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0047": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(8*10+2*25+14*15)/24 = 14.1666666666667; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0051": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(14*12+10*30)/24 = 19.5; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0052": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(0.9*10+0.1*25)*365 = 4197.5; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0160": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "((18*40+6*20)/24*5+(12*40+12*20)/24*2)/7 = 33.5714285714286; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0165": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(8*15+9*12+80+6*10)/24 = 15.3333333333333; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0168": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(3*25+8*12+13*18)/24 = 16.875; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0174": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "550/24 = 22.9166666666667; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0178": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(4*12+2*40+8*10+10*12)/24 = 13.6666666666667; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0210": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(3*20+6*12+2*40+13*10)/24 = 14.25; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0216": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(10*12+8*18+6*45)/24 = 22.25; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0222": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(3*10+5*15+4*40)/12 = 22.0833333333333; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0297": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(8*11+9*22+2*65+5*35)/24 = 24.625; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0298": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(5*10+9*20+6*80+4*30)/24 = 34.5833333333333; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0299": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(12*14+8*18+4*50)/24 = 21.3333333333333; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0300": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(8*10+10*22+3*60+3*35)/24 = 24.375; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0303": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(5*40+10*15+9*25)/24 = 23.9583333333333; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0068": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(.015*.378/18.6)/.0003 = 1.01612903225806; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0069": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "25*15.7*20/(80*70) = 1.40178571428571; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0091": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".8*.5/(1+.8*.5) = 0.285714285714286; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0181": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "15000*(1-1/1.24**3.5) = 7934.94802750405; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0294": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "12000*(1-1/1.15**1.5) = 2269.5150444489; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0302": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "750000*800/100000*.1 = 600; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0321": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "3000*(1-1/1.1**2.5) = 636.043167159689; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0323": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "600*(1-1/1.25) = 120; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0327": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "2200*(1-1/1.18**1.5) = 483.674441206515; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0328": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "3000*(1-1/1.15**1.5) = 567.378761112225; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0329": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "12000*(1-1/1.1**2.5) = 2544.17266863876; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0330": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "450*(1-1/1.12) = 48.2142857142857; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0332": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "2400*(1-1/1.16**1.5) = 479.013742996015; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0333": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "18000*(1-1/1.1**2.5) = 3816.25900295813; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS3-016": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "60*4.8+40*4*2.5+30*8*1.5+15*8*.45 = 1102; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-003": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "1.23**2 = 1.5129; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-004": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "1.24 = 1.24; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-006": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "1.14**3 = 1.481544; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-007": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "525*(1-1/1.1**1.5) = 69.9383096782401; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-010": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "100*(1-1/1.07**2.5) = 15.5614910432646; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-014": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "2700*(1-1/1.24**2.3) = 1053.75720098473; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-015": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "320*(1-1/1.14**1.7) = 63.8987306378686; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-017": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "600*(1-1/1.1**1.3) = 69.9208041737192; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-018": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "720*(1-1/1.07**1.1) = 51.6401683177816; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS3-005": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(12*20+50*1.8)/24 = 13.75; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0014": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "16.4/18.2 = 0.901098901098901; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0121": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "20300*.5*.01 = 101.5; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0123": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".1*(2.5*4+1.5*20) = 4; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0183": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "86.4+73.9 = 160.3; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0186": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "100-50 = 50; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0261": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".9*24 = 21.6; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0141": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".007184*20**.425*110**.725 = 0.775021532206651; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0229": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "80*.5 = 40; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0254": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".7*.4*50 = 14; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0264": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".25*80 = 20; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0343": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "35*.3 = 10.5; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0363": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".3*.5*100 = 15; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0367": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".4*70 = 28; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S2-0369": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".8*.25*50 = 10; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0145": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "46/168 = 0.273809523809524; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0147": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "13.6/14 = 0.971428571428571; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0226": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "24*.87 = 20.88; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0232": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(.32+.39+1.60)/3 = 0.77; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S3-0237": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "1.5+1.8 = 3.3; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0148": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "5*.6*10 = 30; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0176": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".1*1000*.4*(1-.6) = 16; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0179": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".05*.8*1000/20 = 2; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0187": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".05*1.5*.5*1000 = 37.5; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0206": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "8*.39 = 3.12; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S4-0273": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "100*.15 = 15; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0190": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "8000*(1-exp(-.006*20)) = 904.63650626274; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0203": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "3750*(1-1/1.12) = 401.785714285715; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0217": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "6000*(1-exp(-.004*20)) = 461.301921680185; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0220": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "2500*(1-exp(-.005*15)) = 180.641284178618; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0228": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "3000*(1-exp(-.005*20)) = 285.487745892121; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0231": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "20000*(1-exp(-.004*10)) = 784.211216953536; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S5-0240": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "24000*(1-exp(-.004*15)) = 1397.65119397803; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS2-013": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "18*.55*.3/(.3+.15)*12 = 79.2; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS2-017": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "60*4.8*.5 = 144; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS3-002": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(18*12+4*45+2*25)*16/24 = 297.333333333333; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS3-003": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(18*14+50*8+80*2)*.5 = 406; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS3-008": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "50*2.5*2 = 250; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS3-020": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "(18*2+4*8+2*15)*.5 = 49; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS4-008": {
+    "title": "EPA IRIS inorganic arsenic, final assessment 2025",
+    "url": "https://iris.epa.gov/ChemicalLanding/&substance_nmbr=278",
+    "locator": "Oral RfD; arithmetic uses the stated exposure inputs",
+    "status": "checked",
+    "basis": ".01*1.053/80/.00006"
+  },
+  "TS4-011": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".0001*(16/24*8)*250*25/(86.4*70*365) = 1.50999009446498e-06; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS4-013": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "5*.07*20300*.13*350*30/(1e6*86.4*70*365) = 4.39331240487062e-06; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS4-014": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".03*12*365*5/(31.8*70*365) = 0.000808625336927224; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-005": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".01*1.10/83.57*1.5 = 0.000197439272466196; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "TS5-012": {
+    "title": "Independent arithmetic from question inputs",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": ".005*1.10/83.57*1.5 = 9.8719636233098e-05; dimensional units follow the question. Numerical constants are exercise inputs unless a source is specified."
+  },
+  "S1-0003": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 3",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter03.pdf",
+    "locator": "Table 3-1, mL/kg-day",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0240": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 3",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter03.pdf",
+    "locator": "Table 3-1",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0185": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 3",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter03.pdf",
+    "locator": "Table 3-1",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0247": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 8",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter08.pdf",
+    "locator": "Table 8-1, ages 6 to <11",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0002": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 6",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf",
+    "locator": "Table 6-1",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0175": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 6",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf",
+    "locator": "Table 6-1",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0113": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 6",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf",
+    "locator": "Tables 6-14 to 6-16",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0161": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 3",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter03.pdf",
+    "locator": "Pregnant and lactating women",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0266": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 7",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter07.pdf",
+    "locator": "Surface-area/body-weight tables",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0273": {
+    "title": "EPA Exposure Factors Handbook (2011), Chapter 7",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter07.pdf",
+    "locator": "Age-specific skin surface-area tables",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S1-0187": {
+    "title": "中国人群暴露参数手册（作者给定1153 min/day）",
+    "url": "",
+    "locator": "版本/表号/页码待补查",
+    "status": "author_supplied_not_independently_verified",
+    "basis": "1153/1440×100 = 80.0694%; do not cite an EPA adult US time-activity excerpt for this Chinese population value."
+  },
+  "S2-0029": {
+    "title": "WHO Global Air Quality Guidelines (2021)",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK574582/table/fm-ch1.tab1/",
+    "locator": "Table 0.1 and footnotes",
+    "status": "checked",
+    "basis": ""
+  },
+  "S2-0282": {
+    "title": "WHO Global Air Quality Guidelines (2021)",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK574582/table/fm-ch1.tab1/",
+    "locator": "Table 0.1 and footnotes",
+    "status": "checked",
+    "basis": ""
+  },
+  "S2-0283": {
+    "title": "WHO Global Air Quality Guidelines (2021)",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK574582/table/fm-ch1.tab1/",
+    "locator": "Table 0.1 and footnotes",
+    "status": "checked",
+    "basis": ""
+  },
+  "S2-0360": {
+    "title": "WHO Global Air Quality Guidelines (2021)",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK574582/table/fm-ch1.tab1/",
+    "locator": "Table 0.1 and footnotes",
+    "status": "checked",
+    "basis": ""
+  },
+  "S4-0214": {
+    "title": "EPA IRIS inorganic arsenic, final assessment 2025",
+    "url": "https://iris.epa.gov/ChemicalLanding/&substance_nmbr=278",
+    "locator": "Oral RfD 6×10⁻⁵ mg/kg-day",
+    "status": "checked",
+    "basis": ""
+  },
+  "TS5-016": {
+    "title": "EPA IRIS benzene",
+    "url": "https://iris.epa.gov/ChemicalLanding/%26substance_nmbr%3D276",
+    "locator": "RfC 0.03 mg/m³; lower IUR 2.2×10⁻⁶ per µg/m³",
+    "status": "checked",
+    "basis": "HQ = 1/3; ELCR = 2.2e-5; score separately."
+  },
+  "S4-0266": {
+    "title": "EPA Exposure Assessment Tools by Routes—Ingestion",
+    "url": "https://www.epa.gov/expobox/exposure-assessment-tools-routes-ingestion",
+    "locator": "Dose equations and unit consistency",
+    "status": "checked",
+    "basis": ""
+  },
+  "S4-0281": {
+    "title": "EPA MPPD v2.0 Model (2025)",
+    "url": "https://www.epa.gov/system/files/documents/2026-07/2025-epa-mppd-v2.0-model.pdf",
+    "locator": "Elongated and irregular non-spherical particles",
+    "status": "checked",
+    "basis": ""
+  },
+  "S4-0234": {
+    "title": "EPA MPPD v2.0 Model (2025)",
+    "url": "https://www.epa.gov/system/files/documents/2026-07/2025-epa-mppd-v2.0-model.pdf",
+    "locator": "Age-specific lung geometry, breathing inputs and deposition mechanisms",
+    "status": "primary_source",
+    "basis": ""
+  },
+  "S4-0067": {
+    "title": "EPA RAGS Part F: Inhalation Risk Assessment",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/partf_200901_final.pdf",
+    "locator": "Lifetime-adjusted exposure concentration and IUR",
+    "status": "checked",
+    "basis": "2.2e-6*10*(250/365)*(30/70) = 6.457925636e-6."
+  },
+  "S4-0071": {
+    "title": "Explicit hypothetical dose-addition exercise",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "HQ_inh=(5*15.7/1000/80)/0.0004=2.453125; HQ_ing=(10/1000/80)/0.0004=0.3125; sum=2.765625. The common cross-route reference value is a stipulated teaching input, not an EPA lead RfD."
+  },
+  "S4-0151": {
+    "title": "Conservation of applied chemical mass",
+    "url": "",
+    "locator": "",
+    "status": "recomputed",
+    "basis": "min(applied mass, nominal flux*area*time)=min(2,0.1*100*3)=2 mg, under no replenishment."
+  },
+  "S4-0235": {
+    "title": "EPA RAGS Part E: Supplemental Guidance for Dermal Risk Assessment",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/part_e_final_revision_10-03-07.pdf",
+    "locator": "Section 4.2; matching absorbed dose and toxicity-factor basis",
+    "status": "checked",
+    "basis": ""
+  },
+  "S1-0017": {
+    "title": "Nikolovski et al. (2008), infant skin barrier properties; EPA EFH Chapter 7 for SA/BW",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/18200056/",
+    "locator": "J Invest Dermatol 128:1728–1736; doi:10.1038/sj.jid.5701239",
+    "status": "checked",
+    "basis": "Primary measurements support infant/adult differences in skin hydration and water transport, not a universal increase in permeability to every chemical at every childhood age. Use chemical-specific absorption information where available."
+  },
+  "S2-0209": {
+    "title": "WHO Global Air Quality Guidelines (2021)",
+    "url": "https://www.who.int/publications/i/item/9789240034228",
+    "locator": "Section 3.8.1, point 8; printed p.138, local PDF p.162",
+    "status": "checked",
+    "basis": "WHO explicitly contrasts the 2005 precautionary approach without a formal derivation method with the 2021 mortality-based protocol. The change is not explained merely by a switch to a percentile."
+  },
+  "S5-0191": {
+    "title": "WHO Global Air Quality Guidelines (2021)",
+    "url": "https://www.who.int/publications/i/item/9789240034228",
+    "locator": "Section 1.3.4; printed p.180, local PDF p.200",
+    "status": "checked",
+    "basis": "WHO describes chronic disease, child development and reduced physiological reserve in older people as reasons for susceptibility. EPA EFH Chapter 6 supplies the child body-weight-normalized inhalation context."
+  },
+  "S5-0097": {
+    "title": "WHO Global Air Quality Guidelines (2021); slope of the stipulated supralinear function",
+    "url": "https://www.who.int/publications/i/item/9789240034228",
+    "locator": "Systematic-review summary, local PDF p.270",
+    "status": "checked",
+    "basis": "WHO reports linear or supralinear concentration–response functions. For the supralinear function stipulated in this item, a larger low-concentration slope implies a larger marginal benefit; this is conditional, not a statement that every disease curve has that shape."
+  },
+  "S5-0189": {
+    "title": "Zeger et al. (2000), Exposure measurement error in time-series studies of air pollution: concepts and consequences",
+    "url": "https://www.biostat.jhsph.edu/~fdominic/papers/measurement.pdf",
+    "locator": "Berkson versus classical errors",
+    "status": "checked",
+    "basis": "Berkson and classical errors are distinct and their consequences depend on the regression model and error structure; universal attenuation is not justified."
+  },
+  "S5-0083": {
+    "title": "Zeger et al. (2000), Exposure measurement error in time-series studies of air pollution: concepts and consequences",
+    "url": "https://www.biostat.jhsph.edu/~fdominic/papers/measurement.pdf",
+    "locator": "Classical nondifferential error and attenuation",
+    "status": "checked",
+    "basis": ""
+  },
+  "S2-0289": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "Indoor PM2.5 concentrations are often lower than outdoor concentrations in buildings with effective HVAC filtration systems because the filters remove a substantial fraction of particulate matter from incoming and recirculated air. In addition, if indoor PM2.5 sources are limited, filtration can maintain indoor concentrations below outdoor levels."
+  },
+  "S5-0087": {
+    "title": "WHO: Estimations of attributable burden of disease due to a risk factor",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/environmental-health-estimations-of-attributable-burden-of-disease-due-to-a-risk-factor",
+    "locator": "AF/PAF and attributable burden; additional claim-specific references may be needed",
+    "status": "method_source",
+    "basis": "AF = (RR − 1) / RR\nAF = (1.20 − 1) / 1.20 = 0.1667 ≈ 16.67%\nPAF = p(RR − 1) / [1 + p(RR − 1)]\nPAF = 0.75 × (1.20 − 1) / [1 + 0.75 × (1.20 − 1)]\nPAF = 0.15 / 1.15 = 0.1304 ≈ 13.04%"
+  },
+  "S5-0090": {
+    "title": "WHO: Estimations of attributable burden of disease due to a risk factor",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/environmental-health-estimations-of-attributable-burden-of-disease-due-to-a-risk-factor",
+    "locator": "AF/PAF and attributable burden; additional claim-specific references may be needed",
+    "status": "method_source",
+    "basis": "Apply the outcome-specific PAF to the corresponding current observed annual mortality rate. These are rates per 100,000, not absolute case counts in an unspecified population."
+  },
+  "S5-0236": {
+    "title": "WHO: Estimations of attributable burden of disease due to a risk factor",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/environmental-health-estimations-of-attributable-burden-of-disease-due-to-a-risk-factor",
+    "locator": "AF/PAF and attributable burden; additional claim-specific references may be needed",
+    "status": "method_source",
+    "basis": "Three important factors are:\n1. **Relative risk (RR)** – A higher RR leads to a higher attributable fraction, since AF = (RR − 1) / RR.\n2. **Exposure level or intensity** – Higher exposure may increase RR through the exposure–response relationship, thereby increasing AF.\n3. **Population susceptibility or effect modifiers** – Factors such as age, pre-existing disease, or other vulnerabilities may strengthen the effect of exposure and increase RR and AF.\nBaseline disease rate affects the absolute number of attributable cases, while the proportion of the population exposed mainly affects the population attributable fraction (PAF), not AF itself."
+  },
+  "S5-0243": {
+    "title": "WHO: Estimations of attributable burden of disease due to a risk factor",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/environmental-health-estimations-of-attributable-burden-of-disease-due-to-a-risk-factor",
+    "locator": "AF/PAF and attributable burden; additional claim-specific references may be needed",
+    "status": "method_source",
+    "basis": "Three key factors are:\n\n1. **Relative risk (RR)** – A higher RR results in a larger attributable fraction.\n\n2. **Exposure level or intensity** – Greater exposure can increase the health risk and therefore increase the AF.\n\n3. **Population susceptibility** – Factors such as age, pre-existing disease, or other vulnerabilities can increase the effect of exposure and lead to a higher AF."
+  },
+  "S5-0303": {
+    "title": "WHO: Estimations of attributable burden of disease due to a risk factor",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/environmental-health-estimations-of-attributable-burden-of-disease-due-to-a-risk-factor",
+    "locator": "AF/PAF and attributable burden; additional claim-specific references may be needed",
+    "status": "method_source",
+    "basis": "An exposure–response function supplies the RR for the exposure contrast of interest. For an exposed group, AF = (RR−1)/RR; population PAF additionally accounts for the exposure distribution. Attributable cases equal the appropriate AF or PAF multiplied by the current observed case count, or by the matching observed disease rate and population size. Apply age- or susceptibility-specific rates and, where supported by evidence, stratum-specific RRs. Higher baseline rates can produce more attributable cases even when RR and AF are unchanged."
+  },
+  "S1-0009": {
+    "title": "U.S. EPA, Exposure Factors Handbook (2011), Chapters 6 and 8.",
+    "url": "",
+    "locator": "",
+    "status": "author_citation",
+    "basis": "These are average daily doses: 25×12/31.8=9.43 and 25×16/80=5.00 µg/kg-day. LADD would additionally require exposure duration and a lifetime averaging time."
+  },
+  "S1-0164": {
+    "title": "U.S. EPA, Exposure Factors Handbook, Chapter 3; verify the exact sex/age group and whether the metric is drinking water, total water, or an upper percentile.",
+    "url": "",
+    "locator": "",
+    "status": "author_citation",
+    "basis": "The cited material does not identify 2.2 L/day as the mean daily drinking-water intake for adult females; the value and metric are mismatched."
+  },
+  "S2-0191": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "For I/O = P·AER/(AER+k) with P>0 and k>0, d(I/O)/dAER = Pk/(AER+k)² > 0. The ratio increases monotonically with AER, while approaching P as an upper limit."
+  },
+  "S2-0230": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "The revised answer supplies the requested mass-balance equation, the surface-area term, and the transient solution."
+  },
+  "S2-0231": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "A higher PM10 I/O ratio can occur when indoor coarse-particle sources are important, especially resuspension of settled dust during occupant activity, cleaning, or movement, and when doors/windows or other pathways introduce coarse outdoor particles. This is a conditional result; larger particles generally settle faster and many filters remove them efficiently, so those mechanisms should not be reversed."
+  },
+  "S2-0243": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "This removes the contradiction between an assumed P_eff model and the claim that the reduction is unspecified."
+  },
+  "S2-0250": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "The revised answer distinguishes envelope penetration from post-entry or mechanical-filtration removal."
+  },
+  "S2-0252": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "PM2.5 penetration depends on particle size, leakage-path geometry, envelope airtightness, pressure differences, wind, ventilation operation, and filtration. Material type alone is not a reliable proxy: cracks, joints, seals, and intentional openings often dominate transport. Any concrete-versus-wood comparison should therefore be tied to measured airtightness and a specific study rather than generalized from nominal material porosity."
+  },
+  "S2-0266": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "Indoor activities can resuspend settled dust and generate coarse particles, increasing indoor PM10−2.5 independently of outdoor infiltration. The result applies to coarse particles under source-rich conditions and should not be generalized as total PM10 always having a higher I/O ratio than PM2.5."
+  },
+  "S2-0319": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "The revision removes unsupported directional claims and explains the variables that actually determine the ratio."
+  },
+  "S2-0320": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "The answer now separates entry through the envelope from removal after entry."
+  },
+  "S2-0357": {
+    "title": "EPA indoor particle mass-balance studies",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100HP70.TXT",
+    "locator": "Separate penetration, air exchange, indoor sources and losses",
+    "status": "method_source",
+    "basis": "False. In the steady-state model I/O = P×AER/(AER+k), the indoor removal rate k remains relevant even at low AER."
+  },
+  "S4-0062": {
+    "title": "U.S. EPA, Risk Assessment Guidance for Superfund, Part F (Inhalation Risk Assessment).",
+    "url": "",
+    "locator": "",
+    "status": "author_citation",
+    "basis": "Risk = IUR × lifetime-average concentration under the exposure definition used by the IUR. Intermittent or shorter-duration indoor concentrations require exposure adjustment before multiplication."
+  },
+  "S4-0143": {
+    "title": "ICRP Publication 66, Human Respiratory Tract Model for Radiological Protection.",
+    "url": "",
+    "locator": "",
+    "status": "author_citation",
+    "basis": "Under typical ICRP 66 reference breathing conditions, a substantial fraction of 5 µm particles is removed in the extrathoracic region; it is not correct to state generally that they are primarily deposited in the tracheobronchial region."
+  },
+  "S4-0182": {
+    "title": "ICRP Publication 66, Human Respiratory Tract Model for Radiological Protection.",
+    "url": "",
+    "locator": "",
+    "status": "author_citation",
+    "basis": "In the ICRP respiratory tract model, 5 µm particles are generally subject to strong extrathoracic removal; 'preferentially deposited in the tracheobronchial region' is not a generally valid statement."
+  },
+  "S4-0229": {
+    "title": "ICRP Publication 66, Human Respiratory Tract Model for Radiological Protection.",
+    "url": "",
+    "locator": "",
+    "status": "author_citation",
+    "basis": "The revised answer removes unsupported hard thresholds and the incorrect implication that >5 µm particles generally favor TB deposition."
+  },
+  "S5-0081": {
+    "title": "WHO: Estimations of attributable burden of disease due to a risk factor",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/environmental-health-estimations-of-attributable-burden-of-disease-due-to-a-risk-factor",
+    "locator": "AF/PAF and attributable burden; additional claim-specific references may be needed",
+    "status": "method_source",
+    "basis": "A constant RR per increment is multiplicative on the risk-ratio scale. It does not mean that absolute risk increases by 10 percentage points at every increment."
+  }
+}

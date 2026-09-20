@@ -27,7 +27,8 @@ See [CONFIGURATIONS.md](CONFIGURATIONS.md) for the complete design.
 - `code/pexpo_bench/`: model clients, configurations, prompts, retrieval, tools,
   experiment runners, scoring and statistical analysis.
 - `data/bank/`: the 1,104-item full bank, 1,027-item evaluation set, calculation
-  stream and curation records.
+  stream, curation records and the 2026-09-18 gold-standard revision records
+  (`revision_20260918/`).
 - `data/trajectories/`: main, factorial and seed-replication responses.
 - `data/scored/`: the recorded main and combined scoring tables.
 - `data/judges/`, `data/expert_validation/`: judgments, anonymous ratings and
@@ -35,6 +36,7 @@ See [CONFIGURATIONS.md](CONFIGURATIONS.md) for the complete design.
 - `data/manifests/`: execution settings and the recorded software environment.
 - `RESULTS_TABLES.md`: numerical results.
 - `MANIFEST.json`: file sizes and SHA-256 checksums.
+- `LICENSE`: MIT license for the software in this release.
 
 Follow [REPRODUCE.md](REPRODUCE.md) to reproduce the recorded results without model
 API calls or to execute the specified experiments with your own credentials.
@@ -49,3 +51,15 @@ behaviors are retained as used by the benchmark.
 Credentials are configured locally in `.env`. The public configuration example
 contains blank values; private paths and workstation identifiers are redacted.
 Manuscript figures and their source workbook accompany the journal submission.
+
+## Data version
+
+This package carries the question bank and results after the gold-standard review of
+18 September 2026: 97 questions were reworded and re-answered in every experiment,
+87 answers or units were corrected and re-scored on the original responses, and 57
+items received explanation-only edits; 1,304 of the 20,540 main-grid scores changed.
+`data/bank/revision_20260918/` lists every change per item, and
+`data/manifests/revision_20260918.yaml` records the execution scope. The
+reference-grounding judgments were re-run for the 16 reworded subsample items; the seed-replication files contain
+the 545 objective items used in the analysis. Retrieved passages are distributed as
+identifiers (`doc_id`, `section`, `chunk_id`, `score`), not as text (SANITIZATION.md).
