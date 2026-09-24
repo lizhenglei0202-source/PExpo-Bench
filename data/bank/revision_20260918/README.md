@@ -1,11 +1,11 @@
 # Gold-standard revision of 18 September 2026
 
-All 1,104 questions were re-examined after the expert validation (SI Section C) had
+All 1,027 questions were re-examined after the expert validation (SI Section C) had
 questioned gold answers: two independent model-based screening passes (GPT-5.4 and
 DeepSeek-V4, each covering every item) plus 194 manual arithmetic or source checks
-flagged 638 evaluation-set items, of which 135 had a confirmed defect in the answer,
-unit, stated conditions or explanation. The authors then reviewed all 1,104 items one by
-one, adjudicating the flagged items against the primary sources.
+flagged 638 items, of which 135 had a confirmed defect in the answer, unit, stated
+conditions or explanation. The authors then reviewed all 1,027 items one by one,
+adjudicating the flagged items against the primary sources.
 
 | action | items | meaning |
 |---|---:|---|
@@ -14,11 +14,10 @@ one, adjudicating the flagged items against the primary sources.
 | rejudge | 35 | open-ended answer corrected; original responses re-judged with the original protocol |
 | metadata_only | 57 | rationale or unit wording only; scores unchanged |
 | retain | 397 | kept (239 of them with supplemented source citations) |
-| historical_excluded | 48 | items outside the 1,027-item evaluation set; remain excluded |
 
 Files
 
-- `revision_manifest.json`: one entry per reviewed item with the review group, the
+- `revision_manifest.json`: one entry per flagged item (638) with the review group, the
   author decision, the fields changed, adjudication notes (English translation and
   the original Chinese), the source used, and the item before and after.
 - `evidence_ledger.json`: the primary-source evidence consulted per item.

@@ -1,6 +1,6 @@
 # Expert Validation — Rater Instructions / 专家验证评分说明
 
-**What this is.** A stratified random sample of 110 PExpo-Bench questions (seed 20260820, drawn from the curated 1,027-item evaluation set, proportional across sub-domain × question type × difficulty; see `sample_manifest.json`). Two PhD-level exposure scientists each rate every question independently.
+**What this is.** A stratified random sample of 110 PExpo-Bench questions (seed 20260820, drawn from the 1,027-item evaluation set, proportional across sub-domain × question type × difficulty; see `sample_manifest.json`). Two PhD-level exposure scientists each rate every question independently.
 
 **Files.** `rater1_sheet.csv` and `rater2_sheet.csv` are identical. Each rater works ONLY in their own file, without discussing any item until both are complete. 两位评审各自只填写自己的文件，全部完成前不讨论任何题目。
 

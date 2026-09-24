@@ -2,7 +2,7 @@
  "date": "2026-08-20",
  "seed": 20260820,
  "n": 110,
- "source_bank": "pexpo_bench_v3_full.patched_20260811.yaml restricted to the curated 1,027-item evaluation set",
+ "source_bank": "data/bank/bank_evaluation_set.yaml (1,027 items)",
  "procedure": "proportional allocation over subdomain x question_type x difficulty strata; numpy default_rng",
  "strata_counts": {
   "S1_exposure_factors|calculation|hard": 3,

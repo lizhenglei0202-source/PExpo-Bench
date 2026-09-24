@@ -1,6 +1,6 @@
 {
  "n": 110,
- "sample": "stratified seed 20260820 over the curated 1,027-item set",
+ "sample": "stratified seed 20260820 over the 1,027-item evaluation set",
  "per_criterion": {
   "clarity": {
    "both": 102,

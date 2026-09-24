@@ -5,7 +5,7 @@ Flagship Performance on a Personal Exposure Assessment Benchmark**.
 
 ## Experiment
 
-The main experiment evaluates four models with five configurations on the curated
+The main experiment evaluates four models with five configurations on the
 1,027-item question set. The accompanying analyses cover the 361-item calculation
 factorial design, three seed replications, reference grounding, expert validation
 and judge calibration.
@@ -26,9 +26,8 @@ See [CONFIGURATIONS.md](CONFIGURATIONS.md) for the complete design.
 
 - `code/pexpo_bench/`: model clients, configurations, prompts, retrieval, tools,
   experiment runners, scoring and statistical analysis.
-- `data/bank/`: the 1,104-item full bank, 1,027-item evaluation set, calculation
-  stream, curation records and the 2026-09-18 gold-standard revision records
-  (`revision_20260918/`).
+- `data/bank/`: the 1,027-item evaluation set, the calculation stream and the
+  2026-09-18 gold-standard revision records (`revision_20260918/`).
 - `data/trajectories/`: main, factorial and seed-replication responses.
 - `data/scored/`: the recorded main and combined scoring tables.
 - `data/judges/`, `data/expert_validation/`: judgments, anonymous ratings and
