@@ -1,0 +1,72 @@
+{
+  "n_judged_rows": 400,
+  "per_judge_mean": {
+    "deepseek-v4": 4.3675,
+    "gpt-5.4-nano": 4.75
+  },
+  "per_judge_mean_by_model": {
+    "deepseek-v4": {
+      "deepseek-v4": 4.35,
+      "gpt-5.4": 4.58,
+      "gpt-5.4-mini": 4.25,
+      "gpt-5.4-nano": 4.29
+    },
+    "gpt-5.4-nano": {
+      "deepseek-v4": 4.75,
+      "gpt-5.4": 4.81,
+      "gpt-5.4-mini": 4.76,
+      "gpt-5.4-nano": 4.68
+    }
+  },
+  "judge_judge": {
+    "pair": "deepseek-v4 vs gpt-5.4-nano",
+    "n": 400,
+    "pearson_r": 0.7302,
+    "spearman_rho": 0.6038,
+    "exact_agree": 0.795,
+    "within_1": 0.9,
+    "kappa_unweighted": 0.2714,
+    "kappa_linear": 0.4644,
+    "kappa_quadratic": 0.5805,
+    "mean_diff": -0.3825
+  },
+  "n_human_rated": 400,
+  "human_human": {
+    "pair": "rater1 vs rater2",
+    "n": 400,
+    "pearson_r": 0.9236,
+    "spearman_rho": 0.8187,
+    "exact_agree": 0.8625,
+    "within_1": 0.995,
+    "kappa_unweighted": 0.6856,
+    "kappa_linear": 0.82,
+    "kappa_quadratic": 0.9235,
+    "mean_diff": -0.0025
+  },
+  "judge_human": {
+    "deepseek-v4": {
+      "pair": "deepseek-v4 vs human_mean",
+      "n": 400,
+      "pearson_r": 0.7514,
+      "spearman_rho": 0.6455,
+      "exact_agree": 0.7175,
+      "within_1": 0.9225,
+      "kappa_unweighted": 0.3457,
+      "kappa_linear": 0.5374,
+      "kappa_quadratic": 0.6755,
+      "mean_diff": -0.1462
+    },
+    "gpt-5.4-nano": {
+      "pair": "gpt-5.4-nano vs human_mean",
+      "n": 400,
+      "pearson_r": 0.8075,
+      "spearman_rho": 0.5307,
+      "exact_agree": 0.73,
+      "within_1": 0.97,
+      "kappa_unweighted": 0.2853,
+      "kappa_linear": 0.5412,
+      "kappa_quadratic": 0.7613,
+      "mean_diff": 0.2362
+    }
+  }
+}

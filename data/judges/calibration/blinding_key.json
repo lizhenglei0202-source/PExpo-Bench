@@ -1,0 +1,1606 @@
+{
+  "_WARNING": "WITHHELD FROM RATERS. Do not open until human rating is complete.",
+  "seed": 42,
+  "map": {
+    "JC-001": {
+      "qid": "S4-0252",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-002": {
+      "qid": "S1-0214",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-003": {
+      "qid": "S1-0245",
+      "model": "gpt-5.4"
+    },
+    "JC-004": {
+      "qid": "S4-0144",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-005": {
+      "qid": "S3-0250",
+      "model": "gpt-5.4"
+    },
+    "JC-006": {
+      "qid": "S1-0212",
+      "model": "gpt-5.4"
+    },
+    "JC-007": {
+      "qid": "S5-0174",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-008": {
+      "qid": "S2-0295",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-009": {
+      "qid": "S4-0074",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-010": {
+      "qid": "S5-0275",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-011": {
+      "qid": "S2-0279",
+      "model": "deepseek-v4"
+    },
+    "JC-012": {
+      "qid": "S4-0080",
+      "model": "gpt-5.4"
+    },
+    "JC-013": {
+      "qid": "S3-0260",
+      "model": "deepseek-v4"
+    },
+    "JC-014": {
+      "qid": "S1-0205",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-015": {
+      "qid": "S5-0316",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-016": {
+      "qid": "S4-0068",
+      "model": "gpt-5.4"
+    },
+    "JC-017": {
+      "qid": "S5-0174",
+      "model": "gpt-5.4"
+    },
+    "JC-018": {
+      "qid": "S5-0257",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-019": {
+      "qid": "S2-0289",
+      "model": "deepseek-v4"
+    },
+    "JC-020": {
+      "qid": "S4-0135",
+      "model": "gpt-5.4"
+    },
+    "JC-021": {
+      "qid": "S5-0313",
+      "model": "gpt-5.4"
+    },
+    "JC-022": {
+      "qid": "S3-0251",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-023": {
+      "qid": "S1-0218",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-024": {
+      "qid": "S4-0254",
+      "model": "deepseek-v4"
+    },
+    "JC-025": {
+      "qid": "S4-0144",
+      "model": "deepseek-v4"
+    },
+    "JC-026": {
+      "qid": "S2-0266",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-027": {
+      "qid": "S5-0311",
+      "model": "deepseek-v4"
+    },
+    "JC-028": {
+      "qid": "S5-0264",
+      "model": "deepseek-v4"
+    },
+    "JC-029": {
+      "qid": "S1-0142",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-030": {
+      "qid": "S5-0213",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-031": {
+      "qid": "S3-0260",
+      "model": "gpt-5.4"
+    },
+    "JC-032": {
+      "qid": "S2-0288",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-033": {
+      "qid": "S1-0232",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-034": {
+      "qid": "S5-0283",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-035": {
+      "qid": "S3-0161",
+      "model": "gpt-5.4"
+    },
+    "JC-036": {
+      "qid": "S5-0213",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-037": {
+      "qid": "S4-0144",
+      "model": "gpt-5.4"
+    },
+    "JC-038": {
+      "qid": "S5-0313",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-039": {
+      "qid": "S2-0266",
+      "model": "gpt-5.4"
+    },
+    "JC-040": {
+      "qid": "S1-0230",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-041": {
+      "qid": "S4-0144",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-042": {
+      "qid": "S1-0212",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-043": {
+      "qid": "S2-0252",
+      "model": "gpt-5.4"
+    },
+    "JC-044": {
+      "qid": "S2-0325",
+      "model": "deepseek-v4"
+    },
+    "JC-045": {
+      "qid": "S5-0275",
+      "model": "gpt-5.4"
+    },
+    "JC-046": {
+      "qid": "S1-0214",
+      "model": "deepseek-v4"
+    },
+    "JC-047": {
+      "qid": "S2-0029",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-048": {
+      "qid": "S5-0197",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-049": {
+      "qid": "S4-0234",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-050": {
+      "qid": "S4-0071",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-051": {
+      "qid": "S5-0213",
+      "model": "gpt-5.4"
+    },
+    "JC-052": {
+      "qid": "S3-0186",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-053": {
+      "qid": "S3-0162",
+      "model": "gpt-5.4"
+    },
+    "JC-054": {
+      "qid": "S1-0015",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-055": {
+      "qid": "S1-0015",
+      "model": "gpt-5.4"
+    },
+    "JC-056": {
+      "qid": "S3-0160",
+      "model": "deepseek-v4"
+    },
+    "JC-057": {
+      "qid": "S3-0260",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-058": {
+      "qid": "S2-0032",
+      "model": "deepseek-v4"
+    },
+    "JC-059": {
+      "qid": "S4-0068",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-060": {
+      "qid": "S3-0056",
+      "model": "gpt-5.4"
+    },
+    "JC-061": {
+      "qid": "S2-0289",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-062": {
+      "qid": "S3-0249",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-063": {
+      "qid": "S1-0218",
+      "model": "deepseek-v4"
+    },
+    "JC-064": {
+      "qid": "S2-0037",
+      "model": "gpt-5.4"
+    },
+    "JC-065": {
+      "qid": "S2-0037",
+      "model": "deepseek-v4"
+    },
+    "JC-066": {
+      "qid": "S1-0149",
+      "model": "gpt-5.4"
+    },
+    "JC-067": {
+      "qid": "S2-0295",
+      "model": "gpt-5.4"
+    },
+    "JC-068": {
+      "qid": "S1-0212",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-069": {
+      "qid": "S4-0232",
+      "model": "deepseek-v4"
+    },
+    "JC-070": {
+      "qid": "S5-0264",
+      "model": "gpt-5.4"
+    },
+    "JC-071": {
+      "qid": "S1-0233",
+      "model": "gpt-5.4"
+    },
+    "JC-072": {
+      "qid": "S4-0238",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-073": {
+      "qid": "S4-0256",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-074": {
+      "qid": "S5-0280",
+      "model": "deepseek-v4"
+    },
+    "JC-075": {
+      "qid": "S5-0088",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-076": {
+      "qid": "S4-0249",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-077": {
+      "qid": "S3-0256",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-078": {
+      "qid": "S2-0193",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-079": {
+      "qid": "S4-0249",
+      "model": "deepseek-v4"
+    },
+    "JC-080": {
+      "qid": "S4-0071",
+      "model": "gpt-5.4"
+    },
+    "JC-081": {
+      "qid": "S4-0268",
+      "model": "deepseek-v4"
+    },
+    "JC-082": {
+      "qid": "S3-0152",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-083": {
+      "qid": "S2-0316",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-084": {
+      "qid": "S4-0232",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-085": {
+      "qid": "S3-0162",
+      "model": "deepseek-v4"
+    },
+    "JC-086": {
+      "qid": "S2-0037",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-087": {
+      "qid": "S4-0068",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-088": {
+      "qid": "S4-0238",
+      "model": "deepseek-v4"
+    },
+    "JC-089": {
+      "qid": "S5-0224",
+      "model": "gpt-5.4"
+    },
+    "JC-090": {
+      "qid": "S3-0056",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-091": {
+      "qid": "S5-0224",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-092": {
+      "qid": "S4-0078",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-093": {
+      "qid": "S1-0142",
+      "model": "gpt-5.4"
+    },
+    "JC-094": {
+      "qid": "S2-0289",
+      "model": "gpt-5.4"
+    },
+    "JC-095": {
+      "qid": "S5-0275",
+      "model": "deepseek-v4"
+    },
+    "JC-096": {
+      "qid": "S4-0068",
+      "model": "deepseek-v4"
+    },
+    "JC-097": {
+      "qid": "S3-0249",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-098": {
+      "qid": "S1-0239",
+      "model": "gpt-5.4"
+    },
+    "JC-099": {
+      "qid": "S3-0186",
+      "model": "gpt-5.4"
+    },
+    "JC-100": {
+      "qid": "S2-0292",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-101": {
+      "qid": "S1-0230",
+      "model": "gpt-5.4"
+    },
+    "JC-102": {
+      "qid": "S3-0162",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-103": {
+      "qid": "S5-0099",
+      "model": "deepseek-v4"
+    },
+    "JC-104": {
+      "qid": "S4-0256",
+      "model": "deepseek-v4"
+    },
+    "JC-105": {
+      "qid": "S1-0196",
+      "model": "deepseek-v4"
+    },
+    "JC-106": {
+      "qid": "S5-0210",
+      "model": "deepseek-v4"
+    },
+    "JC-107": {
+      "qid": "S2-0255",
+      "model": "gpt-5.4"
+    },
+    "JC-108": {
+      "qid": "S5-0098",
+      "model": "deepseek-v4"
+    },
+    "JC-109": {
+      "qid": "S2-0198",
+      "model": "deepseek-v4"
+    },
+    "JC-110": {
+      "qid": "S3-0060",
+      "model": "deepseek-v4"
+    },
+    "JC-111": {
+      "qid": "S5-0311",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-112": {
+      "qid": "S5-0088",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-113": {
+      "qid": "S1-0245",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-114": {
+      "qid": "S5-0174",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-115": {
+      "qid": "S1-0015",
+      "model": "deepseek-v4"
+    },
+    "JC-116": {
+      "qid": "S4-0135",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-117": {
+      "qid": "S5-0311",
+      "model": "gpt-5.4"
+    },
+    "JC-118": {
+      "qid": "S5-0257",
+      "model": "deepseek-v4"
+    },
+    "JC-119": {
+      "qid": "S5-0099",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-120": {
+      "qid": "S3-0250",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-121": {
+      "qid": "S4-0074",
+      "model": "gpt-5.4"
+    },
+    "JC-122": {
+      "qid": "S3-0256",
+      "model": "deepseek-v4"
+    },
+    "JC-123": {
+      "qid": "S2-0288",
+      "model": "gpt-5.4"
+    },
+    "JC-124": {
+      "qid": "S2-0325",
+      "model": "gpt-5.4"
+    },
+    "JC-125": {
+      "qid": "S2-0221",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-126": {
+      "qid": "S4-0071",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-127": {
+      "qid": "S5-0197",
+      "model": "gpt-5.4"
+    },
+    "JC-128": {
+      "qid": "S4-0237",
+      "model": "deepseek-v4"
+    },
+    "JC-129": {
+      "qid": "S3-0264",
+      "model": "deepseek-v4"
+    },
+    "JC-130": {
+      "qid": "S1-0212",
+      "model": "deepseek-v4"
+    },
+    "JC-131": {
+      "qid": "S2-0292",
+      "model": "gpt-5.4"
+    },
+    "JC-132": {
+      "qid": "S2-0255",
+      "model": "deepseek-v4"
+    },
+    "JC-133": {
+      "qid": "S1-0142",
+      "model": "deepseek-v4"
+    },
+    "JC-134": {
+      "qid": "S5-0311",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-135": {
+      "qid": "S3-0161",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-136": {
+      "qid": "S5-0099",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-137": {
+      "qid": "S5-0283",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-138": {
+      "qid": "S4-0078",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-139": {
+      "qid": "S4-0254",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-140": {
+      "qid": "S5-0280",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-141": {
+      "qid": "S3-0266",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-142": {
+      "qid": "S3-0266",
+      "model": "deepseek-v4"
+    },
+    "JC-143": {
+      "qid": "S1-0210",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-144": {
+      "qid": "S5-0098",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-145": {
+      "qid": "S1-0202",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-146": {
+      "qid": "S2-0230",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-147": {
+      "qid": "S2-0252",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-148": {
+      "qid": "S2-0221",
+      "model": "deepseek-v4"
+    },
+    "JC-149": {
+      "qid": "S2-0288",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-150": {
+      "qid": "S1-0157",
+      "model": "gpt-5.4"
+    },
+    "JC-151": {
+      "qid": "S3-0060",
+      "model": "gpt-5.4"
+    },
+    "JC-152": {
+      "qid": "S1-0233",
+      "model": "deepseek-v4"
+    },
+    "JC-153": {
+      "qid": "S2-0196",
+      "model": "gpt-5.4"
+    },
+    "JC-154": {
+      "qid": "S2-0193",
+      "model": "gpt-5.4"
+    },
+    "JC-155": {
+      "qid": "S3-0273",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-156": {
+      "qid": "S3-0186",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-157": {
+      "qid": "S1-0202",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-158": {
+      "qid": "S3-0270",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-159": {
+      "qid": "S5-0224",
+      "model": "deepseek-v4"
+    },
+    "JC-160": {
+      "qid": "S5-0280",
+      "model": "gpt-5.4"
+    },
+    "JC-161": {
+      "qid": "S3-0176",
+      "model": "deepseek-v4"
+    },
+    "JC-162": {
+      "qid": "S1-0142",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-163": {
+      "qid": "S3-0256",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-164": {
+      "qid": "S4-0080",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-165": {
+      "qid": "S5-0264",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-166": {
+      "qid": "S3-0176",
+      "model": "gpt-5.4"
+    },
+    "JC-167": {
+      "qid": "S5-0272",
+      "model": "gpt-5.4"
+    },
+    "JC-168": {
+      "qid": "S3-0270",
+      "model": "deepseek-v4"
+    },
+    "JC-169": {
+      "qid": "S3-0213",
+      "model": "gpt-5.4"
+    },
+    "JC-170": {
+      "qid": "S1-0211",
+      "model": "gpt-5.4"
+    },
+    "JC-171": {
+      "qid": "S4-0268",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-172": {
+      "qid": "S2-0298",
+      "model": "gpt-5.4"
+    },
+    "JC-173": {
+      "qid": "S5-0316",
+      "model": "gpt-5.4"
+    },
+    "JC-174": {
+      "qid": "S4-0254",
+      "model": "gpt-5.4"
+    },
+    "JC-175": {
+      "qid": "S2-0032",
+      "model": "gpt-5.4"
+    },
+    "JC-176": {
+      "qid": "S1-0245",
+      "model": "deepseek-v4"
+    },
+    "JC-177": {
+      "qid": "S4-0257",
+      "model": "gpt-5.4"
+    },
+    "JC-178": {
+      "qid": "S3-0213",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-179": {
+      "qid": "S2-0288",
+      "model": "deepseek-v4"
+    },
+    "JC-180": {
+      "qid": "S3-0056",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-181": {
+      "qid": "S5-0283",
+      "model": "gpt-5.4"
+    },
+    "JC-182": {
+      "qid": "S4-0237",
+      "model": "gpt-5.4"
+    },
+    "JC-183": {
+      "qid": "S2-0289",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-184": {
+      "qid": "S5-0305",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-185": {
+      "qid": "S5-0313",
+      "model": "deepseek-v4"
+    },
+    "JC-186": {
+      "qid": "S2-0292",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-187": {
+      "qid": "S2-0255",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-188": {
+      "qid": "S3-0263",
+      "model": "gpt-5.4"
+    },
+    "JC-189": {
+      "qid": "S1-0239",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-190": {
+      "qid": "S3-0245",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-191": {
+      "qid": "S3-0152",
+      "model": "gpt-5.4"
+    },
+    "JC-192": {
+      "qid": "S1-0218",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-193": {
+      "qid": "S3-0245",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-194": {
+      "qid": "S1-0232",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-195": {
+      "qid": "S2-0230",
+      "model": "deepseek-v4"
+    },
+    "JC-196": {
+      "qid": "S3-0060",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-197": {
+      "qid": "S3-0176",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-198": {
+      "qid": "S3-0249",
+      "model": "deepseek-v4"
+    },
+    "JC-199": {
+      "qid": "S4-0078",
+      "model": "gpt-5.4"
+    },
+    "JC-200": {
+      "qid": "S3-0264",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-201": {
+      "qid": "S5-0210",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-202": {
+      "qid": "S5-0257",
+      "model": "gpt-5.4"
+    },
+    "JC-203": {
+      "qid": "S2-0298",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-204": {
+      "qid": "S3-0251",
+      "model": "deepseek-v4"
+    },
+    "JC-205": {
+      "qid": "S5-0174",
+      "model": "deepseek-v4"
+    },
+    "JC-206": {
+      "qid": "S2-0249",
+      "model": "deepseek-v4"
+    },
+    "JC-207": {
+      "qid": "S4-0238",
+      "model": "gpt-5.4"
+    },
+    "JC-208": {
+      "qid": "S2-0249",
+      "model": "gpt-5.4"
+    },
+    "JC-209": {
+      "qid": "S5-0264",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-210": {
+      "qid": "S4-0238",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-211": {
+      "qid": "S4-0080",
+      "model": "deepseek-v4"
+    },
+    "JC-212": {
+      "qid": "S3-0213",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-213": {
+      "qid": "S1-0117",
+      "model": "deepseek-v4"
+    },
+    "JC-214": {
+      "qid": "S4-0231",
+      "model": "gpt-5.4"
+    },
+    "JC-215": {
+      "qid": "S5-0204",
+      "model": "deepseek-v4"
+    },
+    "JC-216": {
+      "qid": "S4-0234",
+      "model": "gpt-5.4"
+    },
+    "JC-217": {
+      "qid": "S1-0232",
+      "model": "gpt-5.4"
+    },
+    "JC-218": {
+      "qid": "S5-0210",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-219": {
+      "qid": "S3-0250",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-220": {
+      "qid": "S2-0230",
+      "model": "gpt-5.4"
+    },
+    "JC-221": {
+      "qid": "S5-0241",
+      "model": "gpt-5.4"
+    },
+    "JC-222": {
+      "qid": "S4-0074",
+      "model": "deepseek-v4"
+    },
+    "JC-223": {
+      "qid": "S5-0241",
+      "model": "deepseek-v4"
+    },
+    "JC-224": {
+      "qid": "S2-0246",
+      "model": "gpt-5.4"
+    },
+    "JC-225": {
+      "qid": "S5-0257",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-226": {
+      "qid": "S3-0266",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-227": {
+      "qid": "S1-0210",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-228": {
+      "qid": "S3-0249",
+      "model": "gpt-5.4"
+    },
+    "JC-229": {
+      "qid": "S2-0306",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-230": {
+      "qid": "S4-0254",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-231": {
+      "qid": "S4-0232",
+      "model": "gpt-5.4"
+    },
+    "JC-232": {
+      "qid": "S4-0237",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-233": {
+      "qid": "S4-0232",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-234": {
+      "qid": "S1-0129",
+      "model": "gpt-5.4"
+    },
+    "JC-235": {
+      "qid": "S2-0298",
+      "model": "deepseek-v4"
+    },
+    "JC-236": {
+      "qid": "S4-0074",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-237": {
+      "qid": "S2-0292",
+      "model": "deepseek-v4"
+    },
+    "JC-238": {
+      "qid": "S3-0251",
+      "model": "gpt-5.4"
+    },
+    "JC-239": {
+      "qid": "S2-0306",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-240": {
+      "qid": "S5-0283",
+      "model": "deepseek-v4"
+    },
+    "JC-241": {
+      "qid": "S3-0270",
+      "model": "gpt-5.4"
+    },
+    "JC-242": {
+      "qid": "S3-0263",
+      "model": "deepseek-v4"
+    },
+    "JC-243": {
+      "qid": "S4-0080",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-244": {
+      "qid": "S3-0152",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-245": {
+      "qid": "S2-0198",
+      "model": "gpt-5.4"
+    },
+    "JC-246": {
+      "qid": "S1-0196",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-247": {
+      "qid": "S2-0295",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-248": {
+      "qid": "S1-0149",
+      "model": "deepseek-v4"
+    },
+    "JC-249": {
+      "qid": "S5-0204",
+      "model": "gpt-5.4"
+    },
+    "JC-250": {
+      "qid": "S5-0088",
+      "model": "deepseek-v4"
+    },
+    "JC-251": {
+      "qid": "S3-0263",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-252": {
+      "qid": "S2-0029",
+      "model": "deepseek-v4"
+    },
+    "JC-253": {
+      "qid": "S3-0260",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-254": {
+      "qid": "S4-0078",
+      "model": "deepseek-v4"
+    },
+    "JC-255": {
+      "qid": "S3-0250",
+      "model": "deepseek-v4"
+    },
+    "JC-256": {
+      "qid": "S5-0241",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-257": {
+      "qid": "S1-0233",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-258": {
+      "qid": "S1-0149",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-259": {
+      "qid": "S1-0230",
+      "model": "deepseek-v4"
+    },
+    "JC-260": {
+      "qid": "S5-0204",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-261": {
+      "qid": "S1-0117",
+      "model": "gpt-5.4"
+    },
+    "JC-262": {
+      "qid": "S2-0249",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-263": {
+      "qid": "S1-0214",
+      "model": "gpt-5.4"
+    },
+    "JC-264": {
+      "qid": "S2-0249",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-265": {
+      "qid": "S4-0071",
+      "model": "deepseek-v4"
+    },
+    "JC-266": {
+      "qid": "S4-0229",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-267": {
+      "qid": "S1-0205",
+      "model": "gpt-5.4"
+    },
+    "JC-268": {
+      "qid": "S2-0295",
+      "model": "deepseek-v4"
+    },
+    "JC-269": {
+      "qid": "S2-0279",
+      "model": "gpt-5.4"
+    },
+    "JC-270": {
+      "qid": "S2-0246",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-271": {
+      "qid": "S3-0245",
+      "model": "deepseek-v4"
+    },
+    "JC-272": {
+      "qid": "S2-0279",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-273": {
+      "qid": "S2-0037",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-274": {
+      "qid": "S1-0218",
+      "model": "gpt-5.4"
+    },
+    "JC-275": {
+      "qid": "S5-0099",
+      "model": "gpt-5.4"
+    },
+    "JC-276": {
+      "qid": "S1-0202",
+      "model": "gpt-5.4"
+    },
+    "JC-277": {
+      "qid": "S5-0210",
+      "model": "gpt-5.4"
+    },
+    "JC-278": {
+      "qid": "S3-0264",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-279": {
+      "qid": "S2-0032",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-280": {
+      "qid": "S5-0224",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-281": {
+      "qid": "S5-0280",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-282": {
+      "qid": "S1-0129",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-283": {
+      "qid": "S3-0270",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-284": {
+      "qid": "S5-0197",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-285": {
+      "qid": "S4-0135",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-286": {
+      "qid": "S5-0272",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-287": {
+      "qid": "S5-0305",
+      "model": "deepseek-v4"
+    },
+    "JC-288": {
+      "qid": "S1-0210",
+      "model": "deepseek-v4"
+    },
+    "JC-289": {
+      "qid": "S3-0160",
+      "model": "gpt-5.4"
+    },
+    "JC-290": {
+      "qid": "S1-0157",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-291": {
+      "qid": "S3-0160",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-292": {
+      "qid": "S4-0256",
+      "model": "gpt-5.4"
+    },
+    "JC-293": {
+      "qid": "S3-0273",
+      "model": "gpt-5.4"
+    },
+    "JC-294": {
+      "qid": "S1-0117",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-295": {
+      "qid": "S2-0193",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-296": {
+      "qid": "S4-0257",
+      "model": "deepseek-v4"
+    },
+    "JC-297": {
+      "qid": "S4-0231",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-298": {
+      "qid": "S2-0029",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-299": {
+      "qid": "S2-0198",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-300": {
+      "qid": "S3-0060",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-301": {
+      "qid": "S2-0246",
+      "model": "deepseek-v4"
+    },
+    "JC-302": {
+      "qid": "S4-0252",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-303": {
+      "qid": "S2-0266",
+      "model": "deepseek-v4"
+    },
+    "JC-304": {
+      "qid": "S2-0230",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-305": {
+      "qid": "S3-0186",
+      "model": "deepseek-v4"
+    },
+    "JC-306": {
+      "qid": "S4-0229",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-307": {
+      "qid": "S5-0316",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-308": {
+      "qid": "S3-0263",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-309": {
+      "qid": "S2-0193",
+      "model": "deepseek-v4"
+    },
+    "JC-310": {
+      "qid": "S3-0273",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-311": {
+      "qid": "S2-0325",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-312": {
+      "qid": "S2-0196",
+      "model": "deepseek-v4"
+    },
+    "JC-313": {
+      "qid": "S5-0275",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-314": {
+      "qid": "S4-0231",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-315": {
+      "qid": "S5-0305",
+      "model": "gpt-5.4"
+    },
+    "JC-316": {
+      "qid": "S3-0213",
+      "model": "deepseek-v4"
+    },
+    "JC-317": {
+      "qid": "S1-0233",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-318": {
+      "qid": "S5-0316",
+      "model": "deepseek-v4"
+    },
+    "JC-319": {
+      "qid": "S2-0252",
+      "model": "deepseek-v4"
+    },
+    "JC-320": {
+      "qid": "S1-0239",
+      "model": "deepseek-v4"
+    },
+    "JC-321": {
+      "qid": "S5-0213",
+      "model": "deepseek-v4"
+    },
+    "JC-322": {
+      "qid": "S1-0239",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-323": {
+      "qid": "S5-0098",
+      "model": "gpt-5.4"
+    },
+    "JC-324": {
+      "qid": "S2-0255",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-325": {
+      "qid": "S3-0162",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-326": {
+      "qid": "S3-0245",
+      "model": "gpt-5.4"
+    },
+    "JC-327": {
+      "qid": "S5-0272",
+      "model": "deepseek-v4"
+    },
+    "JC-328": {
+      "qid": "S2-0221",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-329": {
+      "qid": "S1-0245",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-330": {
+      "qid": "S1-0149",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-331": {
+      "qid": "S2-0221",
+      "model": "gpt-5.4"
+    },
+    "JC-332": {
+      "qid": "S5-0241",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-333": {
+      "qid": "S2-0298",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-334": {
+      "qid": "S1-0232",
+      "model": "deepseek-v4"
+    },
+    "JC-335": {
+      "qid": "S3-0273",
+      "model": "deepseek-v4"
+    },
+    "JC-336": {
+      "qid": "S1-0015",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-337": {
+      "qid": "S1-0211",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-338": {
+      "qid": "S2-0246",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-339": {
+      "qid": "S1-0196",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-340": {
+      "qid": "S3-0056",
+      "model": "deepseek-v4"
+    },
+    "JC-341": {
+      "qid": "S4-0249",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-342": {
+      "qid": "S4-0256",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-343": {
+      "qid": "S2-0029",
+      "model": "gpt-5.4"
+    },
+    "JC-344": {
+      "qid": "S4-0257",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-345": {
+      "qid": "S4-0249",
+      "model": "gpt-5.4"
+    },
+    "JC-346": {
+      "qid": "S3-0264",
+      "model": "gpt-5.4"
+    },
+    "JC-347": {
+      "qid": "S5-0098",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-348": {
+      "qid": "S1-0202",
+      "model": "deepseek-v4"
+    },
+    "JC-349": {
+      "qid": "S2-0279",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-350": {
+      "qid": "S5-0197",
+      "model": "deepseek-v4"
+    },
+    "JC-351": {
+      "qid": "S2-0032",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-352": {
+      "qid": "S4-0237",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-353": {
+      "qid": "S4-0135",
+      "model": "deepseek-v4"
+    },
+    "JC-354": {
+      "qid": "S3-0266",
+      "model": "gpt-5.4"
+    },
+    "JC-355": {
+      "qid": "S1-0211",
+      "model": "deepseek-v4"
+    },
+    "JC-356": {
+      "qid": "S5-0313",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-357": {
+      "qid": "S2-0306",
+      "model": "gpt-5.4"
+    },
+    "JC-358": {
+      "qid": "S4-0268",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-359": {
+      "qid": "S1-0230",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-360": {
+      "qid": "S4-0231",
+      "model": "deepseek-v4"
+    },
+    "JC-361": {
+      "qid": "S1-0129",
+      "model": "deepseek-v4"
+    },
+    "JC-362": {
+      "qid": "S4-0229",
+      "model": "gpt-5.4"
+    },
+    "JC-363": {
+      "qid": "S1-0157",
+      "model": "deepseek-v4"
+    },
+    "JC-364": {
+      "qid": "S4-0268",
+      "model": "gpt-5.4"
+    },
+    "JC-365": {
+      "qid": "S2-0196",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-366": {
+      "qid": "S2-0316",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-367": {
+      "qid": "S3-0160",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-368": {
+      "qid": "S4-0234",
+      "model": "deepseek-v4"
+    },
+    "JC-369": {
+      "qid": "S1-0196",
+      "model": "gpt-5.4"
+    },
+    "JC-370": {
+      "qid": "S4-0252",
+      "model": "gpt-5.4"
+    },
+    "JC-371": {
+      "qid": "S3-0256",
+      "model": "gpt-5.4"
+    },
+    "JC-372": {
+      "qid": "S2-0196",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-373": {
+      "qid": "S3-0161",
+      "model": "deepseek-v4"
+    },
+    "JC-374": {
+      "qid": "S1-0205",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-375": {
+      "qid": "S4-0234",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-376": {
+      "qid": "S4-0257",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-377": {
+      "qid": "S1-0205",
+      "model": "deepseek-v4"
+    },
+    "JC-378": {
+      "qid": "S5-0204",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-379": {
+      "qid": "S3-0176",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-380": {
+      "qid": "S1-0214",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-381": {
+      "qid": "S1-0117",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-382": {
+      "qid": "S2-0266",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-383": {
+      "qid": "S3-0152",
+      "model": "deepseek-v4"
+    },
+    "JC-384": {
+      "qid": "S2-0316",
+      "model": "deepseek-v4"
+    },
+    "JC-385": {
+      "qid": "S5-0272",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-386": {
+      "qid": "S1-0211",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-387": {
+      "qid": "S5-0305",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-388": {
+      "qid": "S1-0129",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-389": {
+      "qid": "S4-0229",
+      "model": "deepseek-v4"
+    },
+    "JC-390": {
+      "qid": "S2-0306",
+      "model": "deepseek-v4"
+    },
+    "JC-391": {
+      "qid": "S5-0088",
+      "model": "gpt-5.4"
+    },
+    "JC-392": {
+      "qid": "S4-0252",
+      "model": "deepseek-v4"
+    },
+    "JC-393": {
+      "qid": "S2-0198",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-394": {
+      "qid": "S3-0251",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-395": {
+      "qid": "S1-0157",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-396": {
+      "qid": "S2-0325",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-397": {
+      "qid": "S3-0161",
+      "model": "gpt-5.4-nano"
+    },
+    "JC-398": {
+      "qid": "S1-0210",
+      "model": "gpt-5.4"
+    },
+    "JC-399": {
+      "qid": "S2-0252",
+      "model": "gpt-5.4-mini"
+    },
+    "JC-400": {
+      "qid": "S2-0316",
+      "model": "gpt-5.4"
+    }
+  }
+}
