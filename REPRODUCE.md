@@ -115,4 +115,4 @@ python_sandbox only, or a domain lookup or calculation function. It writes
 `pexpo_bench.analysis.error_magnitude` classifies every main-grid calculation response by
 the size of its error (correct, near miss, wrong by <2×, 2–10× or ≥10×, no extractable number),
 reports the share of ≥10× errors that are exact decimal-prefix slips, and writes
-`analysis_outputs/error_magnitude.json` and `.md` (SI Section K, Table S12, Figure S4).
+`analysis_outputs/error_magnitude.json` and `.md` (Figure 4 of the manuscript; SI Section K, Table S12).

@@ -20,8 +20,8 @@
     "sha256": "192abfc1625a35e708900decaf752c7f6e941931ebffc76ddb1cdb837e060ea0"
   },
   "REPRODUCE.md": {
-    "bytes": 5580,
-    "sha256": "c7ad28704415fa2fa77aa09ce58681bf00d4ed29be516bce9f9672a3864113a9"
+    "bytes": 5597,
+    "sha256": "f4792c633998a778ea6d037eef59ec8f1b6e7ae33ccc4d962756630336ff7691"
   },
   "RESULTS_TABLES.md": {
     "bytes": 20122,
@@ -44,8 +44,8 @@
     "sha256": "9fb56cd2942fc97281c3eba3cee7fde9a99c4276c3d1c179af2cd11e5cf9a54b"
   },
   "code/pexpo_bench/analysis/error_magnitude.py": {
-    "bytes": 9186,
-    "sha256": "81b5ffd43d91faf515aa3de5fa39369437854fe6fcf6c1638a6bdb901a9c83cf"
+    "bytes": 9203,
+    "sha256": "a17c5132b031cbe9c53df80607bfd95e216b91ad18ca4fbd16ce38b112adadb1"
   },
   "code/pexpo_bench/analysis/grounding_stats.py": {
     "bytes": 4139,

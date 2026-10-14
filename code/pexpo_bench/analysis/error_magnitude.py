@@ -12,7 +12,7 @@ Among wrong numeric answers the script also reports the share that are exact dec
 (the answer divided by 10^k, k != 0, falls within tolerance of the gold value), the over/under split,
 and the median |log10(predicted/gold)|. The one two-component item (named_numeric_components) is
 classified by score only and excluded from the ratio statistics. Writes analysis_outputs/error_magnitude.json
-and .md (SI Section K, Table S12, Figure S4)."""
+and .md (Figure 4 of the manuscript; SI Section K, Table S12)."""
 import json, math, os, pathlib
 import pandas as pd, yaml
 from pexpo_bench.data_schema import configuration_id, record_id
