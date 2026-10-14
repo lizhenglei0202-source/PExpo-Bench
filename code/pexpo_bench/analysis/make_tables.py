@@ -50,7 +50,7 @@ L.append("| **Mean** | " + " | ".join(f"{M['cross_model_means'][x]*100:.1f}" for
 M["by_type"] = {m: {qt: {LAB[ar]: float(a[(a.model==m)&(a.arch==ar)&(a.question_type==qt)].score.mean())
                           for ar in PAPER} for qt in ["calculation","true_false","open_ended"]} for m in MODELS}
 
-# Table S2: within-model contrasts (Holm across 20)
+# Table S3: within-model contrasts (Holm across 20)
 CONTRASTS = [("A0","A1"),("A0","A2"),("A0","A3"),
              ("A3","A4"),("A0","A4")]
 s1, ps = [], []
@@ -63,13 +63,13 @@ for x, y in CONTRASTS:
         ps.append(p)
 for r, ph in zip(s1, holm(np.array(ps))): r["p_holm"] = float(ph)
 M["within_model_contrasts"] = s1
-L += ["", "## Table S2 (within-model Wilcoxon; Holm across 20)", "",
+L += ["", "## Table S3 (within-model Wilcoxon; Holm across 20)", "",
       "| Contrast | " + " | ".join(MNAME[m] for m in MODELS) + " |", "|---|---|---|---|---|"]
 for x, y in CONTRASTS:
     row = [next(r for r in s1 if r["contrast"]==f"{LAB[x]} vs {LAB[y]}" and r["model"]==m) for m in MODELS]
     L.append(f"| {LAB[x]} vs {LAB[y]} | " + " | ".join(f"{fmt_p(r['p'])} ({r['diff_pp']:+.1f} pp)" for r in row) + " |")
 
-# Table S3: between-model at fixed arch (Holm across 30)
+# Table S4: between-model at fixed arch (Holm across 30)
 pairs = [(x, y) for i, x in enumerate(MODELS) for y in MODELS[i+1:]]
 s2, ps2 = [], []
 for m1, m2 in pairs:
@@ -81,7 +81,7 @@ for m1, m2 in pairs:
         ps2.append(p)
 for r, ph in zip(s2, holm(np.array(ps2))): r["p_holm"] = float(ph)
 M["between_model_contrasts"] = s2
-L += ["", "## Table S3 (between-model at fixed arch; Holm across 30)", "",
+L += ["", "## Table S4 (between-model at fixed arch; Holm across 30)", "",
       "| Pair | A0 | A1 | A2 | A3 | A4 |", "|---|---|---|---|---|---|"]
 for m1, m2 in pairs:
     row = [next(r for r in s2 if r["pair"]==f"{MNAME[m1]} vs {MNAME[m2]}" and r["arch"]==LAB[ar]) for ar in PAPER]

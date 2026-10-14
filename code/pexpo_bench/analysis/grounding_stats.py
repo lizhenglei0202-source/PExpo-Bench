@@ -71,7 +71,7 @@ vn.write_text(json.dumps(d, indent=1))
 
 md = ROOT / "analysis_outputs/statistics.md"
 txt = md.read_text()
-marker = "## Grounding (Table S1, all 1,027 items x 20 cells)"
+marker = "## Grounding (Table S2, all 1,027 items x 20 cells)"
 block = (f"\n\n{marker}\n\nDesign: {summary['design']}.\n\n{table_md}\n")
 if marker in txt:
     txt = txt[:txt.index(marker)].rstrip() + block

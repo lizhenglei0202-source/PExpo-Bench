@@ -5,7 +5,7 @@ revise_plan excluded): "none" = no external tool call, "sandbox_only" = python_s
 external tool called, "domain" = at least one domain lookup or calculation function was called
 (with or without the sandbox). The split is descriptive: the model chooses when to call a tool, and
 it does so on the items it finds hardest, so group differences reflect item selection as well as
-tool effect. Writes analysis_outputs/tool_use_split.json and .md (SI Table S11)."""
+tool effect. Writes analysis_outputs/tool_use_split.json and .md (SI Table S12)."""
 import json, os, pathlib
 import pandas as pd
 from pexpo_bench.data_schema import configuration_id, record_id

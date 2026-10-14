@@ -10,7 +10,7 @@
 | DeepSeek-V4 | 91.4 | 93.5 | 94.8 | 95.2 | 94.8 |
 | **Mean** | 78.9 | 80.4 | 79.3 | 93.2 | 94.2 |
 
-## Table S2 (within-model Wilcoxon; Holm across 20)
+## Table S3 (within-model Wilcoxon; Holm across 20)
 
 | Contrast | GPT-5.4 | GPT-5.4-mini | GPT-5.4-nano | DeepSeek-V4 |
 |---|---|---|---|---|
@@ -20,7 +20,7 @@
 | A3 vs A4 | 0.65 (+0.3 pp) | 0.044 (+0.9 pp) | 6.7 × 10^-4 (+2.9 pp) | 0.44 (-0.4 pp) |
 | A0 vs A4 | 2.3 × 10^-40 (+16.3 pp) | 1.6 × 10^-38 (+17.4 pp) | 1.5 × 10^-44 (+24.1 pp) | 3.0 × 10^-5 (+3.4 pp) |
 
-## Table S3 (between-model at fixed arch; Holm across 30)
+## Table S4 (between-model at fixed arch; Holm across 30)
 
 | Pair | A0 | A1 | A2 | A3 | A4 |
 |---|---|---|---|---|---|
@@ -266,7 +266,7 @@
 | GPT-5.4-nano | 90.3 | 90.8 | 91.6 | 94.6 | 95.0 |
 | DeepSeek-V4 | 94.1 | 94.8 | 95.2 | 93.0 | 92.9 |
 
-## Grounding (Table S1, all 1,027 items x 20 cells)
+## Grounding (Table S2, all 1,027 items x 20 cells)
 
 Design: all 1,027 evaluation-set items in every model x configuration cell (20,540 rows), one judge pass.
 

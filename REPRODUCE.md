@@ -110,9 +110,9 @@ two one-sided equivalence tests at margins of 2 and 1.5 percentage points. It wr
 `pexpo_bench.analysis.tool_use_split` splits the A3−A0 gain of every base model by whether the
 recorded A3 trace invoked an external tool (plan meta-tools excluded): no external tool,
 python_sandbox only, or a domain lookup or calculation function. It writes
-`analysis_outputs/tool_use_split.json` and `.md` (Table S11).
+`analysis_outputs/tool_use_split.json` and `.md` (Table S12).
 
 `pexpo_bench.analysis.error_magnitude` classifies every main-grid calculation response by
 the size of its error (correct, near miss, wrong by <2×, 2–10× or ≥10×, no extractable number),
 reports the share of ≥10× errors that are exact decimal-prefix slips, and writes
-`analysis_outputs/error_magnitude.json` and `.md` (Figure 4 of the manuscript; SI Section K, Table S12).
+`analysis_outputs/error_magnitude.json` and `.md` (Figure 4 of the manuscript; SI Section K, Table S13).

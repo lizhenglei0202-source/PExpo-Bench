@@ -122,7 +122,7 @@ for m in MODELS:
                  f"{r['ci_lo_pct']:.2f} | {r['ci_hi_pct']:.2f} |")
 
 # ---------------------------------------------------------------------------
-# 2. Kendall's tau over configuration rankings of mean accuracy (SI Table S4)
+# 2. Kendall's tau over configuration rankings of mean accuracy (SI Table S5)
 # ---------------------------------------------------------------------------
 acc_vec = {m: [float(a[(a.model == m) & (a.arch == ar)].score.mean()) for ar in PAPER] for m in MODELS}
 tau_rows, tau_matrix = [], {}
@@ -139,7 +139,7 @@ M["kendall_tau"] = {"pairs": tau_rows,
                     "gpt_family_range": [float(min(gpt_taus)), float(max(gpt_taus))],
                     "gpt_vs_deepseek_range": [float(min(other_taus)), float(max(other_taus))],
                     "ranking_basis": "mean accuracy over the five configurations, n=5 per model"}
-L += ["", "## Kendall tau over configuration rankings of mean accuracy (Table S4)", "",
+L += ["", "## Kendall tau over configuration rankings of mean accuracy (Table S5)", "",
       "| | " + " | ".join(MNAME[m] for m in MODELS) + " |", "|---|---|---|---|---|"]
 for m1 in MODELS:
     L.append(f"| {MNAME[m1]} | " + " | ".join("1.000" if m1 == m2 else f"{tau_matrix[m1][m2]:+.3f}"
@@ -223,7 +223,7 @@ for role, (sm, sa) in (("headline", HEADLINE_SMALL), ("secondary", SECONDARY_SMA
 M["headline_cross_cell"] = {
     "sign_convention": "flagship cell minus small-model cell; positive = flagship advantage",
     "correction": "comparisons at a fixed configuration (GPT-5.4 A3 vs GPT-5.4-mini A3, GPT-5.4 A4 vs "
-                  "GPT-5.4-mini A4) are Holm-corrected inside the 30-contrast family of Table S3 "
+                  "GPT-5.4-mini A4) are Holm-corrected inside the 30-contrast family of Table S4 "
                   "(statistics.json: between_model_contrasts); the cross-configuration comparisons "
                   "belong to no family and are reported uncorrected",
     "contrasts": head}
