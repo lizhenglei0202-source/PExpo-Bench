@@ -8,7 +8,7 @@ Flagship Performance on a Personal Exposure Assessment Benchmark**.
 The main experiment evaluates four models with five configurations on the
 1,027-item question set. The accompanying analyses cover the 361-item calculation
 factorial design, the tool-removal configuration A3-T, three seed replications,
-reference grounding, expert validation and judge calibration.
+reference grounding, item validation and judge calibration.
 
 | Configuration | Reference information | Execution |
 |---|---|---|
@@ -40,8 +40,8 @@ See [CONFIGURATIONS.md](CONFIGURATIONS.md) for the complete design.
 - `data/judges/`: open-ended judge scores for the main grid, the seed replications and the
   tool-removal configuration (one judge session) with an independent scoring pass of the
   main grid, reference-grounding judgments for all 20,540 main-grid responses, and the judge-calibration study with its human ratings.
-- `data/expert_validation/`: the expert rating sheets, sampling manifest and agreement
-  statistics.
+- `data/item_validation/`: the item-validation rating sheets, sampling manifest, instructions and
+  agreement statistics.
 - `data/manifests/`: the recorded run manifest and software environment.
 - `RESULTS_TABLES.md`: the numerical results computed by the released scripts; the supplementary
   statistics, the tool-use split and the error-magnitude classification are written to

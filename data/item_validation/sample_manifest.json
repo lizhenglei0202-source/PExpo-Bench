@@ -1,5 +1,4 @@
 {
- "date": "2026-08-20",
  "seed": 20260820,
  "n": 110,
  "source_bank": "data/bank/bank_evaluation_set.yaml (1,027 items)",
@@ -159,5 +158,10 @@
   "TS5-013",
   "TS5-014",
   "TS5-016"
- ]
+ ],
+ "rating": {
+  "bank": "data/bank/bank_evaluation_set.yaml of this release (item text, gold answers, units and gold_references as released; programmatic TS items carry their source-table locator)",
+  "raters": "two independent LLM passes (OpenAI Codex), from the rating sheet and the instructions only (no model outputs); a written reason for every rating of 0",
+  "checked_by": "PhD-level exposure scientists"
+ }
 }

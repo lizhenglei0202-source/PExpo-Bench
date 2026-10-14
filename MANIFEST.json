@@ -16,8 +16,8 @@
     "sha256": "370137adfc772fc33685765cc8b24d2a62933bd656e1f06e83a11c9318c15c8a"
   },
   "README.md": {
-    "bytes": 4058,
-    "sha256": "0beba977892f9bc8d59c27048331195f598eac7d626dc542a8d18e3304a9ea7d"
+    "bytes": 4077,
+    "sha256": "192abfc1625a35e708900decaf752c7f6e941931ebffc76ddb1cdb837e060ea0"
   },
   "REPRODUCE.md": {
     "bytes": 5580,
@@ -167,29 +167,33 @@
     "bytes": 1509560,
     "sha256": "c2962081af8ecd8c6cf25aaddaa3c4001a51634b13fc83f45d38107715d4c1f4"
   },
-  "data/expert_validation/INSTRUCTIONS.md": {
-    "bytes": 2001,
-    "sha256": "815f04d15fcaed55e6c88688318f4e59fdc327b5921df84e3849995b875b39b9"
+  "data/item_validation/INSTRUCTIONS.md": {
+    "bytes": 2965,
+    "sha256": "9b5278a1733fc3741ad201bdd69ea28f469dbbc9606e188899c9386c7179ac08"
   },
-  "data/expert_validation/README.md": {
-    "bytes": 660,
-    "sha256": "bb7e33beca3413d1f71f2e8d217004aba8470fca91d36e597b7e9b450735f29b"
+  "data/item_validation/README.md": {
+    "bytes": 1312,
+    "sha256": "27baad529e166eb92630634284e7c3cce2695c8159584d660fd7e5143a5ec2c4"
   },
-  "data/expert_validation/agreement_report.json": {
-    "bytes": 829,
-    "sha256": "036727c83132e2d9d4759076637dce99a38ec337c9f3730d1a4d86c2648020a3"
+  "data/item_validation/agreement_report.json": {
+    "bytes": 41495,
+    "sha256": "25b9d186a81232a021fc268c57ee4420a54d65757cb8237968edae196bb1edb8"
   },
-  "data/expert_validation/rater1_sheet.csv": {
-    "bytes": 97948,
-    "sha256": "b35206f794d790673183ac963e03739f34ca0ae549a3828911204237096dbf8b"
+  "data/item_validation/compute_agreement.py": {
+    "bytes": 3634,
+    "sha256": "36b892ae465f30d1cb60cceb59b9fc2b07ce2e67486c95429ee5de78acbe4dce"
   },
-  "data/expert_validation/rater2_sheet.csv": {
-    "bytes": 99386,
-    "sha256": "0336b4c778373901cd981371e8e19451455401e1b9aab58a8484634ce2cfce30"
+  "data/item_validation/pass1_sheet.csv": {
+    "bytes": 232997,
+    "sha256": "5a83ecfa13a14d8de73f341848108d05e07cccc9cb087301669509d4824a9232"
   },
-  "data/expert_validation/sample_manifest.json": {
-    "bytes": 3473,
-    "sha256": "1c6a5a44b761de2507a7b3dd60fdecb63eb7037474e447b4a3273205e4814aa3"
+  "data/item_validation/pass2_sheet.csv": {
+    "bytes": 234494,
+    "sha256": "7c3f1bef22adc8e252e0ac7ab42ed7cecd4714c05a60b049ddf4ad0f52442c4e"
+  },
+  "data/item_validation/sample_manifest.json": {
+    "bytes": 3865,
+    "sha256": "81b309e251ffc6ae1481ca352b8a5b3ff6e9522dc0d4a75874acbe2865f49ccf"
   },
   "data/judges/calibration/INSTRUCTIONS.md": {
     "bytes": 2261,

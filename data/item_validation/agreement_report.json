@@ -1,0 +1,1163 @@
+{
+ "n": 110,
+ "sample": "stratified seed 20260820 over the 1,027-item evaluation set; items as in the released bank",
+ "raters": "two independent LLM passes (OpenAI Codex), checked by PhD-level exposure scientists",
+ "kappa_note": "agreement between the two passes",
+ "per_criterion": {
+  "clarity": {
+   "both": 99,
+   "pct": 90.0,
+   "pass1": 100,
+   "pass2": 99,
+   "agree": 99.1,
+   "kappa": 0.95
+  },
+  "gold_correctness": {
+   "both": 94,
+   "pct": 85.5,
+   "pass1": 96,
+   "pass2": 99,
+   "agree": 93.6,
+   "kappa": 0.68
+  },
+  "reference_support": {
+   "both": 59,
+   "pct": 53.6,
+   "pass1": 59,
+   "pass2": 70,
+   "agree": 90.0,
+   "kappa": 0.8
+  },
+  "difficulty_appropriateness": {
+   "both": 73,
+   "pct": 66.4,
+   "pass1": 83,
+   "pass2": 79,
+   "agree": 85.5,
+   "kappa": 0.63
+  }
+ },
+ "reference_support_excluding_programmatic": {
+  "n": 97,
+  "both_accept": 55,
+  "pct": 56.7
+ },
+ "reference_support_programmatic": {
+  "n": 13,
+  "both_accept": 4
+ },
+ "acceptance_4of4_pct": 30.9,
+ "acceptance_3of3_pct": 54.5,
+ "programmatic_items": 13,
+ "rejected_items": [
+  {
+   "qid": "S1-0006",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "难度：参考直接给出400–41000 mg/day，判断是否可超过1000属于直接事实判断，建议simple而非hard。",
+    "pass2": "难度：引文直接给出400–41000 mg/day，判断是否可能超过1000只需读数，宜为simple，非hard。"
+   }
+  },
+  {
+   "qid": "S1-0007",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "10.1/18.6=0.5430 m³/(kg·day)，两参数与参考一致。难度：单次除法，建议simple或medium，不宜hard。",
+    "pass2": "复算10.1/18.6=0.5430 m³/(kg·day)。难度：参数及单位均已给出，仅一步除法，宜simple，非hard。"
+   }
+  },
+  {
+   "qid": "S1-0016",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考支持户外工作和活动差异，但未给出NHAPS的87%比例，也未支撑GPS校正方法；需补充比例来源及校正研究。",
+    "pass2": "参考：两段引文说明职业活动及人群差异，但未给出NHAPS 87%的适用范围或GPS校正方法，不能完整支持所列校正方案。"
+   }
+  },
+  {
+   "qid": "S1-0017",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "金标使用may等限定语，总体合理。参考主要为婴儿皮肤水分屏障研究和SA/BW章节，不能充分支撑整个儿童期的化学渗透、血流及所有机制；需补充化学经皮吸收证据。",
+    "pass2": "所引婴儿皮肤屏障研究及EFH皮肤面积资料与核心解释相符；答案采用may并限定更年轻人群，未断言所有儿童的所有化学物渗透率均更高。"
+   }
+  },
+  {
+   "qid": "S1-0106",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "150×0.30/4=11.25 mg/hour；题干给定参数足以复算。难度：比例分配后除以时间，建议medium而非hard。",
+    "pass2": "复算150×0.30/4=11.25 mg/h，题设比例为给定情景。难度：比例分配后除以时间，宜medium或simple，非hard。"
+   }
+  },
+  {
+   "qid": "S1-0127",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "金标False合理：80 kg是一般成人推荐值，不能直接称为男性均值。所附Ch08引文仅为导言，未列推荐表或男性数据，参考不足。",
+    "pass2": "金标False合理：EFH第8章的80 kg是男女合并成人值。参考：本行截取的导言未包含区分男女合并值的推荐段落或表格，应补第8.2节或相关性别分层表。"
+   }
+  },
+  {
+   "qid": "S1-0140",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "体重用于经皮剂量归一化，金标方向合理；附引文仅说明体重与体表面积等相关，未说明经皮剂量中的体重项，参考不足。",
+    "pass2": "参考：引文只说体重与体表面积等相关，未给出经皮剂量的体重归一化关系。难度：基础暴露因子判断，宜simple。"
+   }
+  },
+  {
+   "qid": "S1-0142",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "年龄分层的总体解释合理；引文为加拿大调查描述，未直接支撑代谢需求及敏感人群准确性等全部理由。",
+    "pass2": "参考：所附加拿大摄水调查段落支持年龄分层及活动差异，但未提供金标关于体型、代谢需求和敏感人群的完整论据。"
+   }
+  },
+  {
+   "qid": "S1-0144",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "1500/68=22.0588，四舍五入为22.06 mL/(kg·day)。难度：常规换算和除法，建议simple而非medium。",
+    "pass2": "复算1.5×1000/68=22.0588，取22.06 mL/(kg·day)；单位换算及体重归一化正确。"
+   }
+  },
+  {
+   "qid": "S1-0187",
+   "failed": {
+    "clarity": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附来源Table 5-1男性Mean为1152 min/day；1152/1440×100=80%，金标及全天分母一致。",
+    "pass2": "清晰度：excluding transportation可指不计入室内时间，也可指从总时间分母扣除，需写明以24 h为分母。原出处表5-1男性均值1152 min/day，按金标口径1152/1440=80%。"
+   }
+  },
+  {
+   "qid": "S1-0189",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附EPA Table 3-1人均均值为271、327、414 mL/day，合计1012。难度：三项查表后求和，建议medium而非hard。",
+    "pass2": "核对EFH 2011表3-1：per-capita均值271、327、414 mL/day，合计1012。难度：三项查表相加，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S1-0228",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "金标总体方向合理；所附NHANES方法段未给出性别差异，也未讨论污染物分布或代谢机制，参考不足。",
+    "pass2": "参考：引文介绍NHANES抽样和人体测量，未解释性别体重差异如何影响剂量归一化、分布或代谢；应补与所问机制直接相关的段落。"
+   }
+  },
+  {
+   "qid": "S1-0242",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附引文讨论数据优缺点及样本限制，未说明年龄差异的体型、代谢和活动机制，不能充分支撑金标。",
+    "pass2": "参考：引文讨论分层样本量、两日调查和估计局限，未支持金标提出的体型、代谢需求和活动水平机制。"
+   }
+  },
+  {
+   "qid": "S1-0268",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附段落讨论食物摄入及性别年龄变异，但未展示食物摄入率按年龄与性别分层的表格或明确陈述，参考不足。",
+    "pass2": "参考：两段引文未展示同时按年龄和性别分层的食物摄入表，仅说明一般个体差异。难度：确认分层字段属于直接事实判断，宜simple。"
+   }
+  },
+  {
+   "qid": "S1-0274",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "Ch03明示每单位体重水摄入在生命早期最高，并给出婴儿与成人比较，金标False得到支撑。",
+    "pass2": "引文给出婴儿按体重计摄水量高于成人，False正确。难度：直接比较方向，宜simple，非medium。"
+   }
+  },
+  {
+   "qid": "S1-0278",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "1500/60=25 mL/(kg·day)。难度：常规单位换算及除法，建议simple，与S1-0144保持一致。",
+    "pass2": "复算1500/60=25 mL/(kg·day)，单位换算与体重归一化正确。"
+   }
+  },
+  {
+   "qid": "S1-0291",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "10×0.8=8 m³/day。难度：一步乘法，建议simple而非medium。",
+    "pass2": "复算0.8×10=8 m³/day。难度：给定同一时段的速率和时长，仅一步乘法，宜simple。"
+   }
+  },
+  {
+   "qid": "S2-0038",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考支持微环境空间差异和室内来源，但未直接支撑动态局部源模型及实时AER测量等所提方案，需补充方法文献。",
+    "pass2": "参考：引文支持空间异质性、活动及局部源的重要性，但没有说明实时换气率测量及动态模型的具体改进依据，不能覆盖全部方法建议。"
+   }
+  },
+  {
+   "qid": "S2-0190",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "引文明示2021年PM2.5年均AQG从10降至5 µg/m³，False正确。难度：直接表格比较，建议simple而非hard。",
+    "pass2": "附文明确2021年PM2.5年均AQG从10降至5 µg/m³，False正确。难度：直接读表，宜simple，非hard。"
+   }
+  },
+  {
+   "qid": "S2-0193",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "按所附质量平衡式(0.9×0.8×50+400/60)/(0.8+0.2)=42.6667 µg/m³。难度：标准模型代入，建议medium而非hard。",
+    "pass2": "按所附稳态公式复算42.6667 µg/m³，正确。难度：单室模型代入，宜medium，非hard。所附REF_WHO文本是整理式材料，正式引用宜另给质量守恒模型原始出处。"
+   }
+  },
+  {
+   "qid": "S2-0214",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "(0.7×0.4×50+600/30)/(0.4+0.1)=68 µg/m³。难度：标准模型代入，与同类medium题相比不宜hard。",
+    "pass2": "按所附稳态公式(14+20)/0.5=68 µg/m³。难度：单室模型常规代入，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S2-0244",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度/金标：把室内表面反应损失与穿透系数混同；室内反应主要降低I/O比，不能无条件断定O3穿透低于PM2.5。参考也未直接支持该比较。",
+    "pass2": "清晰度：penetration未区分入室穿透系数P与入室后的反应损失/I-O比。金标：室内表面反应增强不能推出臭氧P必然小于PM2.5，True概括过强。参考：两段引文没有臭氧与PM2.5穿透系数的直接比较。"
+   }
+  },
+  {
+   "qid": "S2-0245",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度/金标：未给稳态条件、沉积损失、HVAC循环风量/运行时间或进风过滤方式，35仅在额外简化假设下成立，非唯一答案。参考未支持直接乘以50%的算法。",
+    "pass2": "清晰度：未说明50%过滤作用于新风还是回风，也未给循环风量、其他损失率及稳态条件。金标：35仅在简化为100×0.7×(1−0.5)且忽略其他损失时成立，非唯一结果。参考：所附无HVAC过滤模型。难度：缺条件不能作为hard的依据，应先补全模型后定级。"
+   }
+  },
+  {
+   "qid": "S2-0273",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "参考仅支持ETS为室内源，未支撑苯/甲醛及HEPA+活性炭两项控制措施。难度：常见污染源与两项对策的说明，建议medium而非hard。",
+    "pass2": "参考：首段只列ETS等室内源，次段为文献目录；未提供苯/甲醛组成或HEPA与活性炭去除效果的论据，不能支持完整金标。"
+   }
+  },
+  {
+   "qid": "S2-0309",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考含学校O3 I/O及个人/环境比值，不能据此确认住宅典型0.2–0.7范围或与PM2.5的普遍比较。难度：跨污染物机制与范围比较，建议medium而非simple。",
+    "pass2": "参考：所附臭氧数值包括学校0.46–1.08及个人/环境比值，不能直接支撑住宅I/O通常0.2–0.7。难度：要求特定范围并比较不同污染物的穿透与反应损失，宜medium，非simple。"
+   }
+  },
+  {
+   "qid": "S2-0341",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度：金标35 ppb成立于稳态；题干未指定稳态或初始浓度/经过时间。建议明确steady-state及无反应/沉积损失。",
+    "pass2": "清晰度：题干未说明达到稳态；瞬态浓度还取决于初始浓度和时间。按所附稳态模型且k=0，金标0.7×50=35 ppb正确；应把steady-state写入题干。"
+   }
+  },
+  {
+   "qid": "S2-0352",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度：未说明WHO版本，也未定义most national guidelines的国家范围和时间。10 µg/m³这一部分正确，但无国家标准比较，金标True对应的完整复合判断无法核定；参考不足。",
+    "pass2": "清晰度：“most national guidelines”未限定国家集合、年份及标准类别。参考：WHO表只支持10 µg/m³，并未给出多数国家标准的比较；应删除或补证比较部分。"
+   }
+  },
+  {
+   "qid": "S2-0353",
+   "failed": {
+    "gold_correctness": [
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附证据涉及固体/液体燃料比较及燃气灶UFP差异，不能直接证明在相似烹饪条件下燃气与电灶的PM2.5浓度比较；需补充直接比较研究。",
+    "pass2": "金标：没有燃气燃烧颗粒这一事实不足以保证总PM2.5一般低于燃气灶，烹饪食物与油的排放也决定结果。参考：本行直接的燃气/电灶比较是UFP数浓度，其他段落比较固体或液体燃料，未验证所断言的PM2.5质量浓度差异。"
+   }
+  },
+  {
+   "qid": "S3-0148",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "通勤积分3、室内积分13.5，比例3/16.5=18.18%；参考支持时间加权。难度：两环境加权求比例，建议medium而非hard。",
+    "pass2": "复算3/(3+13.5)=0.181818，即18.2%，适用于浓度×时间的暴露积分。难度：两情景加权占比，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S3-0152",
+   "failed": {
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "金标：个人浓度高于区域均值不等于高估个人真实暴露，不能把不同测量目标的差异直接称为高估。参考未支持该方向性结论。难度：偏差来源的概念说明，建议medium。",
+    "pass2": "金标：个人监测值高于区域均值不等于高估个人真实暴露，混淆目标量差异与测量偏倚；偏倚方向须依监测和行为情景判断。参考：引文支持中心站暴露错分，未支持个人监测高估结论。难度：当前仅要求列举偏倚来源，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S3-0159",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考主要讨论空间分辨率、混杂与活动重要性，未直接证明低时间分辨率导致过渡遗漏和时间份额错误。难度：单一机制解释，建议medium而非hard。",
+    "pass2": "参考：首段讨论空间分辨率，次段泛述TMA重要性，均未具体论证低时间分辨率造成转换遗漏和时间份额错分。难度：单一机制解释，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S3-0183",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考列出不同活动/呼吸等级及相应通气率；解释与事实一致。此处应理解为吸入量或剂量评估的准确性。",
+    "pass2": "引文说明活动、心率与通气率的对应；按吸入剂量意义解释金标正确。难度：基础呼吸率随活动变化的判断，宜simple。"
+   }
+  },
+  {
+   "qid": "S3-0209",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考直接讨论车型、开窗、空调及过滤对通勤暴露的影响，金标True得到支撑。",
+    "pass2": "多段通勤研究直接支持交通工具、空调及开窗状态导致暴露差异。难度：直接定性事实判断，宜simple。"
+   }
+  },
+  {
+   "qid": "S3-0211",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "参考直接支持整合浓度、位置和时间。难度：基础传感器与GPS互补概念，与同类simple题相比建议simple。",
+    "pass2": "引文明确联合小型污染传感器与定位设备以整合浓度、地点和时间，支持互补测量的解释。"
+   }
+  },
+  {
+   "qid": "S3-0220",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "参考支持活动强度和通气率差异，但未给出GPS微环境分类及其与浓度/时间耦合，尚不足以完整支撑GPS框架下的金标。",
+    "pass2": "引文关于心率、呼吸频率及活动分类对通气率估计的影响支持金标关于吸入剂量偏差的核心机制。"
+   }
+  },
+  {
+   "qid": "S3-0239",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附段落为固定点与个人暴露差异，未讨论GPS联合可穿戴传感器的具体做法，参考不足。",
+    "pass2": "参考：段落解释个人监测相对固定站的优势，但未给出GPS微环境识别、穿戴设备实时数据与轨迹融合的方法，不能覆盖完整答案。"
+   }
+  },
+  {
+   "qid": "S3-0254",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "EPA引文支持活动等级与通气率，却未说明GPS如何推断活动等级；需补充GPS分类来源，尤其静止不必然等于休息。",
+    "pass2": "参考：EFH段落给出活动等级通气率及其局限，没有说明如何从GPS推断活动等级；须补轨迹与活动识别来源。"
+   }
+  },
+  {
+   "qid": "S3-0269",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ],
+    "difficulty_appropriateness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "所附段落支持固定点与个人监测差异，未直接比较GPS单独方法与可穿戴传感器。难度：基础互补机制，建议simple而非medium。",
+    "pass2": "所附个人监测段落指出近源位置、停留时长和固定站代表性不足，支持直接监测捕捉个人暴露变化的核心解释。"
+   }
+  },
+  {
+   "qid": "S3-0311",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "题干限定已针对目标污染物充分校准，参考支持固定站对个体空间差异表征不足及个人监测的作用。",
+    "pass2": "题干已限定目标污染物校准，并采用can而非保证更准确；参考支持个人暴露代表性。难度：基础监测方法判断，宜simple。"
+   }
+  },
+  {
+   "qid": "S4-0063",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考支持呼吸区及粒径依赖的沉积，False正确。难度：否定所有区域均匀沉积的基础判断，建议simple或medium，不宜hard。",
+    "pass2": "引文说明按粒径及呼吸道分区计算沉积，足以否定均匀沉积。难度：基本模型特征判断，宜simple或medium，非hard。"
+   }
+  },
+  {
+   "qid": "S4-0069",
+   "failed": {
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "金标：25×15.7/80×20/70=1.4018 µg/(kg·day)，1.4数值合理，但答案和unit列均缺少单位，定量金标不完整。参考仅标注自算，未给LADD公式或来源。",
+    "pass2": "金标：复算为1.4018 µg/(kg·day)，即0.0014018 mg/(kg·day)；答案仅1.4且unit栏空，缺少决定量级的单位。参考：Independent arithmetic不是LADD定义或寿命平均公式的来源。难度：固定参数代入，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S4-0073",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考讨论暴露边界和颗粒沉积，未给纤毛黏液清除、肺泡巨噬细胞及淋巴转运机制，不能充分支撑清除机制金标。",
+    "pass2": "参考：第一段只定义暴露边界，第二段讨论沉积而非清除；未支持黏液纤毛与巨噬细胞/淋巴清除机制。答案可作概述，但宜补巨噬细胞向有纤毛气道转运的路径。"
+   }
+  },
+  {
+   "qid": "S4-0154",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度/金标：题干预设MPPD一定比ICRP66更准确；更细参数化不等于已证实更高准确性，须限定条件并给验证比较。参考无两模型直接比较，部分为建筑沉积或参考文献页。难度建议hard。",
+    "pass2": "清晰度：题干预设MPPD必然比ICRP66更准确，未限定粒径、呼吸条件、评价指标及验证数据。金标：解剖细节更多不能直接推出预测精度普遍更高。参考：所附材料没有两模型准确度的直接对照，且混入室内颗粒沉积图和文献列表。"
+   }
+  },
+  {
+   "qid": "S4-0171",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "惯性碰撞的金标合理；附研究给出的粒径范围为0.5–5 µm，未直接支撑>10 µm粗颗粒及上气道的指定结论。",
+    "pass2": "参考：引文的模型数值范围为0.5–5 µm，未直接论证题目>10 µm颗粒的上气道主导机制；金标惯性撞击符合原理，但需匹配粒径范围的证据。"
+   }
+  },
+  {
+   "qid": "S4-0187",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "1.5×0.05×0.5×1000=37.5 µg/day。难度：给定摄入量和吸收分数的常规换算，建议medium而非hard。",
+    "pass2": "复算1.5×0.05×0.5×1000=37.5 µg/day。难度：摄入量乘吸收率并换单位，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S4-0214",
+   "failed": {
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考及EPA 2025 IRIS支持6×10⁻⁵ mg/(kg·day)。金标：gold_answer仅6e−05且unit为空，须补齐单位。难度：直接查询指定版本的数值，建议simple而非hard。",
+    "pass2": "金标：2025 IRIS数值确为6×10⁻⁵ mg/(kg·day)，但答案只写6e−05且unit栏空，应补单位。参考中的单位与EPA官方页一致。难度：一次查表，宜simple，非hard。"
+   }
+  },
+  {
+   "qid": "S4-0242",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "参考为吸入PBPK或一般模型说明，未给皮肤渗透系数、暴露面积及接触时长如何作为经皮输入，参考不足。",
+    "pass2": "参考：RAGS为吸入PBPK的一般指引，EFH明言不提供PBPK所需参数，第三段为金属内部转运；均未给出经皮通透系数、接触面积和时长如何进入皮肤吸收模块。"
+   }
+  },
+  {
+   "qid": "S4-0247",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附文献讨论吸入颗粒/金属的PBPK及手册不包含PBPK参数，未支撑经皮吸收因素和皮肤分配/渗透参数，需补充经皮PBPK来源。",
+    "pass2": "参考：引文为金属的体内PBPK转运和EFH范围说明，未支持经皮吸收的亲脂性、皮肤水合/完整性及皮肤分配系数等具体参数。"
+   }
+  },
+  {
+   "qid": "S4-0262",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "引文支持粒径、呼吸参数及分区沉积，但未讨论清除；金标包含清除机制，附参考对全部回答仍不充分。",
+    "pass2": "参考说明ICRP呼吸道区域划分、前级过滤以及粒径和呼吸条件对沉积的影响，支持按区域估计剂量的核心回答。"
+   }
+  },
+  {
+   "qid": "S4-0272",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "50×0.8×2=80 µg为吸入总质量，金标正确；所附公式是含沉积分数和气道面积的区域沉积剂量，不能直接混用，需总吸入量公式来源。",
+    "pass2": "复算50×0.8×2=80 µg；所求为吸入总质量，不是肺内沉积质量，无需额外乘沉积分数。"
+   }
+  },
+  {
+   "qid": "S5-0091",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "采用二分类PAF公式0.8×(1.5−1)/(1+0.8×(1.5−1))=0.2857。参考只有自算标签，未提供PAF定义/公式来源。难度：单公式代入，建议medium而非hard。",
+    "pass2": "复算p(RR−1)/[1+p(RR−1)]=0.4/1.4=0.285714。参考：Independent arithmetic未给出PAF公式及二分类暴露适用条件。难度：给定p与RR直接代入，宜medium，非hard。"
+   }
+  },
+  {
+   "qid": "S5-0094",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "所附段落支持时间活动误差，但未充分覆盖空间/室内来源和社会经济/居住混杂三项，需要与各项对应的参考。",
+    "pass2": "参考：段落主要是时间序列研究的time-activity误差与负偏倚，未同时支持队列研究中的室内源、长期时间变化及社会经济/行为混杂三类结论。"
+   }
+  },
+  {
+   "qid": "S5-0191",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "金标所列三类易感人群合理；参考把§1.3.4与printed p.180/local p.200并列，章节和页码定位不一致，且未提供全部生理理由的对应引文，需纠正定位并补充。",
+    "pass2": "WHO同版指南支持儿童、老年人与已有疾病者易感，发育阶段及生理储备解释合理。定位备注：所给小节号与页码需统一，可核对同书第6.5节及表2.2。"
+   }
+  },
+  {
+   "qid": "S5-0195",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "AF=(RR−1)/RR在RR>1时小于1，False正确；现有参考为风险、人口暴露比例或书目，未定义AF或给出该公式。",
+    "pass2": "False正确：有害暴露下AF=(RR−1)/RR随RR增大趋近1而不超过1。参考：最坏情景、癌症风险贡献及暴露分布概率不是AF定义/公式。难度：分数上界的基础判断，宜simple。"
+   }
+  },
+  {
+   "qid": "S5-0209",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "参考支持跨地区外推、数据缺口及社会经济修饰，但未直接支撑基线疾病率、污染混合物和人口结构全部解释，需补充对应证据。",
+    "pass2": "引文直接讨论高收入地区函数外推、当地研究不足及社会经济效应修饰，支持金标提出的人群与背景差异及数据局限。"
+   }
+  },
+  {
+   "qid": "S5-0221",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "暴露者AF=(RR−1)/RR的定义与金标正确；所附资料讲环境暴露分解或一般风险术语，未给AF定义或公式，参考不足。",
+    "pass2": "参考：暴露误差框架和一般风险术语没有给出暴露者归因分数(RR−1)/RR，缺乏所问公式的直接支持；金标已正确限定among the exposed。"
+   }
+  },
+  {
+   "qid": "S5-0243",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度：需先区分暴露者AF与人群PAF；金标三因素可经RR影响AF，但若问人群PAF，还必须考虑暴露分布/比例。参考未充分对应暴露强度与易感性两项。",
+    "pass2": "清晰度：未区分暴露者AF与总体PAF。金标：在给定RR时暴露者AF已确定，暴露强度与易感性主要通过RR起作用；若指PAF还缺暴露比例/分布和反事实设定。参考：WHO页面强调分布、RR及反事实，不能直接支撑当前三个因素的列法。"
+   }
+  },
+  {
+   "qid": "S5-0261",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "RR的暴露组/对照组风险比定义正确；所附段落仅提RR用途和一般风险评估，未明确给风险比定义，参考不足。",
+    "pass2": "参考：所附段落讨论RR证据及一般风险/CRF用途，但没有给出暴露组风险除以未暴露组风险的定义，关键定义需补直接来源。"
+   }
+  },
+  {
+   "qid": "S5-0266",
+   "failed": {
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "金标把DALYs列作患病指标，未说明DALY=YLL+YLD同时包含死亡损失，分类不严谨；参考也未支撑DALY定义或暴露反应计算方法。",
+    "pass2": "金标：把DALY列作发病/患病负担指标不准确，DALY=YLL+YLD同时包含死亡损失；疾病非致死负担宜用YLD等。参考：本行讨论住院/症状及不平等指标，未支持DALY分类或完整计算流程。"
+   }
+  },
+  {
+   "qid": "S5-0290",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度/金标：RR=1.20是每10 µg/m³的增量风险比，未给实际暴露与参照的浓度差，也未明确暴露者AF。0.1667仅在恰好增加10 µg/m³且计算暴露者AF时成立。",
+    "pass2": "清晰度：只给每10 µg/m³的RR，未明说本题比较的暴露差为10 µg/m³，也未限定暴露者AF。若采用该对比，(1.20−1)/1.20=0.1667，金标计算正确。"
+   }
+  },
+  {
+   "qid": "S5-0306",
+   "failed": {
+    "gold_correctness": [
+     "pass1"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "金标把GBD对年龄/性别的分层扩展成对所有既存疾病易感组常规调整风险函数/基线率，所附资料不足以支持这一具体做法，应限定确实建模的分层。",
+    "pass2": "参考：GBD年龄/性别/地区分层资料支持基础率异质性，但未说明针对已有疾病者等所有易感群体专门调整暴露反应函数或基础率，完整方法陈述证据不足。"
+   }
+  },
+  {
+   "qid": "S5-0307",
+   "failed": {
+    "gold_correctness": [
+     "pass1"
+    ],
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "金标把反事实限定为无暴露或理想条件，且容易将WHO AQG与TMREL等同；引用明确还包括可行/成本有效等替代分布。须区分政策情景与理论最低风险参照，并补充浓度反应条件。",
+    "pass2": "引文区分归因负担与可避免负担，并列出不同反事实分布；固定单调风险函数下更低反事实通常增大负担。AQG可作政策情景，不应等同于无风险阈值。"
+   }
+  },
+  {
+   "qid": "S5-0333",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度：未明说对数线性模型及基线发病率的观测/反事实口径。若用RR=1.10^2.5及AF=1−1/RR，则18000×AF=3816.26，金标条件性正确。参考未给该LRI对数线性公式及口径。",
+    "pass2": "清晰度：未明确log-linear外推，也未说明基线发病率是当前率还是反事实率。按当前率及RR=1.1^2.5，18000×(1−1/RR)=3816.26，金标3816正确。参考：PM10短期效应、IER概要和HQ段落不能直接支持这一LRI对数线性计算。"
+   }
+  },
+  {
+   "qid": "S5-0341",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "引用明确将当前暴露与假想反事实分布区分，False得到支撑。",
+    "pass2": "引文明确反事实为替代暴露分布，False正确。难度：直接定义辨析，宜simple。"
+   }
+  },
+  {
+   "qid": "S5-0342",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "多群体证据与本地数据组合的金标总体合理；所附摘要仅给IER、TMREL和部分RR，未展示年龄/性别/地点基线率与当地负担计算，参考不完整。",
+    "pass2": "参考：所附IER函数、TMREL及端点RR摘要未给出按当地人口与年龄/性别/地区基础率合成负担的步骤，需补相应GBD方法段落。"
+   }
+  },
+  {
+   "qid": "TS1-001",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度：成年男性未指定年龄/均值口径。所引Table 6-1是男女合并且按年龄分层，Table 8-1成人推荐体重为80 kg；不能推出唯一男性默认值或0.1852，金标及参考不合格。",
+    "pass2": "清晰度：adult male未给年龄段和选值规则。金标/参考：EFH表6-1为男女合并且按年龄分层的IR，表8-1成人BW=80 kg；例如15.7/80=0.19625，16/80=0.2，所引两表不能推出唯一0.1852。"
+   }
+  },
+  {
+   "qid": "TS1-006",
+   "failed": {
+    "clarity": [
+     "pass1",
+     "pass2"
+    ],
+    "gold_correctness": [
+     "pass1",
+     "pass2"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "清晰度：男性体表面积按年龄变化，题干未给年龄/具体参数。Table 7-1成人男性均值约1.92–2.15 m²、Table 8-1成人80 kg，不能直接支持0.0235，需指定同一年龄/性别的SA与BW。",
+    "pass2": "清晰度：未给成年男性年龄段。金标/参考：EFH表7-1男性体表面积随年龄变化，表8-1为男女合并80 kg；所引表没有产生唯一0.0235的成人男性配对。应明确年龄与性别一致的SA、BW及统计口径。"
+   }
+  },
+  {
+   "qid": "TS2-001",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "0.7×0.5×30/(0.5+0.3)=13.125 µg/m³；13.12/13.13应给予合理舍入容差。参考仅为Nazaroff 2004 indoor mass balance标签，缺少具体文献/页码/方程定位。",
+    "pass2": "稳态质量守恒给出0.7×0.5×30/(0.5+0.3)=13.125 µg/m³；13.12属于半偶舍入，若采用通常四舍五入为13.13，建议统一精度/容差。Nazaroff 2004可定位到Indoor particle dynamics。"
+   }
+  },
+  {
+   "qid": "TS2-011",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "(0.6×0.6×18+800/200)/(0.6+0.4)=10.48 µg/m³。参考仅写Nazaroff 2004，没有标题/页码/方程等定位，不足以唯一核对模型出处。",
+    "pass2": "复算(0.6×0.6×18+800/200)/(0.6+0.4)=10.48 µg/m³；Nazaroff 2004质量守恒框架支持所用模型。"
+   }
+  },
+  {
+   "qid": "TS3-010",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "按题干给定1.5小时，(90×1.5+12×22.5)/24=16.875 µg/m³。所引Table 16-1为活动推荐表，未直接列出成人1.5 h/day的在车默认时间，定位不支持来源断言。难度：两环境TWA，建议simple或medium而非hard。",
+    "pass2": "复算(90×1.5+12×22.5)/24=16.875，取16.88 µg/m³。参考：EFH表16-1及续表未列成人车内1.5 h/day，默认值表号不符。难度：两时段TWA，宜medium或simple，非hard。"
+   }
+  },
+  {
+   "qid": "TS3-017",
+   "failed": {
+    "reference_support": [
+     "pass1"
+    ]
+   },
+   "comments": {
+    "pass1": "(16×0.4+2×2+1×5+5×1.5)/24=0.954167 mg/m³。参考microenv averaging仅是方法标签，无可定位的文献或公式。",
+    "pass2": "题干完整给出24 h及浓度，按TWA定义复算(16×0.4+2×2+1×5+5×1.5)/24=0.954167 mg/m³。参考名只是方法标签，建议补可追溯出处；不影响此处由题设直接验证加权算术。"
+   }
+  },
+  {
+   "qid": "TS4-007",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "3×2.2e−6=6.6e−6，EPA IRIS苯的IUR下限与题干一致。难度：寿命连续暴露且系数已给，只需乘法，建议simple。",
+    "pass2": "核对EPA IRIS苯IUR下限2.2e−6，3×2.2e−6=6.6e−6。难度：已给连续终身暴露和IUR，仅一步乘法，宜simple。"
+   }
+  },
+  {
+   "qid": "TS5-004",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "题干明确简化对数线性模型，1.24^((15−5)/10)=1.24。参考GBD 2019未具体定位，不能直接作为固定RR斜率模型来源。难度：一个10 µg/m³增量，建议simple。",
+    "pass2": "(15−5)/10=1，按题设简化模型RR=1.24。参考：“GBD 2019”未提供该固定RR对数线性模型的具体出处，不能视为GBD原模型支持。难度：只有一个10 µg/m³增量，宜simple。"
+   }
+  },
+  {
+   "qid": "TS5-011",
+   "failed": {
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "8×2.2e−6=1.76e−5；EPA IRIS苯下限一致，连续寿命条件明确。难度：题干已给公式的一步乘法，建议simple。",
+    "pass2": "题设已限定连续终身暴露，8×2.2e−6=1.76e−5，IRIS苯下限一致。难度：题干给出公式的一步乘法，宜simple。"
+   }
+  },
+  {
+   "qid": "TS5-013",
+   "failed": {
+    "gold_correctness": [
+     "pass1"
+    ],
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ],
+    "difficulty_appropriateness": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "按指定系数相乘确为6e−4，但其EPA IRIS来源断言不成立：2024 IRIS寿命IUR为0.018 (µg/m³)⁻¹，另列成人0.011；按该寿命值风险为9e−4。来源下金标和参考不合格；如保留给定值须标为练习假设。一步乘法建议simple。核对：https://iris.epa.gov/ChemicalLanding/&substance_nmbr=144",
+    "pass2": "按题干指定IUR算得0.05×0.012=0.0006，算术正确。参考：未指定历史版本，现行EPA IRIS 2024 Cr(VI)终身IUR为0.018，成人为0.011，不能用笼统EPA IRIS chromium证明0.012；须标明旧版或设为练习假定。难度：一步乘法，宜simple。"
+   }
+  },
+  {
+   "qid": "TS5-014",
+   "failed": {
+    "reference_support": [
+     "pass1",
+     "pass2"
+    ]
+   },
+   "comments": {
+    "pass1": "按题干简化模型RR=1.24^2.3=1.64010，2700×(1−1/RR)=1053.76≈1054 deaths/year。参考GBD 2019 IER与此固定斜率对数线性模型不同，未支撑所用模型。",
+    "pass2": "按题设对数线性模型RR=1.24^2.3，2700×(1−1/RR)=1053.757，取1054 deaths/year。参考：GBD 2019 IER与题设固定RR对数线性模型不同，不能作为该简化模型的直接依据。"
+   }
+  }
+ ]
+}
